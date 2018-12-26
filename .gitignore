@@ -1,5 +1,11 @@
 # Ignore all images
-../.png
+**/*.png
+**/*.raw
+**/*.mhd
+**/*.pro
+
+# Ignore all folders inside data-folder
+data/*
 
 # Ignore pycache folders
-../__pycache__
+__pycache__/
