@@ -2,7 +2,6 @@
 
 import argparse
 import logging
-import os
 
 import numpy as np
 import torch
@@ -108,7 +107,7 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
     """
     # reload weights from restore_file if specified
     if restore_file is not None:
-        restore_path = os.path.join(args.model_dir + os.sep, args.restore_file + '.pth.tar')
+        restore_path = str(Path(args.model_dir) / (restore_file + '.pth.tar'))
         logging.info("Restoring parameters from {}".format(restore_path))
         utils.load_checkpoint(restore_path, model, optimizer)
 

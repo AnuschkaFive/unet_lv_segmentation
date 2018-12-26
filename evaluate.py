@@ -68,9 +68,9 @@ def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
                 #print("Output batch shape: {}/{}".format(output_batch.shape[0], output_batch.shape))                
                 for i in range(0, output_batch.shape[0]):
                     image = Image.fromarray(output_batch[i][0], 'I')                    
-                    image.save(Path(model_dir) / str(Path(ground_truth_filename[idx][i]).parts[-1]).replace(".png", "_SEG.png"))
+                    image.save(Path(model_dir) / str(Path(ground_truth_filename[i]).parts[-1]).replace(".png", "_SEG.png"))
                     image = Image.fromarray(error_batch[i][0], 'I')
-                    image.save(Path(model_dir) / str(Path(ground_truth_filename[idx][i]).parts[-1]).replace(".png", "_SEG_ERROR.png"))
+                    image.save(Path(model_dir) / str(Path(ground_truth_filename[i]).parts[-1]).replace(".png", "_SEG_ERROR.png"))
             
             # compute all metrics on this batch
             summary_batch = {metric: metrics[metric](output_batch, ground_truth_batch)

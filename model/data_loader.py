@@ -52,7 +52,7 @@ class Heart2DSegmentationDataset(Dataset):
             #ground_truth = self.transform(ground_truth)
 
         #return scan.type(torch.FloatTensor), ground_truth.type(torch.FloatTensor), self.ground_truth_filenames[idx]
-        return scan, ground_truth, self.ground_truth_filenames
+        return scan, ground_truth, self.ground_truth_filenames[idx]
 
 def fetch_dataloader(types, data_dir, hyper_params):
     """

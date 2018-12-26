@@ -10,6 +10,32 @@ import model.metric as metric
 from pathlib import Path
 from PIL import Image
 
+# from https://github.com/EKami/carvana-challenge/blob/original_unet/src/nn/losses.py (modified)
+class SoftDiceLoss(nn.Module):
+    def __init__(self, weight=None, size_average=True):
+        super(SoftDiceLoss, self).__init__()
+
+    def forward(self, logits, targets):
+#        smooth = 1
+#        num = targets.size(0)
+#        probs = torch.sigmoid(logits)
+#        m1 = probs.view(num, -1)
+#        m2 = targets.view(num, -1)
+#        intersection = (m1 * m2)
+#
+#        score = 2. * (intersection.sum(1) + smooth) / (m1.sum(1) + m2.sum(1) + smooth)
+#        score = 1 - score.sum() / num
+        smooth = 1
+        probs = torch.sigmoid(logits)
+        m1 = probs.view(-1)
+        m2 = targets.view(-1)
+        intersection = (m1 * m2)
+
+        score = 2. * (intersection.sum() + smooth) / (m1.sum() + m2.sum() + smooth)
+        score = 1 - score.sum()
+        return score
+
+
 def soft_dice_loss(outputs, ground_truths):
     """
     Compute the Dice loss (F1 loss) given outputs and ground truths.
@@ -20,12 +46,8 @@ def soft_dice_loss(outputs, ground_truths):
     Returns:
         loss (Tensor): binary cross entropy loss for all images in the batch
     """
-    outputs_f = torch.sigmoid(outputs).view( -1)
-    ground_truths_f = ground_truths.view(-1)
-    intersection = (outputs_f * ground_truths_f).sum()
-    cardinalities = outputs_f.sum(1) + ground_truths_f.sum()
-    return (2. * intersection + 1.) / (cardinalities + 1.)
-    #return torch.tensor(1. - metric.DSC((torch.sigmoid(outputs)).detach().numpy(), ground_truths.numpy()))
+    loss_fn = SoftDiceLoss()
+    return loss_fn(outputs, ground_truths)
 
 
 def cross_entropy_loss(outputs, ground_truths):
