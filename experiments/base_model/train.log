@@ -1,0 +1,177 @@
+2018-12-25 18:27:25,125:INFO: Loading the datasets...
+2018-12-25 18:27:27,149:INFO: - done.
+2018-12-25 18:27:33,540:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:27:33,541:INFO: Epoch 1/10
+2018-12-25 18:28:32,659:INFO: - Train metrics: dsc: 0.003 ; iou: 0.002 ; accuracy: 0.948 ; precision: 0.291 ; recall: 0.050 ; loss: 0.394
+2018-12-25 18:28:37,255:INFO: - Eval metrics : dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.000 ; loss: 0.205
+2018-12-25 18:28:38,993:INFO: - Found new best accuracy
+2018-12-25 18:28:39,002:INFO: Epoch 2/10
+2018-12-25 18:29:34,056:INFO: - Train metrics: dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 0.967 ; recall: 0.000 ; loss: 0.138
+2018-12-25 18:29:38,719:INFO: - Eval metrics : dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.000 ; loss: 0.084
+2018-12-25 18:29:40,540:INFO: - Found new best accuracy
+2018-12-25 18:29:40,548:INFO: Epoch 3/10
+2018-12-25 18:30:35,926:INFO: - Train metrics: dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 0.989 ; recall: 0.000 ; loss: 0.063
+2018-12-25 18:30:40,537:INFO: - Eval metrics : dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.000 ; loss: 0.054
+2018-12-25 18:30:42,426:INFO: - Found new best accuracy
+2018-12-25 18:30:42,434:INFO: Epoch 4/10
+2018-12-25 18:31:37,858:INFO: - Train metrics: dsc: 0.316 ; iou: 0.207 ; accuracy: 0.993 ; precision: 0.701 ; recall: 0.234 ; loss: 0.037
+2018-12-25 18:31:42,509:INFO: - Eval metrics : dsc: 0.422 ; iou: 0.276 ; accuracy: 0.984 ; precision: 0.311 ; recall: 0.727 ; loss: 0.046
+2018-12-25 18:31:43,842:INFO: Epoch 5/10
+2018-12-25 18:32:39,406:INFO: - Train metrics: dsc: 0.508 ; iou: 0.365 ; accuracy: 0.994 ; precision: 0.673 ; recall: 0.444 ; loss: 0.027
+2018-12-25 18:32:44,071:INFO: - Eval metrics : dsc: 0.565 ; iou: 0.414 ; accuracy: 0.993 ; precision: 0.545 ; recall: 0.599 ; loss: 0.025
+2018-12-25 18:32:45,969:INFO: - Found new best accuracy
+2018-12-25 18:32:45,976:INFO: Epoch 6/10
+2018-12-25 18:33:41,799:INFO: - Train metrics: dsc: 0.564 ; iou: 0.411 ; accuracy: 0.994 ; precision: 0.675 ; recall: 0.507 ; loss: 0.022
+2018-12-25 18:33:46,474:INFO: - Eval metrics : dsc: 0.551 ; iou: 0.407 ; accuracy: 0.994 ; precision: 0.681 ; recall: 0.511 ; loss: 0.020
+2018-12-25 18:33:48,321:INFO: - Found new best accuracy
+2018-12-25 18:33:48,330:INFO: Epoch 7/10
+2018-12-25 18:34:44,239:INFO: - Train metrics: dsc: 0.602 ; iou: 0.443 ; accuracy: 0.995 ; precision: 0.698 ; recall: 0.541 ; loss: 0.019
+2018-12-25 18:34:48,941:INFO: - Eval metrics : dsc: 0.600 ; iou: 0.447 ; accuracy: 0.995 ; precision: 0.671 ; recall: 0.555 ; loss: 0.018
+2018-12-25 18:34:50,878:INFO: - Found new best accuracy
+2018-12-25 18:34:50,885:INFO: Epoch 8/10
+2018-12-25 18:35:46,717:INFO: - Train metrics: dsc: 0.605 ; iou: 0.449 ; accuracy: 0.995 ; precision: 0.698 ; recall: 0.547 ; loss: 0.018
+2018-12-25 18:35:51,386:INFO: - Eval metrics : dsc: 0.582 ; iou: 0.435 ; accuracy: 0.994 ; precision: 0.615 ; recall: 0.575 ; loss: 0.019
+2018-12-25 18:35:52,872:INFO: Epoch 9/10
+2018-12-25 18:36:48,658:INFO: - Train metrics: dsc: 0.596 ; iou: 0.443 ; accuracy: 0.995 ; precision: 0.700 ; recall: 0.535 ; loss: 0.017
+2018-12-25 18:36:53,356:INFO: - Eval metrics : dsc: 0.616 ; iou: 0.477 ; accuracy: 0.995 ; precision: 0.759 ; recall: 0.554 ; loss: 0.014
+2018-12-25 18:36:55,555:INFO: - Found new best accuracy
+2018-12-25 18:36:55,561:INFO: Epoch 10/10
+2018-12-25 18:37:51,399:INFO: - Train metrics: dsc: 0.593 ; iou: 0.438 ; accuracy: 0.995 ; precision: 0.696 ; recall: 0.530 ; loss: 0.016
+2018-12-25 18:37:56,145:INFO: - Eval metrics : dsc: 0.621 ; iou: 0.474 ; accuracy: 0.995 ; precision: 0.684 ; recall: 0.586 ; loss: 0.015
+2018-12-25 18:42:45,270:INFO: Loading the datasets...
+2018-12-25 18:42:47,097:INFO: - done.
+2018-12-25 18:42:47,526:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:42:47,528:INFO: Epoch 1/10
+2018-12-25 18:43:33,646:INFO: Loading the datasets...
+2018-12-25 18:43:35,470:INFO: - done.
+2018-12-25 18:43:35,842:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:43:35,844:INFO: Epoch 1/10
+2018-12-25 18:45:57,407:INFO: Loading the datasets...
+2018-12-25 18:45:57,418:INFO: - done.
+2018-12-25 18:45:59,660:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:45:59,661:INFO: Epoch 1/10
+2018-12-25 18:48:20,898:INFO: Loading the datasets...
+2018-12-25 18:48:20,909:INFO: - done.
+2018-12-25 18:48:21,218:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:48:21,220:INFO: Epoch 1/10
+2018-12-25 18:49:07,050:INFO: Loading the datasets...
+2018-12-25 18:49:07,061:INFO: - done.
+2018-12-25 18:49:07,386:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:49:07,387:INFO: Epoch 1/10
+2018-12-25 18:50:02,591:INFO: - Train metrics: dsc: 0.012 ; iou: 0.006 ; accuracy: 0.941 ; precision: 0.368 ; recall: 0.080 ; loss: 0.392
+2018-12-25 18:50:07,274:INFO: - Eval metrics : dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.000 ; loss: 0.210
+2018-12-25 18:50:09,262:INFO: - Found new best DSC
+2018-12-25 18:50:09,269:INFO: Epoch 2/10
+2018-12-25 18:58:09,400:INFO: Loading the datasets...
+2018-12-25 18:58:11,265:INFO: - done.
+2018-12-25 18:58:13,504:INFO: Starting training for 10 epoch(s)
+2018-12-25 18:58:13,505:INFO: Epoch 1/10
+2018-12-25 19:00:48,083:INFO: Loading the datasets...
+2018-12-25 19:00:49,841:INFO: - done.
+2018-12-25 19:00:50,199:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:00:50,201:INFO: Epoch 1/10
+2018-12-25 19:01:29,130:INFO: Loading the datasets...
+2018-12-25 19:03:47,362:INFO: Loading the datasets...
+2018-12-25 19:03:49,108:INFO: - done.
+2018-12-25 19:03:49,459:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:03:49,461:INFO: Epoch 1/10
+2018-12-25 19:10:53,842:INFO: Loading the datasets...
+2018-12-25 19:10:55,764:INFO: - done.
+2018-12-25 19:10:56,082:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:10:56,083:INFO: Epoch 1/10
+2018-12-25 19:15:43,120:INFO: Loading the datasets...
+2018-12-25 19:15:45,161:INFO: - done.
+2018-12-25 19:15:45,519:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:15:45,521:INFO: Epoch 1/10
+2018-12-25 19:16:22,071:INFO: Loading the datasets...
+2018-12-25 19:16:23,915:INFO: - done.
+2018-12-25 19:16:24,282:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:16:24,283:INFO: Epoch 1/10
+2018-12-25 19:17:15,901:INFO: Loading the datasets...
+2018-12-25 19:17:17,790:INFO: - done.
+2018-12-25 19:17:18,175:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:17:18,176:INFO: Epoch 1/10
+2018-12-25 19:18:14,097:INFO: - Train metrics: dsc: 0.311 ; iou: 0.311 ; accuracy: 0.932 ; precision: 0.311 ; recall: 1.000 ; loss: 0.392
+2018-12-25 19:46:31,194:INFO: Loading the datasets...
+2018-12-25 19:46:33,156:INFO: - done.
+2018-12-25 19:46:35,378:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:46:35,379:INFO: Epoch 1/10
+2018-12-25 19:47:31,033:INFO: - Train metrics: dsc: -0.118 ; iou: -0.030 ; accuracy: 1.573 ; precision: -0.621 ; recall: 0.052 ; loss: -0.226
+2018-12-25 19:47:35,639:INFO: - Eval metrics : dsc: -0.000 ; iou: -0.000 ; accuracy: 1.697 ; precision: 1.000 ; recall: -0.000 ; loss: -0.935
+2018-12-25 19:47:37,545:INFO: Epoch 2/10
+2018-12-25 19:49:22,393:INFO: Loading the datasets...
+2018-12-25 19:49:24,337:INFO: - done.
+2018-12-25 19:49:24,689:INFO: Starting training for 10 epoch(s)
+2018-12-25 19:49:24,690:INFO: Epoch 1/10
+2018-12-25 19:50:20,114:INFO: - Train metrics: dsc: 0.002 ; iou: 0.001 ; accuracy: 0.948 ; precision: 0.379 ; recall: 0.056 ; loss: 0.402
+2018-12-25 19:50:24,807:INFO: - Eval metrics : dsc: 0.000 ; iou: 0.000 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.000 ; loss: 0.219
+2018-12-25 19:50:27,040:INFO: - Found new best DSC
+2018-12-25 19:50:27,048:INFO: Epoch 2/10
+2018-12-25 19:51:23,003:INFO: - Train metrics: dsc: 0.089 ; iou: 0.061 ; accuracy: 0.992 ; precision: 0.972 ; recall: 0.067 ; loss: 0.132
+2018-12-25 19:51:27,674:INFO: - Eval metrics : dsc: 0.007 ; iou: 0.004 ; accuracy: 0.992 ; precision: 1.000 ; recall: 0.004 ; loss: 0.075
+2018-12-25 19:51:29,967:INFO: - Found new best DSC
+2018-12-25 19:51:29,975:INFO: Epoch 3/10
+2018-12-25 19:52:25,550:INFO: - Train metrics: dsc: 0.660 ; iou: 0.527 ; accuracy: 0.996 ; precision: 0.864 ; recall: 0.602 ; loss: 0.051
+2018-12-25 19:52:30,225:INFO: - Eval metrics : dsc: 0.786 ; iou: 0.660 ; accuracy: 0.997 ; precision: 0.832 ; recall: 0.765 ; loss: 0.033
+2018-12-25 19:52:32,520:INFO: - Found new best DSC
+2018-12-25 19:52:32,527:INFO: Epoch 4/10
+2018-12-25 19:53:28,296:INFO: - Train metrics: dsc: 0.797 ; iou: 0.678 ; accuracy: 0.997 ; precision: 0.850 ; recall: 0.782 ; loss: 0.027
+2018-12-25 19:53:32,949:INFO: - Eval metrics : dsc: 0.879 ; iou: 0.789 ; accuracy: 0.998 ; precision: 0.876 ; recall: 0.895 ; loss: 0.019
+2018-12-25 19:53:35,367:INFO: - Found new best DSC
+2018-12-25 19:53:35,376:INFO: Epoch 5/10
+2018-12-25 19:54:31,177:INFO: - Train metrics: dsc: 0.857 ; iou: 0.757 ; accuracy: 0.998 ; precision: 0.869 ; recall: 0.861 ; loss: 0.016
+2018-12-25 19:54:35,880:INFO: - Eval metrics : dsc: 0.856 ; iou: 0.767 ; accuracy: 0.998 ; precision: 0.887 ; recall: 0.846 ; loss: 0.013
+2018-12-25 19:54:37,413:INFO: Epoch 6/10
+2018-12-25 19:55:33,645:INFO: - Train metrics: dsc: 0.871 ; iou: 0.778 ; accuracy: 0.998 ; precision: 0.877 ; recall: 0.878 ; loss: 0.012
+2018-12-25 19:55:38,378:INFO: - Eval metrics : dsc: 0.918 ; iou: 0.849 ; accuracy: 0.999 ; precision: 0.939 ; recall: 0.901 ; loss: 0.009
+2018-12-25 19:55:40,593:INFO: - Found new best DSC
+2018-12-25 19:55:40,601:INFO: Epoch 7/10
+2018-12-25 19:56:37,238:INFO: - Train metrics: dsc: 0.865 ; iou: 0.772 ; accuracy: 0.998 ; precision: 0.884 ; recall: 0.861 ; loss: 0.010
+2018-12-25 19:56:42,097:INFO: - Eval metrics : dsc: 0.898 ; iou: 0.820 ; accuracy: 0.998 ; precision: 0.919 ; recall: 0.888 ; loss: 0.008
+2018-12-25 19:56:43,534:INFO: Epoch 8/10
+2018-12-25 19:57:39,803:INFO: - Train metrics: dsc: 0.907 ; iou: 0.833 ; accuracy: 0.998 ; precision: 0.908 ; recall: 0.912 ; loss: 0.007
+2018-12-25 19:57:44,560:INFO: - Eval metrics : dsc: 0.876 ; iou: 0.789 ; accuracy: 0.998 ; precision: 0.976 ; recall: 0.807 ; loss: 0.008
+2018-12-25 19:57:46,022:INFO: Epoch 9/10
+2018-12-25 19:58:42,279:INFO: - Train metrics: dsc: 0.906 ; iou: 0.831 ; accuracy: 0.999 ; precision: 0.908 ; recall: 0.910 ; loss: 0.006
+2018-12-25 19:58:47,099:INFO: - Eval metrics : dsc: 0.923 ; iou: 0.858 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.945 ; loss: 0.005
+2018-12-25 19:58:48,896:INFO: - Found new best DSC
+2018-12-25 19:58:48,911:INFO: Epoch 10/10
+2018-12-25 19:59:45,354:INFO: - Train metrics: dsc: 0.905 ; iou: 0.831 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.915 ; loss: 0.006
+2018-12-25 19:59:50,223:INFO: - Eval metrics : dsc: 0.905 ; iou: 0.829 ; accuracy: 0.999 ; precision: 0.896 ; recall: 0.918 ; loss: 0.006
+2018-12-25 20:00:52,127:INFO: Creating the dataset...
+2018-12-25 20:00:54,038:INFO: - done.
+2018-12-25 20:00:54,397:INFO: Starting evaluation
+2018-12-25 20:05:11,535:INFO: Creating the dataset...
+2018-12-25 20:05:13,455:INFO: - done.
+2018-12-25 20:05:13,804:INFO: Starting evaluation
+2018-12-25 20:05:57,019:INFO: Creating the dataset...
+2018-12-25 20:05:59,071:INFO: - done.
+2018-12-25 20:05:59,479:INFO: Starting evaluation
+2018-12-25 20:06:38,094:INFO: Creating the dataset...
+2018-12-25 20:06:40,101:INFO: - done.
+2018-12-25 20:06:40,465:INFO: Starting evaluation
+2018-12-25 20:08:07,284:INFO: Creating the dataset...
+2018-12-25 20:08:09,219:INFO: - done.
+2018-12-25 20:08:09,599:INFO: Starting evaluation
+2018-12-25 20:09:34,603:INFO: Creating the dataset...
+2018-12-25 20:09:36,610:INFO: - done.
+2018-12-25 20:09:36,967:INFO: Starting evaluation
+2018-12-25 20:12:15,942:INFO: Creating the dataset...
+2018-12-25 20:12:18,186:INFO: - done.
+2018-12-25 20:12:18,616:INFO: Starting evaluation
+2018-12-25 20:16:59,793:INFO: Creating the dataset...
+2018-12-25 20:17:02,424:INFO: - done.
+2018-12-25 20:17:02,927:INFO: Starting evaluation
+2018-12-25 20:17:57,073:INFO: Creating the dataset...
+2018-12-25 20:17:59,547:INFO: - done.
+2018-12-25 20:18:00,000:INFO: Starting evaluation
+2018-12-25 20:18:17,334:INFO: Creating the dataset...
+2018-12-25 20:18:19,674:INFO: - done.
+2018-12-25 20:18:20,103:INFO: Starting evaluation
+2018-12-25 20:22:51,764:INFO: Creating the dataset...
+2018-12-25 20:22:54,428:INFO: - done.
+2018-12-25 20:22:54,930:INFO: Starting evaluation
+2018-12-25 20:26:52,939:INFO: Creating the dataset...
+2018-12-25 20:26:55,919:INFO: - done.
+2018-12-25 20:26:56,451:INFO: Starting evaluation
+2018-12-25 20:27:04,242:INFO: - Eval metrics : dsc: 0.923 ; iou: 0.858 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.945 ; loss: 0.005

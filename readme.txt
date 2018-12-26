@@ -1,0 +1,1 @@
+Folder Structure and Setup based on https://cs230-stanford.github.io/pytorch-getting-started.html (Coursera Course)
