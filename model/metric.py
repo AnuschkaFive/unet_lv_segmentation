@@ -2,7 +2,7 @@
 Defines the metrics used in evaluating a model.
 """
 
-import torch
+#import torch
 import numpy as np
 from pathlib import Path
 from PIL import Image
@@ -23,16 +23,20 @@ def accuracy(outputs, ground_truths, debug=False):
     """
     if debug:
         print('Accuracy:')
-    outputs_f = outputs.flatten()
-    ground_truths_f = ground_truths.flatten()
-    intersection = (outputs_f * ground_truths_f).sum()
+    num = outputs.shape[0]    
+    outputs_f = outputs.reshape(num, -1)
+    ground_truths_f = ground_truths.reshape(num, -1)
+    intersection = (outputs_f * ground_truths_f).sum(1)
     if debug:
         print('    Intersection: {}'.format(intersection))
-    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+    cardinalities = outputs_f.sum(1) + ground_truths_f.sum(1)
     union = cardinalities - intersection
     if debug:
         print('    Union: {}'.format(union))
-    return (intersection + (outputs_f.size - union)) / outputs_f.size
+    score = (intersection + (outputs_f.shape[1] - union)) / outputs_f.shape[1]
+    if debug:
+        print('    Score before Averaging: {}'.format(score))
+    return score.sum() / num
 
 
 def precision(outputs, ground_truths, debug=False):
@@ -47,15 +51,19 @@ def precision(outputs, ground_truths, debug=False):
     """
     if debug:
         print('Precision:')
-    outputs_f = outputs.flatten()
-    ground_truths_f = ground_truths.flatten()
-    intersection = (outputs_f * ground_truths_f).sum()
+    num =  outputs.shape[0]
+    outputs_f = outputs.reshape(num, -1)
+    ground_truths_f = ground_truths.reshape(num, -1)
+    intersection = (outputs_f * ground_truths_f).sum(1)
     if debug:
         print('    Intersection: {}'.format(intersection))
-    outputs_cardinality = outputs_f.sum()
+    outputs_cardinality = outputs_f.sum(1)
     if debug:
         print('    Outputs Cardinality: {}'.format(outputs_cardinality))
-    return (intersection + SMOOTH) / (outputs_cardinality + SMOOTH)
+    score = (intersection + SMOOTH) / (outputs_cardinality + SMOOTH)
+    if debug:
+        print('    Score before Averaging: {}'.format(score))
+    return score.sum() / num
 
 
 def recall(outputs, ground_truths, debug=False):
@@ -70,15 +78,19 @@ def recall(outputs, ground_truths, debug=False):
     """
     if debug:
         print('Recall:')
-    outputs_f = outputs.flatten()
-    ground_truths_f = ground_truths.flatten()
-    intersection = (outputs_f * ground_truths_f).sum()
+    num =  outputs.shape[0]
+    outputs_f = outputs.reshape(num, -1)
+    ground_truths_f = ground_truths.reshape(num, -1)
+    intersection = (outputs_f * ground_truths_f).sum(1)
     if debug:
         print('    Intersection: {}'.format(intersection))
-    ground_truth_cardinality = ground_truths_f.sum()
+    ground_truth_cardinality = ground_truths_f.sum(1)
     if debug:
         print('    Ground Truth Cardinality: {}'.format(ground_truth_cardinality))
-    return (intersection + SMOOTH) / (ground_truth_cardinality + SMOOTH)
+    score = (intersection + SMOOTH) / (ground_truth_cardinality + SMOOTH)
+    if debug:
+        print('    Score before Averaging: {}'.format(score))
+    return score.sum() / num
 
 
 def DSC(outputs, ground_truths, debug=False):
@@ -93,15 +105,19 @@ def DSC(outputs, ground_truths, debug=False):
     """
     if debug:
         print('DSC:')
-    outputs_f = outputs.flatten()
-    ground_truths_f = ground_truths.flatten()
-    intersection = (outputs_f * ground_truths_f).sum()
+    num =  outputs.shape[0]
+    outputs_f = outputs.reshape(num, -1)
+    ground_truths_f = ground_truths.reshape(num, -1)
+    intersection = (outputs_f * ground_truths_f).sum(1)
     if debug:
         print('    Intersection: {}'.format(intersection))
-    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+    cardinalities = outputs_f.sum(1) + ground_truths_f.sum(1)
     if debug:
         print('    Cardinalities: {}'.format(cardinalities))
-    return (2. * intersection + SMOOTH) / (cardinalities + SMOOTH)
+    score = (2. * intersection + SMOOTH) / (cardinalities + SMOOTH)
+    if debug:
+        print('    Score before Averaging: {}'.format(score))
+    return score.sum() / num
     
 
 def IOU(outputs, ground_truths, debug=False):
@@ -116,16 +132,20 @@ def IOU(outputs, ground_truths, debug=False):
     """
     if debug:
         print('IOU:')
-    outputs_f = outputs.flatten()
-    ground_truths_f = ground_truths.flatten()
-    intersection = (outputs_f * ground_truths_f).sum()
+    num =  outputs.shape[0]
+    outputs_f = outputs.reshape(num, -1)
+    ground_truths_f = ground_truths.reshape(num, -1)
+    intersection = (outputs_f * ground_truths_f).sum(1)
     if debug:
         print('    Intersection: {}'.format(intersection))
-    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+    cardinalities = outputs_f.sum(1) + ground_truths_f.sum(1)
     union = cardinalities - intersection
     if debug:
         print('    Union: {}'.format(union))
-    return (intersection + SMOOTH) / (union + SMOOTH)
+    score = (intersection + SMOOTH) / (union + SMOOTH)
+    if debug:
+        print('    Score before Averaging: {}'.format(score))
+    return score.sum() / num
 
 # TODO: too difficult to calculate, since I have a region, not a contour!
 #def Hausdorff(outputs, ground_truths, debug=False):
@@ -154,12 +174,6 @@ metrics_dict = {
 #image_np_complete = np.resize(image_np_complete, (2,size,size))
 #image_np_complete[1] = image_np
 #print(image_np_complete)
-#
-#image_np_complete = torch.from_numpy(image_np_complete)
-#print(image_np_complete)
-#
-#impage_np_complete_numpy = image_np_complete.numpy()
-#print(impage_np_complete_numpy)
 #
 #image = Image.open(Path('data/heart_scans/ALFE-BL/ALFE-BL_CineMR_ti00_sl01_ENDO.png'))
 #image = image.resize((size, size), Image.BILINEAR)

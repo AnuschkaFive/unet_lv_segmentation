@@ -16,23 +16,16 @@ class SoftDiceLoss(nn.Module):
         super(SoftDiceLoss, self).__init__()
 
     def forward(self, logits, targets):
-#        smooth = 1
-#        num = targets.size(0)
-#        probs = torch.sigmoid(logits)
-#        m1 = probs.view(num, -1)
-#        m2 = targets.view(num, -1)
-#        intersection = (m1 * m2)
-#
-#        score = 2. * (intersection.sum(1) + smooth) / (m1.sum(1) + m2.sum(1) + smooth)
-#        score = 1 - score.sum() / num
-        smooth = 1
+        smooth = 1.
+        num = targets.size(0)
         probs = torch.sigmoid(logits)
-        m1 = probs.view(-1)
-        m2 = targets.view(-1)
+        m1 = probs.view(num, -1)
+        m2 = targets.view(num, -1)
         intersection = (m1 * m2)
 
-        score = 2. * (intersection.sum() + smooth) / (m1.sum() + m2.sum() + smooth)
-        score = 1 - score.sum()
+        score = 2. * (intersection.sum(1) + smooth) / (m1.sum(1) + m2.sum(1) + smooth)
+        score = 1 - score.sum() / num
+        
         return score
 
 
@@ -97,9 +90,9 @@ def soft_dice_and_cross_entropy_loss(outputs, ground_truths):
 #image_np_complete = (torch.from_numpy(image_np_complete)).type(torch.FloatTensor)
 #image_np_complete_y = (torch.from_numpy(image_np_complete_y)).type(torch.FloatTensor)
 #
-#print(cross_entropy_loss(image_np_complete, image_np_complete_y))
+#print("Cross Entropy Loss: {}".format(cross_entropy_loss(image_np_complete, image_np_complete_y)))
 #
-#print(soft_dice_loss(image_np_complete, image_np_complete_y))   
+#print("Soft Dice Loss: {}".format(soft_dice_loss(image_np_complete, image_np_complete_y)))   
 
 
 #######################
