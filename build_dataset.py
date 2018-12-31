@@ -69,8 +69,11 @@ def stratify_filenames(filenames):
 
     assert (categories_np.size - (categories_np == None).sum()) == len(filenames), "Categories has {} elements, but Filenames has {}.".format(categories_np.size - (categories_np == None).sum(), len(filenames))
 
-    # Shuffle subcategories.
+    # Shuffle categories.    
     np.random.seed(230)
+    np.random.shuffle(categories_np)
+
+    # Shuffle subcategories.
     for subcat in categories_np:
         np.random.shuffle(subcat)
     
