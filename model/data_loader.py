@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as transforms
 import numpy as np
 import util.cross_validation as cv
-
+import build_dataset
 
 class Heart2DSegmentationDataset(Dataset):
     """
@@ -23,7 +23,7 @@ class Heart2DSegmentationDataset(Dataset):
             transform: (torchvision.transforms) transformation to apply on image
         """
         self.endo_or_epi = endo_or_epi
-        self.ground_truth_filenames = [str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')]
+        self.ground_truth_filenames = build_dataset.stratify_filenames([str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')])
         self.transform = transform
         self.convert_to_tensor = transforms.ToTensor()
 
