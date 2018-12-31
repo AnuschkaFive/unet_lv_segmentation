@@ -1,3 +1,145 @@
+#"""
+#Defines the metrics used in evaluating a model.
+#"""
+#
+#import torch
+#import numpy as np
+#from pathlib import Path
+#from PIL import Image
+#
+## Constant to be added to both nominators and denominators, to prevent division by 0.
+## TODO: Paul used 1., why? (Why not a very small number?)
+#SMOOTH = 1e-5
+#
+#def accuracy(outputs, ground_truths, debug=False):
+#    """
+#    Compute the accuracy, given the outputs and ground truths for all images.
+#    (TP + TN / TP + TN + FP + FN)
+#    Args:
+#        outputs: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - output of the model
+#        ground_truths: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - ground truth
+#        debug: (bool) True, when debug statements should be printed. False, otherwise.
+#    Returns: (float) accuracy in [0,1]
+#    """
+#    if debug:
+#        print('Accuracy:')
+#    outputs_f = outputs.flatten()
+#    ground_truths_f = ground_truths.flatten()
+#    intersection = (outputs_f * ground_truths_f).sum()
+#    if debug:
+#        print('    Intersection: {}'.format(intersection))
+#    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+#    union = cardinalities - intersection
+#    if debug:
+#        print('    Union: {}'.format(union))
+#    return (intersection + (outputs_f.size - union)) / outputs_f.size
+#
+#
+#def precision(outputs, ground_truths, debug=False):
+#    """
+#    Compute the precision, given the outputs and ground truths for all images.
+#    (TP / TP + FP)
+#    Args:
+#        outputs: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - output of the model
+#        ground_truths: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - ground truth
+#        debug: (bool) True, when debug statements should be printed. False, otherwise.
+#    Returns: (float) precision in [0,1]
+#    """
+#    if debug:
+#        print('Precision:')
+#    outputs_f = outputs.flatten()
+#    ground_truths_f = ground_truths.flatten()
+#    intersection = (outputs_f * ground_truths_f).sum()
+#    if debug:
+#        print('    Intersection: {}'.format(intersection))
+#    outputs_cardinality = outputs_f.sum()
+#    if debug:
+#        print('    Outputs Cardinality: {}'.format(outputs_cardinality))
+#    return (intersection + SMOOTH) / (outputs_cardinality + SMOOTH)
+#
+#
+#def recall(outputs, ground_truths, debug=False):
+#    """
+#    Compute the recall, given the outputs and ground truths for all images.
+#    (TP / TP + FN)
+#    Args:
+#        outputs: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - output of the model
+#        ground_truths: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - ground truth
+#        debug: (bool) True, when debug statements should be printed. False, otherwise.
+#    Returns: (float) recall in [0,1]
+#    """
+#    if debug:
+#        print('Recall:')
+#    outputs_f = outputs.flatten()
+#    ground_truths_f = ground_truths.flatten()
+#    intersection = (outputs_f * ground_truths_f).sum()
+#    if debug:
+#        print('    Intersection: {}'.format(intersection))
+#    ground_truth_cardinality = ground_truths_f.sum()
+#    if debug:
+#        print('    Ground Truth Cardinality: {}'.format(ground_truth_cardinality))
+#    return (intersection + SMOOTH) / (ground_truth_cardinality + SMOOTH)
+#
+#
+#def DSC(outputs, ground_truths, debug=False):
+#    """
+#    Compute the Dice coefficient (F1 score), given the outputs and ground truths for all images. 
+#    (2 * TP / 2TP + FP + FN)
+#    Args:
+#        outputs: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - output of the model
+#        ground_truths: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - ground truth
+#        debug: (bool) True, when debug statements should be printed. False, otherwise.
+#    Returns: (float) Dice coefficient in [0,1]
+#    """
+#    if debug:
+#        print('DSC:')
+#    outputs_f = outputs.flatten()
+#    ground_truths_f = ground_truths.flatten()
+#    intersection = (outputs_f * ground_truths_f).sum()
+#    if debug:
+#        print('    Intersection: {}'.format(intersection))
+#    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+#    if debug:
+#        print('    Cardinalities: {}'.format(cardinalities))
+#    return (2. * intersection + SMOOTH) / (cardinalities + SMOOTH)
+#    
+#
+#def IOU(outputs, ground_truths, debug=False):
+#    """
+#    Compute the Intersection over Union (Jaccard index), given the outputs and ground truths for all images.
+#    (TP / TP + FP + FN)
+#    Args:
+#        outputs: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - output of the model
+#        ground_truths: (np.ndarray) dimension batch_size x ground_truth_height x ground_truth_width - ground truth
+#        debug: (bool) True, when debug statements should be printed. False, otherwise.
+#    Returns: (float) Intersection over Union in [0,1]
+#    """
+#    if debug:
+#        print('IOU:')
+#    outputs_f = outputs.flatten()
+#    ground_truths_f = ground_truths.flatten()
+#    intersection = (outputs_f * ground_truths_f).sum()
+#    if debug:
+#        print('    Intersection: {}'.format(intersection))
+#    cardinalities = outputs_f.sum() + ground_truths_f.sum()
+#    union = cardinalities - intersection
+#    if debug:
+#        print('    Union: {}'.format(union))
+#    return (intersection + SMOOTH) / (union + SMOOTH)
+#
+## TODO: too difficult to calculate, since I have a region, not a contour!
+##def Hausdorff(outputs, ground_truths, debug=False):
+#
+#    
+## maintain all metrics required in this dictionary - these are used in the training and evaluation loops
+#metrics_dict = {
+#    'dsc': DSC,
+#    'iou': IOU,
+#    'accuracy': accuracy,
+#    'precision': precision,
+#    'recall': recall
+#}
+
 """
 Defines the metrics used in evaluating a model.
 """
@@ -196,4 +338,4 @@ metrics_dict = {
 #print(recall(image_np_complete, image_np_complete_y, debug=True))
 #
 #print(accuracy(image_np_complete, image_np_complete_y, debug=True))
-#######################
+########################

@@ -24,6 +24,7 @@ class Heart2DSegmentationDataset(Dataset):
         """
         self.endo_or_epi = endo_or_epi
         self.ground_truth_filenames = build_dataset.stratify_filenames([str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')])
+        #self.ground_truth_filenames = [str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')]
         self.transform = transform
         self.convert_to_tensor = transforms.ToTensor()
 

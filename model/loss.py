@@ -27,6 +27,15 @@ class SoftDiceLoss(nn.Module):
         score = 1 - score.sum() / num
         
         return score
+#        smooth = 1
+#        probs = torch.sigmoid(logits)
+#        m1 = probs.view(-1)
+#        m2 = targets.view(-1)
+#        intersection = (m1 * m2)
+#
+#        score = 2. * (intersection.sum() + smooth) / (m1.sum() + m2.sum() + smooth)
+#        score = 1 - score.sum()
+#        return score
 
 
 def soft_dice_loss(outputs, ground_truths):
