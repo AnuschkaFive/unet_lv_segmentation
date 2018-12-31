@@ -33,16 +33,58 @@ TODO:
 import argparse
 import random
 import torchvision.transforms as transforms
+import numpy as np
 
 from pathlib import Path
 from PIL import Image
 from tqdm import tqdm
 
-SIZE = 320
+IMG_SIZE = 320
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', default='data/heart_scans', help="Directory with the Heart Segmentation dataset")
-parser.add_argument('--output_dir', default='data/{}x{}_heart_scans'.format(SIZE, SIZE), help="Where to write the new data")
+parser.add_argument('--output_dir', default='data/{}x{}_heart_scans'.format(IMG_SIZE, IMG_SIZE), help="Where to write the new data")
+
+def stratify_filenames(filenames):
+    """
+    Sorts the filenames in a stratified way.
+    Args:
+        filenames: (string-Array) The paths to the files (only ENDO, EPI or ORIG).
+    Returns:
+        out: (string-Array) Copy of the input array, sorted in a stratified way.
+    """
+    # Array mit Unterarray: [[alle t00 und sl00], [alle ^t00 und sl00], ..., [alle t00 und sl09], [alle ^t00 und sl09]]
+    categories = []
+    
+    # TODO: find max slNUMB, for range max!
+    for numb in range(0, 11):
+        subcategory = [x for x in filenames if (("ti00" in x) and ("sl{:02d}".format(numb) in x))]
+        categories.append(subcategory)
+        subcategory = [x for x in filenames if (("ti00" not in x) and ("sl{:02d}".format(numb) in x))]
+        categories.append(subcategory)
+        
+    # Make all sublists the same length, then cast to numpy array for easier calculations.
+    length = len(sorted(categories,key=len, reverse=True)[0])
+    categories_np = np.array([subcat+[None]*(length-len(subcat)) for subcat in categories])
+
+    assert (categories_np.size - (categories_np == None).sum()) == len(filenames), "Categories has {} elements, but Filenames has {}.".format(categories_np.size - (categories_np == None).sum(), len(filenames))
+
+    # Shuffle subcategories.
+    np.random.seed(230)
+    for subcat in categories_np:
+        np.random.shuffle(subcat)
+    
+    # Flatten column-first.
+    categories_np = categories_np.flatten("F")
+    
+    # Delete empty elements.
+    categories_np = np.delete(categories_np, np.where(categories_np == None))
+    
+    assert categories_np.size == len(filenames), "Categories has {} elements, but Filenames has {}.".format(categories_np.size, len(filenames))
+    
+    # Cast back to Python list and return.
+    return categories_np.tolist()
+
 
 # TODO: alternatively, this can be done before ROI is determined... then it wouldn't contaminate the original data set!
 def create_missing_endo_or_epi(data_dir):
@@ -95,11 +137,14 @@ def split_filenames_into_train_test(data_dir, split_ratio):
     # Get all filenames that contain '_ENDO' and '.png'.
     filenames = [str(path) for path in Path(data_dir).glob('**/*_ENDO*.png')]  
     
-    # Set a random seed, to create reproducible results. Then sort the filenames,
-    # before randomly shuffling them.
-    random.seed(230)
-    filenames.sort()
-    random.shuffle(filenames) 
+#    # Set a random seed, to create reproducible results. Then sort the filenames,
+#    # before randomly shuffling them.
+#    random.seed(230)
+#    filenames.sort()
+#    random.shuffle(filenames) 
+    
+    # Sort filenames in a stratified way.
+    filenames = stratify_filenames(filenames)
     
     # Split the filenames into train and test set.
     split = int(split_ratio * len(filenames))
@@ -133,13 +178,13 @@ def split_filenames_into_train_test(data_dir, split_ratio):
     return filenames
 
 
-def resize_and_save(filename, output_dir, size=SIZE):
+def resize_and_save(filename, output_dir, img_size=IMG_SIZE):
     """
     Resize the image contained in `filename` and save it to the `output_dir`
     """
     image = Image.open(filename)
     # Use bilinear interpolation instead of the default "nearest neighbor" method
-    image = image.resize((size, size), Image.BILINEAR)
+    image = image.resize((img_size, img_size), Image.BILINEAR)
     image.save(Path(output_dir) / Path(filename).parts[-1])
 
 
@@ -183,10 +228,17 @@ def main(data_dir, output_dir):
 
         print("Processing {} data, saving preprocessed data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
-            resize_and_save(filename, output_dir_split, size=SIZE)
+            resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)
 
     print("Done building dataset.")
 
 if __name__ == '__main__':
     args = parser.parse_args()
     main(args.data_dir, args.output_dir)
+    
+    
+#### Test Section ####
+#filenames = [str(path) for path in Path('data/heart_scans').glob('**/*_ENDO*.png')]
+#
+#print(stratify_filenames(filenames))
+#####################
