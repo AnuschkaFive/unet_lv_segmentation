@@ -194,10 +194,26 @@ def resize_and_save(filename, output_dir, img_size=IMG_SIZE):
 def transform_and_save(scan_filename, output_dir):
     """
     Transforms the ORIG scan image and the corresponding ENDO and EPI ground truth
-    images. Saves the transformations in the same folder as the originals, with
+    images. Saves the transformations in the same folder as the scan image, with
     '_AUG{number}' added to the filename.
+    Args:
+        scan_filename: (string) The filename of the ORIG scan image.
+        output_dir: (string) Where to save the transformed pictures.
     """
-    scan = Image.open(scan_filename)   
+    scan = Image.open(scan_filename) 
+    endo = Image.open(scan_filename.replace("_ORIG", "_ENDO"))
+    epi = Image.open(scan_filename.replace("_ORIG", "_EPI"))
+    
+    random.seed(230)
+    
+    for i in range(0, 3):
+        degree = random.randint(70 + (i * 90), 110 + (i * 90))
+        scan_rotated = scan.rotate(degree, resample=Image.BILINEAR, expand=0)
+        endo_rotated = endo.rotate(degree, resample=Image.BILINEAR, expand=0)
+        epi_rotated = epi.rotate(degree, resample=Image.BILINEAR, expand=0)
+        scan_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ORIG_AUG{}".format(i)))
+        endo_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(i)))
+        epi_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(i)))
 
 
 def main(data_dir, output_dir):   
@@ -229,9 +245,14 @@ def main(data_dir, output_dir):
         else:
             print("Warning: dir {} already exists".format(output_dir_split))
 
-        print("Processing {} data, saving preprocessed data to {}".format(split, output_dir_split))
+        print("Resizing {} data, saving resized data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
             resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)
+        
+        print("Augmenting {} data, saving augmented data to {}".format(split, output_dir_split))
+        for filename in tqdm(filenames[split]):
+            if "_ORIG" in filename and not "_AUG" in filename:
+                transform_and_save(str(Path(output_dir_split) / Path(filename).parts[-1]), output_dir_split)
 
     print("Done building dataset.")
 

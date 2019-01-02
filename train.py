@@ -88,6 +88,7 @@ def train(model, optimizer, loss_fn, dataloader, metrics_dict, hyper_params):
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]}
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Train metrics: " + metrics_string)
+    #return metrics_mean, to append to list, to average later on for k-fold cross validation
 
 
 def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_fn, metrics_dict, hyper_params, model_dir,
@@ -166,6 +167,12 @@ def main(data_dir, model_dir, restore_file):
     # Create the input data pipeline
     logging.info("Loading the datasets...")
         
+    # TODO:
+    # enter k_fold: loop with train - eval, using different dataloaders
+    # return results after each split, append to list
+    # average results from list, save somewhere
+    # THEN start normal train - eval run, with eval being the test set!
+    
     #if k_fold is not 1:
     # fetch dataloaders
     dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)

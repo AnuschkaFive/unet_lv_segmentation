@@ -42,7 +42,7 @@ class StackEncoder(nn.Module):
 class StackDecoder(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, padding, stride, upsample_size, hyper_params):
         super(StackDecoder, self).__init__()
-
+        self.use_crop_concat = in_channels != out_channels
         #self.upSample = nn.Upsample(size=upsample_size, mode="bilinear")
         self.convr1 = ConvBnRelu(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, hyper_params=hyper_params)
         # Crop + concat step between these 2
@@ -68,7 +68,8 @@ class StackDecoder(nn.Module):
         #x = self.upSample(x)
         x = F.interpolate(x, self.upsample_size)
         x = self.convr1(x)
-        x = self._crop_concat(x, down_tensor)
+        if self.use_crop_concat:
+            x = self._crop_concat(x, down_tensor)
         x = self.convr2(x)
         return x
 
@@ -104,6 +105,52 @@ class UNetOriginal(nn.Module):
         # 1x1 convolution at the last layer
         # Different from the paper is the output size here
         self.output_seg_map = nn.Conv2d(64, 1, kernel_size=(1, 1), padding=0, stride=1)
+
+    def forward(self, x):
+        x, x_trace1 = self.down1(x)  # Calls the forward() method of each layer
+        x, x_trace2 = self.down2(x)
+        x, x_trace3 = self.down3(x)
+        x, x_trace4 = self.down4(x)
+
+        x = self.center(x)
+
+        x = self.up1(x, x_trace4)
+        x = self.up2(x, x_trace3)
+        x = self.up3(x, x_trace2)
+        x = self.up4(x, x_trace1)
+
+        out = self.output_seg_map(x)
+        #out = torch.squeeze(out, dim=1)
+        return out
+    
+    
+class ModelA(nn.Module):
+    def __init__(self, hyper_params):
+        super(ModelA, self).__init__()
+        # TODO: works for input image sizes 360x360 (thanks Marco!)
+        kSize = (3,3)
+        pad = 1  # padding 1 so ksize 3 doesn't shorten the output
+        stride = 1
+        pool_kSize = (2,2)
+        pool_stride = 2
+
+        self.down1 = StackEncoder(1, 32, kernel_size=kSize, padding=pad, stride=stride, pool_kernel_size=pool_kSize, pool_stride=pool_stride, hyper_params=hyper_params)
+        self.down2 = StackEncoder(32, 32, kernel_size=kSize, padding=pad, stride=stride, pool_kernel_size=pool_kSize, pool_stride=pool_stride, hyper_params=hyper_params)
+        self.down3 = StackEncoder(32, 32, kernel_size=kSize, padding=pad, stride=stride, pool_kernel_size=pool_kSize, pool_stride=pool_stride, hyper_params=hyper_params)
+        self.down4 = StackEncoder(32, 32, kernel_size=kSize, padding=pad, stride=stride, pool_kernel_size=pool_kSize, pool_stride=pool_stride, hyper_params=hyper_params)
+
+        self.center = nn.Sequential(
+            ConvBnRelu(32, 32, kernel_size=(3, 3), stride=1, padding=0, hyper_params=hyper_params),
+            ConvBnRelu(32, 32, kernel_size=(3, 3), stride=1, padding=0, hyper_params=hyper_params)
+        )
+    
+        self.up1 = StackDecoder(in_channels=32, out_channels=32, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(40, 40), hyper_params=hyper_params)
+        self.up2 = StackDecoder(in_channels=32, out_channels=32, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(80, 80), hyper_params=hyper_params)
+        self.up3 = StackDecoder(in_channels=32, out_channels=32, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(160, 160), hyper_params=hyper_params)
+        self.up4 = StackDecoder(in_channels=32, out_channels=32, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(320, 320), hyper_params=hyper_params)
+        # 1x1 convolution at the last layer
+        # Different from the paper is the output size here
+        self.output_seg_map = nn.Conv2d(32, 1, kernel_size=(1, 1), padding=0, stride=1)
 
     def forward(self, x):
         x, x_trace1 = self.down1(x)  # Calls the forward() method of each layer
