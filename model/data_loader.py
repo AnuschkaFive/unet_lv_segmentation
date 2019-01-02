@@ -4,7 +4,7 @@ import torch
 
 from pathlib import Path
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, Subset
 import torchvision.transforms as transforms
 import numpy as np
 import util.cross_validation as cv
@@ -55,7 +55,7 @@ class Heart2DSegmentationDataset(Dataset):
         #return scan.type(torch.FloatTensor), ground_truth.type(torch.FloatTensor), self.ground_truth_filenames[idx]
         return scan, ground_truth, self.ground_truth_filenames[idx]
 
-def fetch_dataloader(types, data_dir, hyper_params):
+def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None):
     """
     Fetches the DataLoader object for each type in types from data_dir.
     Args:
@@ -68,8 +68,11 @@ def fetch_dataloader(types, data_dir, hyper_params):
     """
     dataloaders = {}
     
-    mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
-    print("Mean: {}, Std: {}".format(mean.item(), std.item()))
+    if train_idx.any() != None:
+        mean, std = mean_std_calc(DataLoader(Subset(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi), train_idx)))
+    else:
+        mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
+    #print("Mean: {}, Std: {}".format(mean.item(), std.item()))
     # borrowed from http://pytorch.org/tutorials/advanced/neural_style_tutorial.html
     # and http://pytorch.org/tutorials/beginner/data_loading_tutorial.html
     # define a training image loader that specifies transforms on images. See documentation for more details.
@@ -90,10 +93,10 @@ def fetch_dataloader(types, data_dir, hyper_params):
         transforms.Normalize(mean=[mean.item()], std=[std.item()])
         ])
 
-    for split in ['train', 'test']:
+    for split in ['train', 'val', 'test']:
         if split in types:
             # TODO: ich glaube, hier soll das was anderes sein, nämlich nur eine string concatenation...? Kein Unterordner?
-            path = str(Path(data_dir) / "{}_heart_scans".format(split))
+            path = str(Path(data_dir) / "{}_heart_scans".format(split if split != 'val' else 'train'))
 
             # use the train_transformer if training data, else use eval_transformer without random flip
             # TODO: hier, falls k-fold-cross-validation, dann in folds aufteilen?
@@ -102,17 +105,31 @@ def fetch_dataloader(types, data_dir, hyper_params):
                 # - make array of dict with is_cv as size
                 # - use SubsetRandomSampler, with seed and shuffle, to create dataloaders of train and val, for each array space
                 # - else: just make train (of all)
-                dl = DataLoader(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, train_transformer), 
-                                batch_size=hyper_params.batch_size, 
-                                shuffle=True,
-                                num_workers=hyper_params.num_workers,
-                                pin_memory=hyper_params.cuda)
+                if train_idx.any() != None:
+                    dl = DataLoader(Subset(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, train_transformer), train_idx), 
+                                    batch_size=hyper_params.batch_size, 
+                                    shuffle=True,
+                                    num_workers=hyper_params.num_workers,
+                                    pin_memory=hyper_params.cuda)
+                else:
+                    dl = DataLoader(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, train_transformer), 
+                                    batch_size=hyper_params.batch_size, 
+                                    shuffle=True,
+                                    num_workers=hyper_params.num_workers,
+                                    pin_memory=hyper_params.cuda)
             else:
-                dl = DataLoader(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, eval_transformer), 
-                                batch_size=hyper_params.batch_size, 
-                                shuffle=False,
-                                num_workers=hyper_params.num_workers,
-                                pin_memory=hyper_params.cuda)
+                if (split == 'val') and (val_idx.any() != None): 
+                    dl = DataLoader(Subset(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, eval_transformer), val_idx), 
+                                    batch_size=hyper_params.batch_size, 
+                                    shuffle=False,
+                                    num_workers=hyper_params.num_workers,
+                                    pin_memory=hyper_params.cuda)                    
+                else:
+                    dl = DataLoader(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, eval_transformer), 
+                                    batch_size=hyper_params.batch_size, 
+                                    shuffle=False,
+                                    num_workers=hyper_params.num_workers,
+                                    pin_memory=hyper_params.cuda)
 
             dataloaders[split] = dl
 

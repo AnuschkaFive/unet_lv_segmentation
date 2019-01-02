@@ -15,6 +15,7 @@ import model.net as net
 import model.loss as loss
 import model.metric as metric
 import model.data_loader as data_loader
+import util.cross_validation as cv
 from evaluate import evaluate
 
 parser = argparse.ArgumentParser()
@@ -89,6 +90,7 @@ def train(model, optimizer, loss_fn, dataloader, metrics_dict, hyper_params):
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Train metrics: " + metrics_string)
     #return metrics_mean, to append to list, to average later on for k-fold cross validation
+    return metrics_mean
 
 
 def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_fn, metrics_dict, hyper_params, model_dir,
@@ -113,16 +115,21 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
         utils.load_checkpoint(restore_path, model, optimizer)
 
     best_val_dsc = 0.0
+    
+    all_val_metrics = {}
+    all_train_metrics = {}
 
     for epoch in range(hyper_params.num_epochs):
         # Run one epoch
         logging.info("Epoch {}/{}".format(epoch + 1, hyper_params.num_epochs))
 
         # compute number of batches in one epoch (one full pass over the training set)
-        train(model, optimizer, loss_fn, train_dataloader, metrics_dict, hyper_params)
+        train_metrics = train(model, optimizer, loss_fn, train_dataloader, metrics_dict, hyper_params)
+        all_train_metrics['epoch_{:02d}'.format(epoch + 1)] = train_metrics
 
         # Evaluate for one epoch on validation set
         val_metrics = evaluate(model, loss_fn, val_dataloader, metrics_dict, '', hyper_params)
+        all_val_metrics['epoch_{:02d}'.format(epoch + 1)] = val_metrics
 
         val_dsc = val_metrics['dsc']
         is_best = val_dsc>=best_val_dsc
@@ -139,16 +146,18 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
             logging.info("- Found new best DSC")
             best_val_dsc = val_dsc
 
-            # Save best val metrics in a json file in the model directory
-            best_json_path = str(Path(model_dir) / "metrics_val_best_weights.json")
-            utils.save_dict_to_json(val_metrics, best_json_path)
+#            # Save best val metrics in a json file in the model directory
+#            best_json_path = str(Path(model_dir) / "metrics_val_best_weights.json")
+#            utils.save_dict_to_json(val_metrics, best_json_path)
 
-        # Save latest val metrics in a json file in the model directory
-        last_json_path = str(Path(model_dir) / "metrics_val_last_weights.json")
-        utils.save_dict_to_json(val_metrics, last_json_path)
+#        # Save latest val metrics in a json file in the model directory
+#        last_json_path = str(Path(model_dir) / "metrics_val_last_weights.json")
+#        utils.save_dict_to_json(val_metrics, last_json_path)
+    
+    return (all_train_metrics, all_val_metrics)
+        
 
-
-def main(data_dir, model_dir, restore_file):
+def main(data_dir, model_dir, restore_file, k_folds=5):
     # Load the parameters from json file    
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)
@@ -163,23 +172,6 @@ def main(data_dir, model_dir, restore_file):
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
-
-    # Create the input data pipeline
-    logging.info("Loading the datasets...")
-        
-    # TODO:
-    # enter k_fold: loop with train - eval, using different dataloaders
-    # return results after each split, append to list
-    # average results from list, save somewhere
-    # THEN start normal train - eval run, with eval being the test set!
-    
-    #if k_fold is not 1:
-    # fetch dataloaders
-    dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)
-    train_dl = dataloaders['train']
-    val_dl = dataloaders['test']
-
-    logging.info("- done.")
 
     # Define the model and optimizer
     model = getattr(net, hyper_params.model, None)
@@ -196,9 +188,78 @@ def main(data_dir, model_dir, restore_file):
     
     metrics_dict = metric.metrics_dict
     
-    # Train the model
-    logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs))
-    train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir, restore_file)
+    if k_folds != 0:
+        idx = 0
+        list_train_metrics = {}
+        list_val_metrics = {}
+        ds = data_loader.Heart2DSegmentationDataset(Path(data_dir) / 'train_heart_scans', hyper_params.endo_or_epi)
+        for train_idx, val_idx in cv.k_folds(n_splits = k_folds, subjects = ds.__len__(), frames=1):
+            idx += 1
+            logging.info("Loading the datasets...")
+            dataloaders = data_loader.fetch_dataloader(['train', 'val'], data_dir, hyper_params, train_idx, val_idx)
+            train_dl = dataloaders['train']
+            val_dl = dataloaders['val']            
+            logging.info("- done.")
+            logging.info("For k-fold {}/{}:".format(idx, k_folds))
+            logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs)) 
+            (all_train_metrics, all_val_metrics) = train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir)
+            list_train_metrics['k_fold_{}'.format(idx)] = all_train_metrics
+            list_val_metrics['k_fold_{}'.format(idx)] = all_val_metrics
+        
+        # Calculate average across all folds.
+        list_train_metrics_mean = {}
+        list_val_metrics_mean = {}        
+        for epoch in list_train_metrics['k_fold_1']:
+            avg_train_dict = {}
+            avg_val_dict = {}
+            for metric_name in metrics_dict:
+                avg_train_dict[metric_name] = 0
+                avg_train_dict['loss'] = 0
+                avg_val_dict[metric_name] = 0
+                avg_val_dict['loss'] = 0
+                for k_fold in list_train_metrics:
+                    avg_train_dict[metric_name] += list_train_metrics[k_fold][epoch][metric_name]
+                    avg_train_dict['loss'] += list_train_metrics[k_fold][epoch]['loss']
+                    avg_val_dict[metric_name] += list_val_metrics[k_fold][epoch][metric_name]
+                    avg_val_dict['loss'] += list_val_metrics[k_fold][epoch]['loss']
+                avg_train_dict[metric_name] /= k_folds
+                avg_val_dict[metric_name] /= k_folds
+            list_train_metrics_mean[epoch] = avg_train_dict
+            list_val_metrics_mean[epoch] = avg_val_dict
+        
+        list_train_metrics['average'] = list_train_metrics_mean
+        list_val_metrics['average'] = list_val_metrics_mean
+        
+        # Save all k-fold cross validation metrices in a Json.
+        k_fold_train_path = str(Path(model_dir) / "metrics_k_fold_train.json")
+        utils.save_dict_to_json(list_train_metrics, k_fold_train_path)
+        k_fold_val_path = str(Path(model_dir) / "metrics_k_fold_val.json")
+        utils.save_dict_to_json(list_val_metrics, k_fold_val_path)
+        
+        # Save last k-fold cross validation average metrics in a Json.
+        last_json_path = str(Path(model_dir) / "metrics_k_fold_val_average_last.json")
+        utils.save_dict_to_json(list_val_metrics['average']['epoch_{:02d}'.format(hyper_params.num_epochs)], last_json_path)
+        
+        # Save best k-fold cross validation average metrics in a Json.
+        best_val_dsc = 0
+        best_val_metrics_list = {}
+        for x in list_val_metrics['average']:
+            if list_val_metrics['average'][x]['dsc'] > best_val_dsc:
+                best_val_dsc = list_val_metrics['average'][x]['dsc']
+                best_val_metrics_list = list_val_metrics['average'][x]
+        best_json_path = str(Path(model_dir) / "metrics_k_fold_val_average_best.json")
+        utils.save_dict_to_json(best_val_metrics_list, best_json_path)
+        
+    else:
+        # fetch dataloaders
+        logging.info("Loading the datasets...")
+        dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)
+        train_dl = dataloaders['train']
+        val_dl = dataloaders['test']        
+        logging.info("- done.")
+        logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs))        
+        # Train the model
+        train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir, restore_file)
     
 if __name__ == '__main__':
     args = parser.parse_args()
