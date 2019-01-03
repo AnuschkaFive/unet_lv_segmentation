@@ -68,7 +68,7 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
     """
     dataloaders = {}
     
-    if train_idx.any() != None:
+    if train_idx is not None:
         mean, std = mean_std_calc(DataLoader(Subset(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi), train_idx)))
     else:
         mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
@@ -105,7 +105,7 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
                 # - make array of dict with is_cv as size
                 # - use SubsetRandomSampler, with seed and shuffle, to create dataloaders of train and val, for each array space
                 # - else: just make train (of all)
-                if train_idx.any() != None:
+                if train_idx is not None:
                     dl = DataLoader(Subset(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, train_transformer), train_idx), 
                                     batch_size=hyper_params.batch_size, 
                                     shuffle=True,
@@ -118,7 +118,7 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
                                     num_workers=hyper_params.num_workers,
                                     pin_memory=hyper_params.cuda)
             else:
-                if (split == 'val') and (val_idx.any() != None): 
+                if (split == 'val') and (val_idx is not None): 
                     dl = DataLoader(Subset(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, eval_transformer), val_idx), 
                                     batch_size=hyper_params.batch_size, 
                                     shuffle=False,

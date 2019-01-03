@@ -2,7 +2,8 @@
 
 import argparse
 import json
-import os
+
+from pathlib import Path
 
 from tabulate import tabulate
 
@@ -21,17 +22,17 @@ def aggregate_metrics(parent_dir, metrics):
         metrics: (dict) subdir -> {'accuracy': ..., ...}
     """
     # Get the metrics for the folder if it has results from an experiment
-    metrics_file = os.path.join(parent_dir + os.sep, 'metrics_val_best_weights.json')
-    if os.path.isfile(metrics_file):
+    metrics_file = Path(parent_dir) / ('metrics_k_fold_val_average_best.json')
+    if metrics_file.is_file():
         with open(metrics_file, 'r') as f:
             metrics[parent_dir] = json.load(f)
 
     # Check every subdirectory of parent_dir
-    for subdir in os.listdir(parent_dir):
-        if not os.path.isdir(os.path.join(parent_dir + os.sep, subdir)):
+    for subdir in Path(parent_dir).iterdir():
+        if not subdir.is_dir():
             continue
         else:
-            aggregate_metrics(os.path.join(parent_dir + os.sep, subdir), metrics)
+            aggregate_metrics(subdir, metrics)
 
 
 def metrics_to_table(metrics):
@@ -43,18 +44,21 @@ def metrics_to_table(metrics):
     return res
 
 
-if __name__ == "__main__":
-    args = parser.parse_args()
-
+def main(parent_dir):
     # Aggregate metrics from args.parent_dir directory
     metrics = dict()
-    aggregate_metrics(args.parent_dir, metrics)
+    aggregate_metrics(parent_dir, metrics)
     table = metrics_to_table(metrics)
 
     # Display the table to terminal
     print(table)
 
     # Save results in parent_dir/results.md
-    save_file = os.path.join(args.parent_dir + os.sep, "results.md")
+    save_file = Path(parent_dir) / "results.md"
     with open(save_file, 'w') as f:
         f.write(table)
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    main(args.parent_dir)
+

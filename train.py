@@ -9,6 +9,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 from tqdm import tqdm
 from pathlib import Path
+from tensorboardX import SummaryWriter
 
 import utils
 import model.net as net
@@ -48,8 +49,8 @@ def train(model, optimizer, loss_fn, dataloader, metrics_dict, hyper_params):
     with tqdm(total=len(dataloader)) as t:
         for i, (scan_batch, ground_truth_batch, _) in enumerate(dataloader):
             # move to GPU if available
-            if hyper_params.cuda:
-                scan_batch, ground_truth_batch = scan_batch.cuda(async=True), ground_truth_batch.cuda(async=True)
+            if hyper_params.cuda is not -1:
+                scan_batch, ground_truth_batch = scan_batch.to(device = hyper_params.cuda), ground_truth_batch.to(device = hyper_params.cuda)
             # convert to torch Variables
             scan_batch, ground_truth_batch = Variable(scan_batch), Variable(ground_truth_batch)
 
@@ -157,26 +158,36 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
     return (all_train_metrics, all_val_metrics)
         
 
-def main(data_dir, model_dir, restore_file, k_folds=5):
+def main(data_dir, model_dir, restore_file=None, k_folds=2):
     # Load the parameters from json file    
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)
     hyper_params = utils.HyperParams(json_path)
 
     # use GPU if available
-    hyper_params.cuda = torch.cuda.is_available()
+    hyper_params.cuda = torch.device('cuda:0') if torch.cuda.is_available() else -1
 
     # Set the random seed for reproducible experiments
     torch.manual_seed(230)
-    if hyper_params.cuda: torch.cuda.manual_seed(230)
+    if hyper_params.cuda is not -1: 
+        with torch.cuda.device(str(hyper_params.cuda)[-1]):
+            torch.cuda.manual_seed(230)
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
+    writer = SummaryWriter(str(Path(model_dir) / 'tensor_log'))
 
     # Define the model and optimizer
     model = getattr(net, hyper_params.model, None)
     assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
-    model = model(hyper_params).cuda() if hyper_params.cuda else model(hyper_params)
+    model = model(hyper_params)
+    
+    dummy_input = Variable(torch.rand(3, 1, 320, 320))
+    writer.add_graph(model, dummy_input)
+    
+    #model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
+    if hyper_params.cuda is not -1:
+        model.to(device=hyper_params.cuda)
     
     optimizer = getattr(optim, hyper_params.optimizer, None)
     assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
@@ -203,6 +214,12 @@ def main(data_dir, model_dir, restore_file, k_folds=5):
             logging.info("For k-fold {}/{}:".format(idx, k_folds))
             logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs)) 
             (all_train_metrics, all_val_metrics) = train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir)
+            # Write to Tesorboard.
+            for epoch_name in all_train_metrics:            
+                writer.add_scalars('loss', {'k_fold_{}/train'.format(idx): all_train_metrics[epoch_name]['loss'], 'k_fold_{}/val'.format(idx): all_val_metrics[epoch_name]['loss']}, epoch_name[-2:])
+                for metric_label in metrics_dict:
+                    writer.add_scalars(metric_label, {'k_fold_{}/train'.format(idx): all_train_metrics[epoch_name][metric_label], 'k_fold_{}/val'.format(idx): all_val_metrics[epoch_name][metric_label]}, epoch_name[-2:])
+
             list_train_metrics['k_fold_{}'.format(idx)] = all_train_metrics
             list_val_metrics['k_fold_{}'.format(idx)] = all_val_metrics
         
@@ -213,10 +230,10 @@ def main(data_dir, model_dir, restore_file, k_folds=5):
             avg_train_dict = {}
             avg_val_dict = {}
             for metric_name in metrics_dict:
-                avg_train_dict[metric_name] = 0
-                avg_train_dict['loss'] = 0
-                avg_val_dict[metric_name] = 0
-                avg_val_dict['loss'] = 0
+                avg_train_dict[metric_name] = 0.0
+                avg_train_dict['loss'] = 0.0
+                avg_val_dict[metric_name] = 0.0
+                avg_val_dict['loss'] = 0.0
                 for k_fold in list_train_metrics:
                     avg_train_dict[metric_name] += list_train_metrics[k_fold][epoch][metric_name]
                     avg_train_dict['loss'] += list_train_metrics[k_fold][epoch]['loss']
@@ -224,8 +241,16 @@ def main(data_dir, model_dir, restore_file, k_folds=5):
                     avg_val_dict['loss'] += list_val_metrics[k_fold][epoch]['loss']
                 avg_train_dict[metric_name] /= k_folds
                 avg_val_dict[metric_name] /= k_folds
+                avg_train_dict['loss'] /= k_folds
+                avg_val_dict['loss'] /= k_folds
             list_train_metrics_mean[epoch] = avg_train_dict
             list_val_metrics_mean[epoch] = avg_val_dict
+        
+        # Write to Tensorboard.
+        for epoch_name in list_train_metrics_mean:            
+            writer.add_scalars('loss', {'average/train': list_train_metrics_mean[epoch_name]['loss'], 'average/val': list_val_metrics_mean[epoch_name]['loss']}, epoch_name[-2:])
+            for metric_label in metrics_dict:
+                writer.add_scalars(metric_label, {'average/train': list_train_metrics_mean[epoch_name][metric_label], 'average/val': list_val_metrics_mean[epoch_name][metric_label]}, epoch_name[-2:])
         
         list_train_metrics['average'] = list_train_metrics_mean
         list_val_metrics['average'] = list_val_metrics_mean
@@ -241,7 +266,7 @@ def main(data_dir, model_dir, restore_file, k_folds=5):
         utils.save_dict_to_json(list_val_metrics['average']['epoch_{:02d}'.format(hyper_params.num_epochs)], last_json_path)
         
         # Save best k-fold cross validation average metrics in a Json.
-        best_val_dsc = 0
+        best_val_dsc = 0.0
         best_val_metrics_list = {}
         for x in list_val_metrics['average']:
             if list_val_metrics['average'][x]['dsc'] > best_val_dsc:
@@ -255,12 +280,21 @@ def main(data_dir, model_dir, restore_file, k_folds=5):
         logging.info("Loading the datasets...")
         dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)
         train_dl = dataloaders['train']
-        val_dl = dataloaders['test']        
+        test_dl = dataloaders['test']        
         logging.info("- done.")
         logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs))        
         # Train the model
-        train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir, restore_file)
-    
+        (all_train_metrics, all_test_metrics) = train_and_evaluate(model, train_dl, test_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir, restore_file)
+        
+        # Write results to Jsons.
+        train_path = str(Path(model_dir) / "metrics_train.json")
+        utils.save_dict_to_json(all_train_metrics, train_path)
+        test_path = str(Path(model_dir) / "metrics_test.json")
+        utils.save_dict_to_json(all_test_metrics, test_path)
+        
+    writer.export_scalars_to_json(str(Path(model_dir) / "all_scalars.json"))
+    writer.close()
+        
 if __name__ == '__main__':
     args = parser.parse_args()
     main(args.data_dir, args.model_dir, args.restore_file)    
