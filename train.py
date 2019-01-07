@@ -175,7 +175,8 @@ def main(data_dir, model_dir, restore_file=None, k_folds=2):
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
-    writer = SummaryWriter(str(Path(model_dir) / 'tensor_log'))
+    #writer = SummaryWriter(str(Path(model_dir) / 'tensor_log'))
+    writer = SummaryWriter(str(Path('tensor_log') / model_dir))
 
     # Define the model and optimizer
     model = getattr(net, hyper_params.model, None)

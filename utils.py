@@ -1,6 +1,7 @@
 import json
 import logging
-import os
+#import os
+from pathlib import Path
 import shutil
 
 import torch
@@ -107,15 +108,17 @@ def save_checkpoint(state, is_best, checkpoint):
         is_best: (bool) True if it is the best model seen till now
         checkpoint: (string) folder where parameters are to be saved
     """
-    filepath = os.path.join(checkpoint + os.sep, 'last.pth.tar')
-    if not os.path.exists(checkpoint):
+    #filepath = os.path.join(checkpoint + os.sep, 'last.pth.tar')
+    filepath = Path(checkpoint) / 'last.pth.tar'
+    if not checkpoint.exists():
         print("Checkpoint Directory does not exist! Making directory {}".format(checkpoint))
-        os.mkdir(checkpoint)
+        #os.mkdir(checkpoint)
+        checkpoint.mkdir()
     else:
         print("Checkpoint Directory exists! ")
     torch.save(state, filepath)
     if is_best:
-        shutil.copyfile(filepath, os.path.join(checkpoint + os.sep, 'best.pth.tar'))
+        shutil.copyfile(filepath, Path(checkpoint) / 'best.pth.tar')
 
 
 def load_checkpoint(checkpoint, model, optimizer=None):
@@ -126,7 +129,8 @@ def load_checkpoint(checkpoint, model, optimizer=None):
         model: (torch.nn.Module) model for which the parameters are loaded
         optimizer: (torch.optim) optional: resume optimizer from checkpoint
     """
-    if not os.path.exists(checkpoint):
+    #if not os.path.exists(checkpoint):
+    if not Path(checkpoint).exists():
         raise("File doesn't exist {}".format(checkpoint))
     checkpoint = torch.load(checkpoint)
     model.load_state_dict(checkpoint['state_dict'])
