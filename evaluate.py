@@ -46,7 +46,7 @@ def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
     
             # move to GPU if available
             if hyper_params.cuda:
-                scan_batch, ground_truth_batch = scan_batch.cuda(async=True), ground_truth_batch.cuda(async=True)
+                scan_batch, ground_truth_batch = scan_batch.to(device = hyper_params.cuda), ground_truth_batch.to(device = hyper_params.cuda)
             # fetch the next evaluation batch
             scan_batch, ground_truth_batch = Variable(scan_batch), Variable(ground_truth_batch)
             
