@@ -109,16 +109,16 @@ def save_checkpoint(state, is_best, checkpoint):
         checkpoint: (string) folder where parameters are to be saved
     """
     #filepath = os.path.join(checkpoint + os.sep, 'last.pth.tar')
-    filepath = Path(checkpoint) / 'last.pth.tar'
-    if not checkpoint.exists():
+    filepath = str(Path(checkpoint) / 'last.pth.tar')
+    if not Path(checkpoint).exists():
         print("Checkpoint Directory does not exist! Making directory {}".format(checkpoint))
         #os.mkdir(checkpoint)
-        checkpoint.mkdir()
+        Path(checkpoint).mkdir()
     else:
         print("Checkpoint Directory exists! ")
     torch.save(state, filepath)
     if is_best:
-        shutil.copyfile(filepath, Path(checkpoint) / 'best.pth.tar')
+        shutil.copyfile(filepath, str(Path(checkpoint) / 'best.pth.tar'))
 
 
 def load_checkpoint(checkpoint, model, optimizer=None):
