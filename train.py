@@ -158,48 +158,20 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
     return (all_train_metrics, all_val_metrics)
         
 
-def main(data_dir, model_dir, restore_file=None, k_folds=5):
+def main(data_dir, model_dir, restore_file=None, k_folds=2):
     # Load the parameters from json file    
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)
     hyper_params = utils.HyperParams(json_path)
-
-    # use GPU if available
-    hyper_params.cuda = torch.device('cuda:0') if torch.cuda.is_available() else -1
-
-    # Set the random seed for reproducible experiments
-    torch.manual_seed(230)
-    if hyper_params.cuda is not -1: 
-        with torch.cuda.device(str(hyper_params.cuda)[-1]):
-            torch.cuda.manual_seed(230)
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
     #writer = SummaryWriter(str(Path(model_dir) / 'tensor_log'))
     writer = SummaryWriter(str(Path('tensor_log') / model_dir))
 
-    # Define the model and optimizer
-    model = getattr(net, hyper_params.model, None)
-    assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
-    model = model(hyper_params)
-    
-    #dummy_input = Variable(torch.rand(3, 1, 320, 320))
-    #writer.add_graph(model, dummy_input)
-    
-    #model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
-    if hyper_params.cuda is not -1:
-        model.to(device=hyper_params.cuda)
-    
-    optimizer = getattr(optim, hyper_params.optimizer, None)
-    assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
-    optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate)
-
-    # fetch loss function and metrics
-    loss_fn = getattr(loss, hyper_params.loss, None)
-    assert loss_fn is not None, "Loss Fn {} couldn't be found!".format(hyper_params.loss)
-    
-    metrics_dict = metric.metrics_dict
-    
+    # use GPU if available
+    hyper_params.cuda = torch.device('cuda:0') if torch.cuda.is_available() else -1
+   
     if k_folds != 0:
         idx = 0
         list_train_metrics = {}
@@ -207,6 +179,30 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         ds = data_loader.Heart2DSegmentationDataset(Path(data_dir) / 'train_heart_scans', hyper_params.endo_or_epi)
         for train_idx, val_idx in cv.k_folds(n_splits = k_folds, subjects = ds.__len__(), frames=1):
             idx += 1
+            # Set the random seed for reproducible experiments
+            torch.manual_seed(230)
+            if hyper_params.cuda is not -1: 
+                with torch.cuda.device(str(hyper_params.cuda)[-1]):
+                    torch.cuda.manual_seed(230)
+        
+            # Define the model and optimizer
+            model = getattr(net, hyper_params.model, None)
+            assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
+            model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
+            
+            #dummy_input = Variable(torch.rand(3, 1, 320, 320))
+            #writer.add_graph(model, dummy_input)    
+            
+            optimizer = getattr(optim, hyper_params.optimizer, None)
+            assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
+            optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate)
+        
+            # fetch loss function and metrics
+            loss_fn = getattr(loss, hyper_params.loss, None)
+            assert loss_fn is not None, "Loss Fn {} couldn't be found!".format(hyper_params.loss)
+            
+            metrics_dict = metric.metrics_dict
+            
             logging.info("Loading the datasets...")
             dataloaders = data_loader.fetch_dataloader(['train', 'val'], data_dir, hyper_params, train_idx, val_idx)
             train_dl = dataloaders['train']
@@ -277,6 +273,30 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         utils.save_dict_to_json(best_val_metrics_list, best_json_path)
         
     else:
+        # Set the random seed for reproducible experiments
+        torch.manual_seed(230)
+        if hyper_params.cuda is not -1: 
+            with torch.cuda.device(str(hyper_params.cuda)[-1]):
+                torch.cuda.manual_seed(230)
+    
+        # Define the model and optimizer
+        model = getattr(net, hyper_params.model, None)
+        assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
+        model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
+        
+        #dummy_input = Variable(torch.rand(3, 1, 320, 320))
+        #writer.add_graph(model, dummy_input)    
+        
+        optimizer = getattr(optim, hyper_params.optimizer, None)
+        assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
+        optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate)
+    
+        # fetch loss function and metrics
+        loss_fn = getattr(loss, hyper_params.loss, None)
+        assert loss_fn is not None, "Loss Fn {} couldn't be found!".format(hyper_params.loss)
+        
+        metrics_dict = metric.metrics_dict
+        
         # fetch dataloaders
         logging.info("Loading the datasets...")
         dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)

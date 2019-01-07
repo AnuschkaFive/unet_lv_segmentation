@@ -75,8 +75,12 @@ def set_logger(log_path):
     """
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
+    
+    for handler in logger.handlers[:]:  # make a copy of the list
+        logger.removeHandler(handler)
 
     if not logger.handlers:
+        print('added new handler!')
         # Logging to a file
         file_handler = logging.FileHandler(log_path)
         file_handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s: %(message)s'))
