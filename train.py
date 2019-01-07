@@ -183,8 +183,8 @@ def main(data_dir, model_dir, restore_file=None, k_folds=2):
     assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
     model = model(hyper_params)
     
-    dummy_input = Variable(torch.rand(3, 1, 320, 320))
-    writer.add_graph(model, dummy_input)
+    #dummy_input = Variable(torch.rand(3, 1, 320, 320))
+    #writer.add_graph(model, dummy_input)
     
     #model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
     if hyper_params.cuda is not -1:
