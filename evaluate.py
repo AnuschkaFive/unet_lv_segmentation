@@ -95,11 +95,15 @@ def main(data_dir, model_dir, restore_file):
     hyper_params = utils.HyperParams(json_path)
 
     # use GPU if available
-    hyper_params.cuda = torch.cuda.is_available()     # use GPU is available
+    #hyper_params.cuda = torch.cuda.is_available()     # use GPU is available
+    hyper_params.cuda = torch.device('cuda:0') if torch.cuda.is_available() else -1
 
     # Set the random seed for reproducible experiments
     torch.manual_seed(230)
-    if hyper_params.cuda: torch.cuda.manual_seed(230)
+    if hyper_params.cuda is not -1: 
+        with torch.cuda.device(str(hyper_params.cuda)[-1]):
+            torch.cuda.manual_seed(230)
+    #if hyper_params.cuda: torch.cuda.manual_seed(230)
         
     # Get the logger
     utils.set_logger(Path(model_dir) / 'evaluate.log')
@@ -116,7 +120,7 @@ def main(data_dir, model_dir, restore_file):
     # Define the model
     model = getattr(net, hyper_params.model, None)
     assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
-    model = model(hyper_params).cuda() if hyper_params.cuda else model(hyper_params)
+    model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
     
     loss_fn = getattr(loss, hyper_params.loss, None)
     assert loss_fn is not None, "Loss Fn {} couldn't be found!".format(hyper_params.loss)
