@@ -158,7 +158,7 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
     return (all_train_metrics, all_val_metrics)
         
 
-def main(data_dir, model_dir, restore_file=None, k_folds=2):
+def main(data_dir, model_dir, restore_file=None, k_folds=5):
     # Load the parameters from json file    
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)

@@ -228,7 +228,7 @@ def main(data_dir, output_dir):
     
     create_missing_endo_or_epi(data_dir)
     
-    filenames = split_filenames_into_train_test(data_dir, 0.8)
+    filenames = split_filenames_into_train_test(data_dir, 0.8333)
 
     # Define the data directories    
     # TODO: if directory already found, delete everything in it! OR skip?

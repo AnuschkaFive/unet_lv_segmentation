@@ -7,7 +7,7 @@
     "loss": "cross_entropy_loss",
     "activation": "ReLU",
     "batch_size": 12,
-    "num_epochs": 40,
+    "num_epochs": 45,
     "dropout_rate":0.8, 
     "treshold": 0.5,
     "num_workers": 4
