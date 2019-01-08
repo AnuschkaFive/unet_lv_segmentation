@@ -1,0 +1,14 @@
+{
+    "endo_or_epi": "ENDO",
+    "model": "UNetOriginal",
+    "learning_rate": 0.01,
+    "momentum": 0.99,
+    "optimizer": "Adam",
+    "loss": "soft_dice_loss",
+    "activation": "ReLU",
+    "batch_size": 12,
+    "num_epochs": 45,
+    "dropout_rate": 0.8,
+    "treshold": 0.5,
+    "num_workers": 4
+}
