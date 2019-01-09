@@ -28,11 +28,13 @@ class StackEncoder(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, padding, stride, pool_kernel_size, pool_stride, hyper_params):
         super(StackEncoder, self).__init__()
         self.convr1 = ConvBnRelu(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, hyper_params=hyper_params)
+        self.dropout = nn.Dropout2d(p=hyper_params.dropout_rate)
         self.convr2 = ConvBnRelu(out_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, hyper_params=hyper_params)
         self.maxPool = nn.MaxPool2d(kernel_size=pool_kernel_size, stride=pool_stride)
 
     def forward(self, x):
         x = self.convr1(x)
+        x = self.dropout(x)
         x = self.convr2(x)
         x_trace = x
         x = self.maxPool(x)

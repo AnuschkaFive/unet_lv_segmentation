@@ -8,7 +8,7 @@
     "activation": "ReLU",
     "batch_size": 12,
     "num_epochs": 45,
-    "dropout_rate": 0.8,
+    "dropout_rate": 0.0,
     "treshold": 0.5,
     "num_workers": 4
 }
