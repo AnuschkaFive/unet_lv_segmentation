@@ -1,0 +1,791 @@
+2019-01-09 23:06:59,427:INFO: Loading the datasets...
+2019-01-09 23:07:04,273:INFO: - done.
+2019-01-09 23:07:04,273:INFO: For k-fold 1/5:
+2019-01-09 23:07:04,273:INFO: Starting training for 45 epoch(s)
+2019-01-09 23:07:04,274:INFO: Epoch 1/45
+2019-01-09 23:07:57,757:INFO: - Train metrics: dsc: 0.032 ; iou: 0.017 ; accuracy: 0.477 ; precision: 0.017 ; recall: 0.890 ; loss: 0.716
+2019-01-09 23:08:01,930:INFO: - Eval metrics : dsc: 0.056 ; iou: 0.029 ; accuracy: 0.759 ; precision: 0.029 ; recall: 0.879 ; loss: 0.650
+2019-01-09 23:08:02,478:INFO: - Found new best DSC
+2019-01-09 23:08:02,478:INFO: Epoch 2/45
+2019-01-09 23:08:55,790:INFO: - Train metrics: dsc: 0.211 ; iou: 0.128 ; accuracy: 0.922 ; precision: 0.131 ; recall: 0.859 ; loss: 0.602
+2019-01-09 23:08:59,960:INFO: - Eval metrics : dsc: 0.386 ; iou: 0.258 ; accuracy: 0.982 ; precision: 0.264 ; recall: 0.829 ; loss: 0.573
+2019-01-09 23:09:01,545:INFO: - Found new best DSC
+2019-01-09 23:09:01,546:INFO: Epoch 3/45
+2019-01-09 23:09:55,269:INFO: - Train metrics: dsc: 0.558 ; iou: 0.425 ; accuracy: 0.992 ; precision: 0.449 ; recall: 0.821 ; loss: 0.560
+2019-01-09 23:09:59,519:INFO: - Eval metrics : dsc: 0.608 ; iou: 0.488 ; accuracy: 0.995 ; precision: 0.521 ; recall: 0.791 ; loss: 0.551
+2019-01-09 23:10:01,146:INFO: - Found new best DSC
+2019-01-09 23:10:01,146:INFO: Epoch 4/45
+2019-01-09 23:10:55,099:INFO: - Train metrics: dsc: 0.691 ; iou: 0.576 ; accuracy: 0.996 ; precision: 0.608 ; recall: 0.852 ; loss: 0.544
+2019-01-09 23:10:59,323:INFO: - Eval metrics : dsc: 0.653 ; iou: 0.536 ; accuracy: 0.995 ; precision: 0.554 ; recall: 0.855 ; loss: 0.539
+2019-01-09 23:11:00,898:INFO: - Found new best DSC
+2019-01-09 23:11:00,898:INFO: Epoch 5/45
+2019-01-09 23:11:54,759:INFO: - Train metrics: dsc: 0.719 ; iou: 0.609 ; accuracy: 0.997 ; precision: 0.634 ; recall: 0.880 ; loss: 0.533
+2019-01-09 23:11:59,003:INFO: - Eval metrics : dsc: 0.683 ; iou: 0.568 ; accuracy: 0.996 ; precision: 0.586 ; recall: 0.872 ; loss: 0.529
+2019-01-09 23:12:00,562:INFO: - Found new best DSC
+2019-01-09 23:12:00,562:INFO: Epoch 6/45
+2019-01-09 23:12:54,539:INFO: - Train metrics: dsc: 0.746 ; iou: 0.644 ; accuracy: 0.997 ; precision: 0.664 ; recall: 0.901 ; loss: 0.524
+2019-01-09 23:12:58,718:INFO: - Eval metrics : dsc: 0.364 ; iou: 0.242 ; accuracy: 0.974 ; precision: 0.243 ; recall: 0.913 ; loss: 0.549
+2019-01-09 23:12:59,531:INFO: Epoch 7/45
+2019-01-09 23:13:53,450:INFO: - Train metrics: dsc: 0.734 ; iou: 0.629 ; accuracy: 0.996 ; precision: 0.658 ; recall: 0.898 ; loss: 0.520
+2019-01-09 23:13:57,761:INFO: - Eval metrics : dsc: 0.750 ; iou: 0.661 ; accuracy: 0.998 ; precision: 0.695 ; recall: 0.866 ; loss: 0.515
+2019-01-09 23:13:59,314:INFO: - Found new best DSC
+2019-01-09 23:13:59,314:INFO: Epoch 8/45
+2019-01-09 23:14:53,133:INFO: - Train metrics: dsc: 0.791 ; iou: 0.701 ; accuracy: 0.998 ; precision: 0.728 ; recall: 0.911 ; loss: 0.511
+2019-01-09 23:14:57,358:INFO: - Eval metrics : dsc: 0.783 ; iou: 0.706 ; accuracy: 0.998 ; precision: 0.769 ; recall: 0.846 ; loss: 0.508
+2019-01-09 23:14:58,981:INFO: - Found new best DSC
+2019-01-09 23:14:58,982:INFO: Epoch 9/45
+2019-01-09 23:15:55,043:INFO: - Train metrics: dsc: 0.802 ; iou: 0.714 ; accuracy: 0.998 ; precision: 0.745 ; recall: 0.920 ; loss: 0.507
+2019-01-09 23:15:59,444:INFO: - Eval metrics : dsc: 0.775 ; iou: 0.692 ; accuracy: 0.998 ; precision: 0.742 ; recall: 0.869 ; loss: 0.505
+2019-01-09 23:16:00,262:INFO: Epoch 10/45
+2019-01-09 23:16:56,360:INFO: - Train metrics: dsc: 0.820 ; iou: 0.738 ; accuracy: 0.998 ; precision: 0.775 ; recall: 0.922 ; loss: 0.502
+2019-01-09 23:17:00,733:INFO: - Eval metrics : dsc: 0.776 ; iou: 0.691 ; accuracy: 0.998 ; precision: 0.768 ; recall: 0.873 ; loss: 0.499
+2019-01-09 23:17:01,498:INFO: Epoch 11/45
+2019-01-09 23:17:57,595:INFO: - Train metrics: dsc: 0.832 ; iou: 0.755 ; accuracy: 0.998 ; precision: 0.807 ; recall: 0.920 ; loss: 0.497
+2019-01-09 23:18:01,760:INFO: - Eval metrics : dsc: 0.799 ; iou: 0.720 ; accuracy: 0.998 ; precision: 0.821 ; recall: 0.879 ; loss: 0.496
+2019-01-09 23:18:03,384:INFO: - Found new best DSC
+2019-01-09 23:18:03,384:INFO: Epoch 12/45
+2019-01-09 23:18:59,457:INFO: - Train metrics: dsc: 0.848 ; iou: 0.773 ; accuracy: 0.998 ; precision: 0.824 ; recall: 0.927 ; loss: 0.493
+2019-01-09 23:19:03,877:INFO: - Eval metrics : dsc: 0.800 ; iou: 0.722 ; accuracy: 0.998 ; precision: 0.821 ; recall: 0.882 ; loss: 0.492
+2019-01-09 23:19:05,524:INFO: - Found new best DSC
+2019-01-09 23:19:05,525:INFO: Epoch 13/45
+2019-01-09 23:20:01,693:INFO: - Train metrics: dsc: 0.855 ; iou: 0.782 ; accuracy: 0.999 ; precision: 0.829 ; recall: 0.932 ; loss: 0.489
+2019-01-09 23:20:06,086:INFO: - Eval metrics : dsc: 0.804 ; iou: 0.726 ; accuracy: 0.998 ; precision: 0.820 ; recall: 0.886 ; loss: 0.488
+2019-01-09 23:20:07,829:INFO: - Found new best DSC
+2019-01-09 23:20:07,829:INFO: Epoch 14/45
+2019-01-09 23:21:04,058:INFO: - Train metrics: dsc: 0.866 ; iou: 0.797 ; accuracy: 0.999 ; precision: 0.852 ; recall: 0.935 ; loss: 0.485
+2019-01-09 23:21:08,472:INFO: - Eval metrics : dsc: 0.814 ; iou: 0.742 ; accuracy: 0.998 ; precision: 0.846 ; recall: 0.880 ; loss: 0.484
+2019-01-09 23:21:10,191:INFO: - Found new best DSC
+2019-01-09 23:21:10,192:INFO: Epoch 15/45
+2019-01-09 23:22:06,339:INFO: - Train metrics: dsc: 0.875 ; iou: 0.808 ; accuracy: 0.999 ; precision: 0.863 ; recall: 0.938 ; loss: 0.482
+2019-01-09 23:22:10,729:INFO: - Eval metrics : dsc: 0.821 ; iou: 0.754 ; accuracy: 0.999 ; precision: 0.873 ; recall: 0.870 ; loss: 0.481
+2019-01-09 23:22:12,481:INFO: - Found new best DSC
+2019-01-09 23:22:12,481:INFO: Epoch 16/45
+2019-01-09 23:23:08,697:INFO: - Train metrics: dsc: 0.882 ; iou: 0.817 ; accuracy: 0.999 ; precision: 0.862 ; recall: 0.946 ; loss: 0.478
+2019-01-09 23:23:13,099:INFO: - Eval metrics : dsc: 0.824 ; iou: 0.758 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.862 ; loss: 0.477
+2019-01-09 23:23:14,706:INFO: - Found new best DSC
+2019-01-09 23:23:14,706:INFO: Epoch 17/45
+2019-01-09 23:24:08,388:INFO: - Train metrics: dsc: 0.890 ; iou: 0.828 ; accuracy: 0.999 ; precision: 0.879 ; recall: 0.945 ; loss: 0.475
+2019-01-09 23:24:12,561:INFO: - Eval metrics : dsc: 0.817 ; iou: 0.746 ; accuracy: 0.998 ; precision: 0.843 ; recall: 0.884 ; loss: 0.474
+2019-01-09 23:24:13,370:INFO: Epoch 18/45
+2019-01-09 23:25:07,228:INFO: - Train metrics: dsc: 0.894 ; iou: 0.834 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.944 ; loss: 0.471
+2019-01-09 23:25:11,464:INFO: - Eval metrics : dsc: 0.826 ; iou: 0.759 ; accuracy: 0.999 ; precision: 0.869 ; recall: 0.870 ; loss: 0.471
+2019-01-09 23:25:12,995:INFO: - Found new best DSC
+2019-01-09 23:25:12,996:INFO: Epoch 19/45
+2019-01-09 23:26:06,870:INFO: - Train metrics: dsc: 0.892 ; iou: 0.834 ; accuracy: 0.999 ; precision: 0.886 ; recall: 0.944 ; loss: 0.468
+2019-01-09 23:26:11,091:INFO: - Eval metrics : dsc: 0.811 ; iou: 0.738 ; accuracy: 0.998 ; precision: 0.832 ; recall: 0.891 ; loss: 0.468
+2019-01-09 23:26:11,842:INFO: Epoch 20/45
+2019-01-09 23:27:05,656:INFO: - Train metrics: dsc: 0.894 ; iou: 0.837 ; accuracy: 0.999 ; precision: 0.883 ; recall: 0.945 ; loss: 0.465
+2019-01-09 23:27:09,850:INFO: - Eval metrics : dsc: 0.820 ; iou: 0.756 ; accuracy: 0.999 ; precision: 0.917 ; recall: 0.829 ; loss: 0.463
+2019-01-09 23:27:10,590:INFO: Epoch 21/45
+2019-01-09 23:28:04,443:INFO: - Train metrics: dsc: 0.900 ; iou: 0.846 ; accuracy: 0.999 ; precision: 0.894 ; recall: 0.946 ; loss: 0.461
+2019-01-09 23:28:08,734:INFO: - Eval metrics : dsc: 0.814 ; iou: 0.740 ; accuracy: 0.998 ; precision: 0.834 ; recall: 0.887 ; loss: 0.461
+2019-01-09 23:28:09,560:INFO: Epoch 22/45
+2019-01-09 23:29:03,385:INFO: - Train metrics: dsc: 0.905 ; iou: 0.852 ; accuracy: 0.999 ; precision: 0.898 ; recall: 0.951 ; loss: 0.458
+2019-01-09 23:29:07,586:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.767 ; accuracy: 0.999 ; precision: 0.899 ; recall: 0.857 ; loss: 0.457
+2019-01-09 23:29:09,310:INFO: - Found new best DSC
+2019-01-09 23:29:09,310:INFO: Epoch 23/45
+2019-01-09 23:30:03,127:INFO: - Train metrics: dsc: 0.907 ; iou: 0.856 ; accuracy: 0.999 ; precision: 0.902 ; recall: 0.951 ; loss: 0.455
+2019-01-09 23:30:07,345:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.766 ; accuracy: 0.999 ; precision: 0.904 ; recall: 0.852 ; loss: 0.454
+2019-01-09 23:30:08,116:INFO: Epoch 24/45
+2019-01-09 23:31:01,992:INFO: - Train metrics: dsc: 0.910 ; iou: 0.859 ; accuracy: 0.999 ; precision: 0.903 ; recall: 0.953 ; loss: 0.451
+2019-01-09 23:31:06,245:INFO: - Eval metrics : dsc: 0.830 ; iou: 0.766 ; accuracy: 0.999 ; precision: 0.900 ; recall: 0.855 ; loss: 0.450
+2019-01-09 23:31:07,035:INFO: Epoch 25/45
+2019-01-09 23:32:00,889:INFO: - Train metrics: dsc: 0.910 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.952 ; loss: 0.448
+2019-01-09 23:32:05,148:INFO: - Eval metrics : dsc: 0.825 ; iou: 0.760 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.839 ; loss: 0.447
+2019-01-09 23:32:05,962:INFO: Epoch 26/45
+2019-01-09 23:32:59,792:INFO: - Train metrics: dsc: 0.910 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.907 ; recall: 0.950 ; loss: 0.444
+2019-01-09 23:33:03,963:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.770 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.840 ; loss: 0.443
+2019-01-09 23:33:05,735:INFO: - Found new best DSC
+2019-01-09 23:33:05,735:INFO: Epoch 27/45
+2019-01-09 23:33:59,592:INFO: - Train metrics: dsc: 0.912 ; iou: 0.863 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.951 ; loss: 0.441
+2019-01-09 23:34:03,844:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.768 ; accuracy: 0.999 ; precision: 0.882 ; recall: 0.875 ; loss: 0.440
+2019-01-09 23:34:04,616:INFO: Epoch 28/45
+2019-01-09 23:34:58,338:INFO: - Train metrics: dsc: 0.913 ; iou: 0.866 ; accuracy: 0.999 ; precision: 0.913 ; recall: 0.951 ; loss: 0.437
+2019-01-09 23:35:02,594:INFO: - Eval metrics : dsc: 0.828 ; iou: 0.762 ; accuracy: 0.999 ; precision: 0.877 ; recall: 0.869 ; loss: 0.436
+2019-01-09 23:35:03,385:INFO: Epoch 29/45
+2019-01-09 23:35:57,119:INFO: - Train metrics: dsc: 0.915 ; iou: 0.868 ; accuracy: 0.999 ; precision: 0.913 ; recall: 0.953 ; loss: 0.434
+2019-01-09 23:36:01,355:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.769 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.872 ; loss: 0.433
+2019-01-09 23:36:02,148:INFO: Epoch 30/45
+2019-01-09 23:36:55,905:INFO: - Train metrics: dsc: 0.910 ; iou: 0.861 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.947 ; loss: 0.431
+2019-01-09 23:37:00,136:INFO: - Eval metrics : dsc: 0.818 ; iou: 0.747 ; accuracy: 0.998 ; precision: 0.895 ; recall: 0.834 ; loss: 0.430
+2019-01-09 23:37:00,947:INFO: Epoch 31/45
+2019-01-09 23:37:54,799:INFO: - Train metrics: dsc: 0.909 ; iou: 0.859 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.945 ; loss: 0.428
+2019-01-09 23:37:59,040:INFO: - Eval metrics : dsc: 0.838 ; iou: 0.773 ; accuracy: 0.999 ; precision: 0.881 ; recall: 0.882 ; loss: 0.427
+2019-01-09 23:38:00,702:INFO: - Found new best DSC
+2019-01-09 23:38:00,702:INFO: Epoch 32/45
+2019-01-09 23:38:54,489:INFO: - Train metrics: dsc: 0.916 ; iou: 0.870 ; accuracy: 0.999 ; precision: 0.915 ; recall: 0.953 ; loss: 0.424
+2019-01-09 23:38:58,737:INFO: - Eval metrics : dsc: 0.820 ; iou: 0.748 ; accuracy: 0.998 ; precision: 0.839 ; recall: 0.889 ; loss: 0.424
+2019-01-09 23:38:59,490:INFO: Epoch 33/45
+2019-01-09 23:39:53,271:INFO: - Train metrics: dsc: 0.921 ; iou: 0.877 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.956 ; loss: 0.421
+2019-01-09 23:39:57,509:INFO: - Eval metrics : dsc: 0.835 ; iou: 0.773 ; accuracy: 0.999 ; precision: 0.914 ; recall: 0.848 ; loss: 0.420
+2019-01-09 23:39:58,312:INFO: Epoch 34/45
+2019-01-09 23:40:52,135:INFO: - Train metrics: dsc: 0.922 ; iou: 0.880 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.958 ; loss: 0.418
+2019-01-09 23:40:56,339:INFO: - Eval metrics : dsc: 0.834 ; iou: 0.770 ; accuracy: 0.999 ; precision: 0.883 ; recall: 0.877 ; loss: 0.417
+2019-01-09 23:40:57,097:INFO: Epoch 35/45
+2019-01-09 23:41:50,937:INFO: - Train metrics: dsc: 0.923 ; iou: 0.879 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.959 ; loss: 0.414
+2019-01-09 23:41:55,200:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.767 ; accuracy: 0.999 ; precision: 0.880 ; recall: 0.872 ; loss: 0.414
+2019-01-09 23:41:55,973:INFO: Epoch 36/45
+2019-01-09 23:42:49,699:INFO: - Train metrics: dsc: 0.925 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.957 ; loss: 0.411
+2019-01-09 23:42:53,934:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.775 ; accuracy: 0.999 ; precision: 0.906 ; recall: 0.858 ; loss: 0.410
+2019-01-09 23:42:54,691:INFO: Epoch 37/45
+2019-01-09 23:43:48,446:INFO: - Train metrics: dsc: 0.927 ; iou: 0.886 ; accuracy: 0.999 ; precision: 0.926 ; recall: 0.959 ; loss: 0.408
+2019-01-09 23:43:52,605:INFO: - Eval metrics : dsc: 0.834 ; iou: 0.772 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.862 ; loss: 0.408
+2019-01-09 23:43:53,358:INFO: Epoch 38/45
+2019-01-09 23:44:47,067:INFO: - Train metrics: dsc: 0.927 ; iou: 0.886 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.960 ; loss: 0.405
+2019-01-09 23:44:51,314:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.774 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.853 ; loss: 0.404
+2019-01-09 23:44:52,098:INFO: Epoch 39/45
+2019-01-09 23:45:45,883:INFO: - Train metrics: dsc: 0.925 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.929 ; recall: 0.954 ; loss: 0.402
+2019-01-09 23:45:50,142:INFO: - Eval metrics : dsc: 0.830 ; iou: 0.764 ; accuracy: 0.999 ; precision: 0.867 ; recall: 0.886 ; loss: 0.401
+2019-01-09 23:45:50,925:INFO: Epoch 40/45
+2019-01-09 23:46:44,754:INFO: - Train metrics: dsc: 0.925 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.955 ; loss: 0.399
+2019-01-09 23:46:48,967:INFO: - Eval metrics : dsc: 0.830 ; iou: 0.767 ; accuracy: 0.999 ; precision: 0.881 ; recall: 0.871 ; loss: 0.398
+2019-01-09 23:46:49,867:INFO: Epoch 41/45
+2019-01-09 23:47:43,630:INFO: - Train metrics: dsc: 0.926 ; iou: 0.885 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.955 ; loss: 0.395
+2019-01-09 23:47:47,805:INFO: - Eval metrics : dsc: 0.829 ; iou: 0.765 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.825 ; loss: 0.396
+2019-01-09 23:47:48,550:INFO: Epoch 42/45
+2019-01-09 23:48:42,281:INFO: - Train metrics: dsc: 0.929 ; iou: 0.889 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.957 ; loss: 0.392
+2019-01-09 23:48:46,483:INFO: - Eval metrics : dsc: 0.839 ; iou: 0.776 ; accuracy: 0.999 ; precision: 0.886 ; recall: 0.879 ; loss: 0.393
+2019-01-09 23:48:48,217:INFO: - Found new best DSC
+2019-01-09 23:48:48,217:INFO: Epoch 43/45
+2019-01-09 23:49:41,993:INFO: - Train metrics: dsc: 0.930 ; iou: 0.892 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.959 ; loss: 0.389
+2019-01-09 23:49:46,156:INFO: - Eval metrics : dsc: 0.838 ; iou: 0.777 ; accuracy: 0.999 ; precision: 0.916 ; recall: 0.851 ; loss: 0.389
+2019-01-09 23:49:46,968:INFO: Epoch 44/45
+2019-01-09 23:50:40,699:INFO: - Train metrics: dsc: 0.931 ; iou: 0.893 ; accuracy: 0.999 ; precision: 0.933 ; recall: 0.958 ; loss: 0.386
+2019-01-09 23:50:44,909:INFO: - Eval metrics : dsc: 0.819 ; iou: 0.750 ; accuracy: 0.998 ; precision: 0.830 ; recall: 0.891 ; loss: 0.386
+2019-01-09 23:50:45,704:INFO: Epoch 45/45
+2019-01-09 23:51:39,464:INFO: - Train metrics: dsc: 0.928 ; iou: 0.889 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.955 ; loss: 0.383
+2019-01-09 23:51:43,701:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.775 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.853 ; loss: 0.383
+2019-01-09 23:51:44,853:INFO: Loading the datasets...
+2019-01-09 23:51:49,263:INFO: - done.
+2019-01-09 23:51:49,263:INFO: For k-fold 2/5:
+2019-01-09 23:51:49,263:INFO: Starting training for 45 epoch(s)
+2019-01-09 23:51:49,263:INFO: Epoch 1/45
+2019-01-09 23:52:43,154:INFO: - Train metrics: dsc: 0.032 ; iou: 0.016 ; accuracy: 0.475 ; precision: 0.017 ; recall: 0.890 ; loss: 0.716
+2019-01-09 23:52:47,402:INFO: - Eval metrics : dsc: 0.056 ; iou: 0.029 ; accuracy: 0.759 ; precision: 0.029 ; recall: 0.886 ; loss: 0.650
+2019-01-09 23:52:48,971:INFO: - Found new best DSC
+2019-01-09 23:52:48,971:INFO: Epoch 2/45
+2019-01-09 23:53:42,766:INFO: - Train metrics: dsc: 0.207 ; iou: 0.126 ; accuracy: 0.921 ; precision: 0.128 ; recall: 0.851 ; loss: 0.602
+2019-01-09 23:53:46,953:INFO: - Eval metrics : dsc: 0.392 ; iou: 0.261 ; accuracy: 0.981 ; precision: 0.266 ; recall: 0.852 ; loss: 0.574
+2019-01-09 23:53:48,668:INFO: - Found new best DSC
+2019-01-09 23:53:48,668:INFO: Epoch 3/45
+2019-01-09 23:54:42,600:INFO: - Train metrics: dsc: 0.555 ; iou: 0.422 ; accuracy: 0.992 ; precision: 0.445 ; recall: 0.815 ; loss: 0.560
+2019-01-09 23:54:46,829:INFO: - Eval metrics : dsc: 0.587 ; iou: 0.452 ; accuracy: 0.992 ; precision: 0.463 ; recall: 0.881 ; loss: 0.554
+2019-01-09 23:54:48,347:INFO: - Found new best DSC
+2019-01-09 23:54:48,347:INFO: Epoch 4/45
+2019-01-09 23:55:42,254:INFO: - Train metrics: dsc: 0.677 ; iou: 0.564 ; accuracy: 0.996 ; precision: 0.597 ; recall: 0.834 ; loss: 0.544
+2019-01-09 23:55:46,495:INFO: - Eval metrics : dsc: 0.697 ; iou: 0.582 ; accuracy: 0.996 ; precision: 0.614 ; recall: 0.857 ; loss: 0.538
+2019-01-09 23:55:48,065:INFO: - Found new best DSC
+2019-01-09 23:55:48,065:INFO: Epoch 5/45
+2019-01-09 23:56:41,897:INFO: - Train metrics: dsc: 0.698 ; iou: 0.589 ; accuracy: 0.996 ; precision: 0.615 ; recall: 0.867 ; loss: 0.534
+2019-01-09 23:56:46,112:INFO: - Eval metrics : dsc: 0.697 ; iou: 0.581 ; accuracy: 0.996 ; precision: 0.605 ; recall: 0.873 ; loss: 0.530
+2019-01-09 23:56:46,878:INFO: Epoch 6/45
+2019-01-09 23:57:40,851:INFO: - Train metrics: dsc: 0.724 ; iou: 0.619 ; accuracy: 0.997 ; precision: 0.644 ; recall: 0.885 ; loss: 0.525
+2019-01-09 23:57:45,067:INFO: - Eval metrics : dsc: 0.742 ; iou: 0.642 ; accuracy: 0.997 ; precision: 0.674 ; recall: 0.874 ; loss: 0.522
+2019-01-09 23:57:46,637:INFO: - Found new best DSC
+2019-01-09 23:57:46,637:INFO: Epoch 7/45
+2019-01-09 23:58:40,526:INFO: - Train metrics: dsc: 0.767 ; iou: 0.670 ; accuracy: 0.997 ; precision: 0.699 ; recall: 0.904 ; loss: 0.518
+2019-01-09 23:58:44,730:INFO: - Eval metrics : dsc: 0.764 ; iou: 0.670 ; accuracy: 0.998 ; precision: 0.692 ; recall: 0.898 ; loss: 0.515
+2019-01-09 23:58:46,214:INFO: - Found new best DSC
+2019-01-09 23:58:46,215:INFO: Epoch 8/45
+2019-01-09 23:59:40,132:INFO: - Train metrics: dsc: 0.785 ; iou: 0.695 ; accuracy: 0.998 ; precision: 0.726 ; recall: 0.906 ; loss: 0.512
+2019-01-09 23:59:44,349:INFO: - Eval metrics : dsc: 0.791 ; iou: 0.714 ; accuracy: 0.998 ; precision: 0.759 ; recall: 0.876 ; loss: 0.509
+2019-01-09 23:59:45,948:INFO: - Found new best DSC
+2019-01-09 23:59:45,949:INFO: Epoch 9/45
+2019-01-10 00:00:39,928:INFO: - Train metrics: dsc: 0.802 ; iou: 0.715 ; accuracy: 0.998 ; precision: 0.752 ; recall: 0.914 ; loss: 0.506
+2019-01-10 00:00:44,171:INFO: - Eval metrics : dsc: 0.801 ; iou: 0.729 ; accuracy: 0.998 ; precision: 0.789 ; recall: 0.867 ; loss: 0.504
+2019-01-10 00:00:45,868:INFO: - Found new best DSC
+2019-01-10 00:00:45,868:INFO: Epoch 10/45
+2019-01-10 00:01:39,733:INFO: - Train metrics: dsc: 0.816 ; iou: 0.732 ; accuracy: 0.998 ; precision: 0.783 ; recall: 0.920 ; loss: 0.502
+2019-01-10 00:01:43,957:INFO: - Eval metrics : dsc: 0.792 ; iou: 0.704 ; accuracy: 0.998 ; precision: 0.753 ; recall: 0.904 ; loss: 0.500
+2019-01-10 00:01:44,698:INFO: Epoch 11/45
+2019-01-10 00:02:38,523:INFO: - Train metrics: dsc: 0.836 ; iou: 0.758 ; accuracy: 0.998 ; precision: 0.809 ; recall: 0.925 ; loss: 0.497
+2019-01-10 00:02:42,772:INFO: - Eval metrics : dsc: 0.819 ; iou: 0.745 ; accuracy: 0.998 ; precision: 0.830 ; recall: 0.886 ; loss: 0.495
+2019-01-10 00:02:44,446:INFO: - Found new best DSC
+2019-01-10 00:02:44,447:INFO: Epoch 12/45
+2019-01-10 00:03:38,249:INFO: - Train metrics: dsc: 0.824 ; iou: 0.743 ; accuracy: 0.998 ; precision: 0.801 ; recall: 0.919 ; loss: 0.495
+2019-01-10 00:03:42,514:INFO: - Eval metrics : dsc: 0.828 ; iou: 0.757 ; accuracy: 0.998 ; precision: 0.848 ; recall: 0.877 ; loss: 0.492
+2019-01-10 00:03:44,126:INFO: - Found new best DSC
+2019-01-10 00:03:44,126:INFO: Epoch 13/45
+2019-01-10 00:04:38,009:INFO: - Train metrics: dsc: 0.852 ; iou: 0.778 ; accuracy: 0.998 ; precision: 0.830 ; recall: 0.932 ; loss: 0.489
+2019-01-10 00:04:42,213:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.760 ; accuracy: 0.998 ; precision: 0.844 ; recall: 0.890 ; loss: 0.488
+2019-01-10 00:04:43,810:INFO: - Found new best DSC
+2019-01-10 00:04:43,810:INFO: Epoch 14/45
+2019-01-10 00:05:38,761:INFO: - Train metrics: dsc: 0.860 ; iou: 0.791 ; accuracy: 0.999 ; precision: 0.848 ; recall: 0.932 ; loss: 0.486
+2019-01-10 00:05:43,164:INFO: - Eval metrics : dsc: 0.830 ; iou: 0.751 ; accuracy: 0.998 ; precision: 0.823 ; recall: 0.906 ; loss: 0.484
+2019-01-10 00:05:43,912:INFO: Epoch 15/45
+2019-01-10 00:06:40,529:INFO: - Train metrics: dsc: 0.870 ; iou: 0.804 ; accuracy: 0.999 ; precision: 0.862 ; recall: 0.936 ; loss: 0.482
+2019-01-10 00:06:44,957:INFO: - Eval metrics : dsc: 0.844 ; iou: 0.774 ; accuracy: 0.999 ; precision: 0.876 ; recall: 0.883 ; loss: 0.481
+2019-01-10 00:06:46,790:INFO: - Found new best DSC
+2019-01-10 00:06:46,791:INFO: Epoch 16/45
+2019-01-10 00:07:43,407:INFO: - Train metrics: dsc: 0.877 ; iou: 0.814 ; accuracy: 0.999 ; precision: 0.869 ; recall: 0.938 ; loss: 0.478
+2019-01-10 00:07:47,863:INFO: - Eval metrics : dsc: 0.849 ; iou: 0.780 ; accuracy: 0.999 ; precision: 0.881 ; recall: 0.886 ; loss: 0.477
+2019-01-10 00:07:49,450:INFO: - Found new best DSC
+2019-01-10 00:07:49,450:INFO: Epoch 17/45
+2019-01-10 00:08:46,076:INFO: - Train metrics: dsc: 0.885 ; iou: 0.824 ; accuracy: 0.999 ; precision: 0.874 ; recall: 0.943 ; loss: 0.475
+2019-01-10 00:08:50,534:INFO: - Eval metrics : dsc: 0.843 ; iou: 0.773 ; accuracy: 0.999 ; precision: 0.865 ; recall: 0.894 ; loss: 0.474
+2019-01-10 00:08:51,324:INFO: Epoch 18/45
+2019-01-10 00:09:44,920:INFO: - Train metrics: dsc: 0.889 ; iou: 0.829 ; accuracy: 0.999 ; precision: 0.883 ; recall: 0.941 ; loss: 0.472
+2019-01-10 00:09:49,188:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.787 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.871 ; loss: 0.471
+2019-01-10 00:09:50,844:INFO: - Found new best DSC
+2019-01-10 00:09:50,844:INFO: Epoch 19/45
+2019-01-10 00:10:44,659:INFO: - Train metrics: dsc: 0.889 ; iou: 0.832 ; accuracy: 0.999 ; precision: 0.888 ; recall: 0.940 ; loss: 0.468
+2019-01-10 00:10:48,944:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.754 ; accuracy: 0.998 ; precision: 0.834 ; recall: 0.911 ; loss: 0.468
+2019-01-10 00:10:49,761:INFO: Epoch 20/45
+2019-01-10 00:11:43,680:INFO: - Train metrics: dsc: 0.893 ; iou: 0.836 ; accuracy: 0.999 ; precision: 0.888 ; recall: 0.944 ; loss: 0.465
+2019-01-10 00:11:47,915:INFO: - Eval metrics : dsc: 0.850 ; iou: 0.783 ; accuracy: 0.999 ; precision: 0.924 ; recall: 0.849 ; loss: 0.464
+2019-01-10 00:11:48,685:INFO: Epoch 21/45
+2019-01-10 00:12:42,630:INFO: - Train metrics: dsc: 0.892 ; iou: 0.838 ; accuracy: 0.999 ; precision: 0.894 ; recall: 0.940 ; loss: 0.462
+2019-01-10 00:12:46,830:INFO: - Eval metrics : dsc: 0.841 ; iou: 0.768 ; accuracy: 0.998 ; precision: 0.859 ; recall: 0.897 ; loss: 0.461
+2019-01-10 00:12:47,627:INFO: Epoch 22/45
+2019-01-10 00:13:41,567:INFO: - Train metrics: dsc: 0.892 ; iou: 0.836 ; accuracy: 0.999 ; precision: 0.890 ; recall: 0.942 ; loss: 0.458
+2019-01-10 00:13:45,766:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.787 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.846 ; loss: 0.457
+2019-01-10 00:13:46,519:INFO: Epoch 23/45
+2019-01-10 00:14:40,483:INFO: - Train metrics: dsc: 0.897 ; iou: 0.844 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.941 ; loss: 0.455
+2019-01-10 00:14:44,672:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.788 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.848 ; loss: 0.454
+2019-01-10 00:14:45,482:INFO: Epoch 24/45
+2019-01-10 00:15:39,447:INFO: - Train metrics: dsc: 0.903 ; iou: 0.852 ; accuracy: 0.999 ; precision: 0.903 ; recall: 0.945 ; loss: 0.451
+2019-01-10 00:15:43,680:INFO: - Eval metrics : dsc: 0.851 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.940 ; recall: 0.837 ; loss: 0.450
+2019-01-10 00:15:44,423:INFO: Epoch 25/45
+2019-01-10 00:16:38,324:INFO: - Train metrics: dsc: 0.906 ; iou: 0.855 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.947 ; loss: 0.448
+2019-01-10 00:16:42,540:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.755 ; accuracy: 0.998 ; precision: 0.826 ; recall: 0.910 ; loss: 0.447
+2019-01-10 00:16:43,289:INFO: Epoch 26/45
+2019-01-10 00:17:37,207:INFO: - Train metrics: dsc: 0.905 ; iou: 0.855 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.947 ; loss: 0.444
+2019-01-10 00:17:41,442:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.791 ; accuracy: 0.999 ; precision: 0.929 ; recall: 0.846 ; loss: 0.443
+2019-01-10 00:17:43,282:INFO: - Found new best DSC
+2019-01-10 00:17:43,282:INFO: Epoch 27/45
+2019-01-10 00:18:37,046:INFO: - Train metrics: dsc: 0.911 ; iou: 0.861 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.950 ; loss: 0.441
+2019-01-10 00:18:41,317:INFO: - Eval metrics : dsc: 0.858 ; iou: 0.796 ; accuracy: 0.999 ; precision: 0.914 ; recall: 0.868 ; loss: 0.440
+2019-01-10 00:18:43,035:INFO: - Found new best DSC
+2019-01-10 00:18:43,035:INFO: Epoch 28/45
+2019-01-10 00:19:36,825:INFO: - Train metrics: dsc: 0.912 ; iou: 0.864 ; accuracy: 0.999 ; precision: 0.912 ; recall: 0.949 ; loss: 0.437
+2019-01-10 00:19:41,040:INFO: - Eval metrics : dsc: 0.849 ; iou: 0.782 ; accuracy: 0.999 ; precision: 0.873 ; recall: 0.887 ; loss: 0.437
+2019-01-10 00:19:41,799:INFO: Epoch 29/45
+2019-01-10 00:20:35,619:INFO: - Train metrics: dsc: 0.912 ; iou: 0.865 ; accuracy: 0.999 ; precision: 0.912 ; recall: 0.950 ; loss: 0.434
+2019-01-10 00:20:39,830:INFO: - Eval metrics : dsc: 0.847 ; iou: 0.778 ; accuracy: 0.999 ; precision: 0.950 ; recall: 0.813 ; loss: 0.433
+2019-01-10 00:20:40,644:INFO: Epoch 30/45
+2019-01-10 00:21:34,504:INFO: - Train metrics: dsc: 0.910 ; iou: 0.863 ; accuracy: 0.999 ; precision: 0.916 ; recall: 0.945 ; loss: 0.431
+2019-01-10 00:21:38,780:INFO: - Eval metrics : dsc: 0.820 ; iou: 0.737 ; accuracy: 0.998 ; precision: 0.797 ; recall: 0.918 ; loss: 0.431
+2019-01-10 00:21:39,544:INFO: Epoch 31/45
+2019-01-10 00:22:33,436:INFO: - Train metrics: dsc: 0.912 ; iou: 0.865 ; accuracy: 0.999 ; precision: 0.916 ; recall: 0.947 ; loss: 0.428
+2019-01-10 00:22:37,647:INFO: - Eval metrics : dsc: 0.855 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.860 ; recall: 0.902 ; loss: 0.427
+2019-01-10 00:22:38,407:INFO: Epoch 32/45
+2019-01-10 00:23:32,235:INFO: - Train metrics: dsc: 0.912 ; iou: 0.866 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.953 ; loss: 0.424
+2019-01-10 00:23:36,456:INFO: - Eval metrics : dsc: 0.810 ; iou: 0.723 ; accuracy: 0.998 ; precision: 0.772 ; recall: 0.919 ; loss: 0.425
+2019-01-10 00:23:37,295:INFO: Epoch 33/45
+2019-01-10 00:24:31,140:INFO: - Train metrics: dsc: 0.914 ; iou: 0.868 ; accuracy: 0.999 ; precision: 0.917 ; recall: 0.949 ; loss: 0.421
+2019-01-10 00:24:35,339:INFO: - Eval metrics : dsc: 0.858 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.943 ; recall: 0.838 ; loss: 0.421
+2019-01-10 00:24:36,839:INFO: - Found new best DSC
+2019-01-10 00:24:36,839:INFO: Epoch 34/45
+2019-01-10 00:25:30,625:INFO: - Train metrics: dsc: 0.916 ; iou: 0.872 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.952 ; loss: 0.418
+2019-01-10 00:25:34,865:INFO: - Eval metrics : dsc: 0.862 ; iou: 0.796 ; accuracy: 0.999 ; precision: 0.886 ; recall: 0.898 ; loss: 0.417
+2019-01-10 00:25:36,638:INFO: - Found new best DSC
+2019-01-10 00:25:36,638:INFO: Epoch 35/45
+2019-01-10 00:26:30,427:INFO: - Train metrics: dsc: 0.922 ; iou: 0.880 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.958 ; loss: 0.414
+2019-01-10 00:26:34,586:INFO: - Eval metrics : dsc: 0.860 ; iou: 0.794 ; accuracy: 0.999 ; precision: 0.888 ; recall: 0.893 ; loss: 0.414
+2019-01-10 00:26:35,384:INFO: Epoch 36/45
+2019-01-10 00:27:29,103:INFO: - Train metrics: dsc: 0.923 ; iou: 0.881 ; accuracy: 0.999 ; precision: 0.923 ; recall: 0.956 ; loss: 0.411
+2019-01-10 00:27:33,364:INFO: - Eval metrics : dsc: 0.865 ; iou: 0.803 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.866 ; loss: 0.411
+2019-01-10 00:27:34,980:INFO: - Found new best DSC
+2019-01-10 00:27:34,980:INFO: Epoch 37/45
+2019-01-10 00:28:28,799:INFO: - Train metrics: dsc: 0.926 ; iou: 0.885 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.958 ; loss: 0.408
+2019-01-10 00:28:33,020:INFO: - Eval metrics : dsc: 0.861 ; iou: 0.799 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.864 ; loss: 0.408
+2019-01-10 00:28:33,925:INFO: Epoch 38/45
+2019-01-10 00:29:27,683:INFO: - Train metrics: dsc: 0.925 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.957 ; loss: 0.405
+2019-01-10 00:29:31,872:INFO: - Eval metrics : dsc: 0.860 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.879 ; recall: 0.895 ; loss: 0.404
+2019-01-10 00:29:32,628:INFO: Epoch 39/45
+2019-01-10 00:30:26,365:INFO: - Train metrics: dsc: 0.926 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.926 ; recall: 0.957 ; loss: 0.402
+2019-01-10 00:30:30,550:INFO: - Eval metrics : dsc: 0.860 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.880 ; recall: 0.900 ; loss: 0.401
+2019-01-10 00:30:31,298:INFO: Epoch 40/45
+2019-01-10 00:31:25,239:INFO: - Train metrics: dsc: 0.923 ; iou: 0.883 ; accuracy: 0.999 ; precision: 0.928 ; recall: 0.954 ; loss: 0.399
+2019-01-10 00:31:29,473:INFO: - Eval metrics : dsc: 0.865 ; iou: 0.801 ; accuracy: 0.999 ; precision: 0.910 ; recall: 0.876 ; loss: 0.398
+2019-01-10 00:31:31,054:INFO: - Found new best DSC
+2019-01-10 00:31:31,054:INFO: Epoch 41/45
+2019-01-10 00:32:24,836:INFO: - Train metrics: dsc: 0.923 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.953 ; loss: 0.395
+2019-01-10 00:32:29,083:INFO: - Eval metrics : dsc: 0.866 ; iou: 0.801 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.881 ; loss: 0.396
+2019-01-10 00:32:30,696:INFO: - Found new best DSC
+2019-01-10 00:32:30,696:INFO: Epoch 42/45
+2019-01-10 00:33:24,546:INFO: - Train metrics: dsc: 0.927 ; iou: 0.888 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.956 ; loss: 0.392
+2019-01-10 00:33:28,719:INFO: - Eval metrics : dsc: 0.869 ; iou: 0.806 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.872 ; loss: 0.393
+2019-01-10 00:33:30,350:INFO: - Found new best DSC
+2019-01-10 00:33:30,351:INFO: Epoch 43/45
+2019-01-10 00:34:24,144:INFO: - Train metrics: dsc: 0.923 ; iou: 0.883 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.952 ; loss: 0.389
+2019-01-10 00:34:28,329:INFO: - Eval metrics : dsc: 0.864 ; iou: 0.803 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.859 ; loss: 0.389
+2019-01-10 00:34:29,075:INFO: Epoch 44/45
+2019-01-10 00:35:22,827:INFO: - Train metrics: dsc: 0.928 ; iou: 0.889 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.956 ; loss: 0.386
+2019-01-10 00:35:27,069:INFO: - Eval metrics : dsc: 0.868 ; iou: 0.803 ; accuracy: 0.999 ; precision: 0.894 ; recall: 0.896 ; loss: 0.386
+2019-01-10 00:35:27,788:INFO: Epoch 45/45
+2019-01-10 00:36:21,504:INFO: - Train metrics: dsc: 0.927 ; iou: 0.888 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.955 ; loss: 0.383
+2019-01-10 00:36:25,706:INFO: - Eval metrics : dsc: 0.864 ; iou: 0.799 ; accuracy: 0.999 ; precision: 0.891 ; recall: 0.886 ; loss: 0.382
+2019-01-10 00:36:26,786:INFO: Loading the datasets...
+2019-01-10 00:36:31,896:INFO: - done.
+2019-01-10 00:36:31,896:INFO: For k-fold 3/5:
+2019-01-10 00:36:31,900:INFO: Starting training for 45 epoch(s)
+2019-01-10 00:36:31,900:INFO: Epoch 1/45
+2019-01-10 00:37:25,748:INFO: - Train metrics: dsc: 0.031 ; iou: 0.016 ; accuracy: 0.469 ; precision: 0.016 ; recall: 0.888 ; loss: 0.718
+2019-01-10 00:37:29,983:INFO: - Eval metrics : dsc: 0.057 ; iou: 0.030 ; accuracy: 0.753 ; precision: 0.030 ; recall: 0.896 ; loss: 0.653
+2019-01-10 00:37:31,929:INFO: - Found new best DSC
+2019-01-10 00:37:31,929:INFO: Epoch 2/45
+2019-01-10 00:38:25,746:INFO: - Train metrics: dsc: 0.201 ; iou: 0.121 ; accuracy: 0.923 ; precision: 0.124 ; recall: 0.831 ; loss: 0.601
+2019-01-10 00:38:29,978:INFO: - Eval metrics : dsc: 0.367 ; iou: 0.240 ; accuracy: 0.979 ; precision: 0.249 ; recall: 0.812 ; loss: 0.573
+2019-01-10 00:38:31,898:INFO: - Found new best DSC
+2019-01-10 00:38:31,899:INFO: Epoch 3/45
+2019-01-10 00:39:25,835:INFO: - Train metrics: dsc: 0.516 ; iou: 0.384 ; accuracy: 0.991 ; precision: 0.409 ; recall: 0.782 ; loss: 0.561
+2019-01-10 00:39:30,102:INFO: - Eval metrics : dsc: 0.592 ; iou: 0.457 ; accuracy: 0.993 ; precision: 0.478 ; recall: 0.844 ; loss: 0.553
+2019-01-10 00:39:31,806:INFO: - Found new best DSC
+2019-01-10 00:39:31,806:INFO: Epoch 4/45
+2019-01-10 00:40:25,663:INFO: - Train metrics: dsc: 0.648 ; iou: 0.531 ; accuracy: 0.996 ; precision: 0.572 ; recall: 0.801 ; loss: 0.545
+2019-01-10 00:40:29,893:INFO: - Eval metrics : dsc: 0.683 ; iou: 0.568 ; accuracy: 0.996 ; precision: 0.615 ; recall: 0.817 ; loss: 0.537
+2019-01-10 00:40:31,693:INFO: - Found new best DSC
+2019-01-10 00:40:31,693:INFO: Epoch 5/45
+2019-01-10 00:41:25,553:INFO: - Train metrics: dsc: 0.670 ; iou: 0.557 ; accuracy: 0.996 ; precision: 0.585 ; recall: 0.844 ; loss: 0.534
+2019-01-10 00:41:29,795:INFO: - Eval metrics : dsc: 0.703 ; iou: 0.593 ; accuracy: 0.996 ; precision: 0.632 ; recall: 0.841 ; loss: 0.529
+2019-01-10 00:41:31,575:INFO: - Found new best DSC
+2019-01-10 00:41:31,575:INFO: Epoch 6/45
+2019-01-10 00:42:25,552:INFO: - Train metrics: dsc: 0.713 ; iou: 0.606 ; accuracy: 0.997 ; precision: 0.629 ; recall: 0.872 ; loss: 0.525
+2019-01-10 00:42:29,804:INFO: - Eval metrics : dsc: 0.723 ; iou: 0.621 ; accuracy: 0.997 ; precision: 0.653 ; recall: 0.858 ; loss: 0.521
+2019-01-10 00:42:31,683:INFO: - Found new best DSC
+2019-01-10 00:42:31,684:INFO: Epoch 7/45
+2019-01-10 00:43:25,446:INFO: - Train metrics: dsc: 0.741 ; iou: 0.643 ; accuracy: 0.997 ; precision: 0.667 ; recall: 0.887 ; loss: 0.518
+2019-01-10 00:43:29,662:INFO: - Eval metrics : dsc: 0.759 ; iou: 0.663 ; accuracy: 0.997 ; precision: 0.692 ; recall: 0.886 ; loss: 0.516
+2019-01-10 00:43:31,550:INFO: - Found new best DSC
+2019-01-10 00:43:31,551:INFO: Epoch 8/45
+2019-01-10 00:44:25,444:INFO: - Train metrics: dsc: 0.764 ; iou: 0.674 ; accuracy: 0.998 ; precision: 0.697 ; recall: 0.893 ; loss: 0.512
+2019-01-10 00:44:29,708:INFO: - Eval metrics : dsc: 0.798 ; iou: 0.718 ; accuracy: 0.998 ; precision: 0.796 ; recall: 0.862 ; loss: 0.509
+2019-01-10 00:44:31,520:INFO: - Found new best DSC
+2019-01-10 00:44:31,521:INFO: Epoch 9/45
+2019-01-10 00:45:25,467:INFO: - Train metrics: dsc: 0.784 ; iou: 0.698 ; accuracy: 0.998 ; precision: 0.729 ; recall: 0.902 ; loss: 0.507
+2019-01-10 00:45:29,680:INFO: - Eval metrics : dsc: 0.797 ; iou: 0.717 ; accuracy: 0.998 ; precision: 0.791 ; recall: 0.875 ; loss: 0.504
+2019-01-10 00:45:30,489:INFO: Epoch 10/45
+2019-01-10 00:46:24,370:INFO: - Train metrics: dsc: 0.808 ; iou: 0.727 ; accuracy: 0.998 ; precision: 0.772 ; recall: 0.907 ; loss: 0.502
+2019-01-10 00:46:28,616:INFO: - Eval metrics : dsc: 0.793 ; iou: 0.699 ; accuracy: 0.998 ; precision: 0.757 ; recall: 0.909 ; loss: 0.500
+2019-01-10 00:46:29,414:INFO: Epoch 11/45
+2019-01-10 00:47:23,329:INFO: - Train metrics: dsc: 0.820 ; iou: 0.742 ; accuracy: 0.998 ; precision: 0.792 ; recall: 0.914 ; loss: 0.497
+2019-01-10 00:47:27,549:INFO: - Eval metrics : dsc: 0.808 ; iou: 0.726 ; accuracy: 0.998 ; precision: 0.828 ; recall: 0.866 ; loss: 0.497
+2019-01-10 00:47:29,244:INFO: - Found new best DSC
+2019-01-10 00:47:29,245:INFO: Epoch 12/45
+2019-01-10 00:48:23,035:INFO: - Train metrics: dsc: 0.829 ; iou: 0.754 ; accuracy: 0.998 ; precision: 0.822 ; recall: 0.911 ; loss: 0.494
+2019-01-10 00:48:27,257:INFO: - Eval metrics : dsc: 0.824 ; iou: 0.750 ; accuracy: 0.998 ; precision: 0.861 ; recall: 0.869 ; loss: 0.491
+2019-01-10 00:48:28,974:INFO: - Found new best DSC
+2019-01-10 00:48:28,974:INFO: Epoch 13/45
+2019-01-10 00:49:22,719:INFO: - Train metrics: dsc: 0.807 ; iou: 0.728 ; accuracy: 0.998 ; precision: 0.791 ; recall: 0.909 ; loss: 0.491
+2019-01-10 00:49:26,958:INFO: - Eval metrics : dsc: 0.787 ; iou: 0.701 ; accuracy: 0.998 ; precision: 0.807 ; recall: 0.867 ; loss: 0.496
+2019-01-10 00:49:27,821:INFO: Epoch 14/45
+2019-01-10 00:50:21,612:INFO: - Train metrics: dsc: 0.829 ; iou: 0.755 ; accuracy: 0.998 ; precision: 0.852 ; recall: 0.890 ; loss: 0.487
+2019-01-10 00:50:25,826:INFO: - Eval metrics : dsc: 0.838 ; iou: 0.765 ; accuracy: 0.998 ; precision: 0.874 ; recall: 0.874 ; loss: 0.484
+2019-01-10 00:50:27,630:INFO: - Found new best DSC
+2019-01-10 00:50:27,630:INFO: Epoch 15/45
+2019-01-10 00:51:21,315:INFO: - Train metrics: dsc: 0.852 ; iou: 0.782 ; accuracy: 0.999 ; precision: 0.859 ; recall: 0.916 ; loss: 0.482
+2019-01-10 00:51:25,582:INFO: - Eval metrics : dsc: 0.857 ; iou: 0.785 ; accuracy: 0.999 ; precision: 0.898 ; recall: 0.871 ; loss: 0.481
+2019-01-10 00:51:27,482:INFO: - Found new best DSC
+2019-01-10 00:51:27,483:INFO: Epoch 16/45
+2019-01-10 00:52:21,338:INFO: - Train metrics: dsc: 0.861 ; iou: 0.795 ; accuracy: 0.999 ; precision: 0.866 ; recall: 0.922 ; loss: 0.479
+2019-01-10 00:52:25,592:INFO: - Eval metrics : dsc: 0.849 ; iou: 0.767 ; accuracy: 0.998 ; precision: 0.844 ; recall: 0.910 ; loss: 0.477
+2019-01-10 00:52:26,396:INFO: Epoch 17/45
+2019-01-10 00:53:20,211:INFO: - Train metrics: dsc: 0.870 ; iou: 0.807 ; accuracy: 0.999 ; precision: 0.875 ; recall: 0.927 ; loss: 0.475
+2019-01-10 00:53:24,424:INFO: - Eval metrics : dsc: 0.866 ; iou: 0.794 ; accuracy: 0.999 ; precision: 0.888 ; recall: 0.893 ; loss: 0.474
+2019-01-10 00:53:26,208:INFO: - Found new best DSC
+2019-01-10 00:53:26,208:INFO: Epoch 18/45
+2019-01-10 00:54:20,014:INFO: - Train metrics: dsc: 0.876 ; iou: 0.815 ; accuracy: 0.999 ; precision: 0.877 ; recall: 0.932 ; loss: 0.472
+2019-01-10 00:54:24,221:INFO: - Eval metrics : dsc: 0.857 ; iou: 0.776 ; accuracy: 0.998 ; precision: 0.830 ; recall: 0.929 ; loss: 0.471
+2019-01-10 00:54:25,070:INFO: Epoch 19/45
+2019-01-10 00:55:18,966:INFO: - Train metrics: dsc: 0.882 ; iou: 0.823 ; accuracy: 0.999 ; precision: 0.884 ; recall: 0.935 ; loss: 0.468
+2019-01-10 00:55:23,129:INFO: - Eval metrics : dsc: 0.860 ; iou: 0.783 ; accuracy: 0.998 ; precision: 0.854 ; recall: 0.917 ; loss: 0.468
+2019-01-10 00:55:23,954:INFO: Epoch 20/45
+2019-01-10 00:56:17,675:INFO: - Train metrics: dsc: 0.882 ; iou: 0.824 ; accuracy: 0.999 ; precision: 0.887 ; recall: 0.933 ; loss: 0.465
+2019-01-10 00:56:21,890:INFO: - Eval metrics : dsc: 0.871 ; iou: 0.801 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.884 ; loss: 0.464
+2019-01-10 00:56:23,858:INFO: - Found new best DSC
+2019-01-10 00:56:23,859:INFO: Epoch 21/45
+2019-01-10 00:57:17,570:INFO: - Train metrics: dsc: 0.887 ; iou: 0.831 ; accuracy: 0.999 ; precision: 0.892 ; recall: 0.935 ; loss: 0.461
+2019-01-10 00:57:21,757:INFO: - Eval metrics : dsc: 0.869 ; iou: 0.798 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.900 ; loss: 0.460
+2019-01-10 00:57:22,564:INFO: Epoch 22/45
+2019-01-10 00:58:16,262:INFO: - Train metrics: dsc: 0.892 ; iou: 0.838 ; accuracy: 0.999 ; precision: 0.896 ; recall: 0.938 ; loss: 0.458
+2019-01-10 00:58:20,511:INFO: - Eval metrics : dsc: 0.867 ; iou: 0.797 ; accuracy: 0.999 ; precision: 0.890 ; recall: 0.893 ; loss: 0.457
+2019-01-10 00:58:21,323:INFO: Epoch 23/45
+2019-01-10 00:59:15,145:INFO: - Train metrics: dsc: 0.893 ; iou: 0.840 ; accuracy: 0.999 ; precision: 0.898 ; recall: 0.939 ; loss: 0.454
+2019-01-10 00:59:19,398:INFO: - Eval metrics : dsc: 0.875 ; iou: 0.806 ; accuracy: 0.999 ; precision: 0.906 ; recall: 0.888 ; loss: 0.453
+2019-01-10 00:59:21,115:INFO: - Found new best DSC
+2019-01-10 00:59:21,116:INFO: Epoch 24/45
+2019-01-10 01:00:14,839:INFO: - Train metrics: dsc: 0.899 ; iou: 0.846 ; accuracy: 0.999 ; precision: 0.898 ; recall: 0.944 ; loss: 0.451
+2019-01-10 01:00:19,082:INFO: - Eval metrics : dsc: 0.867 ; iou: 0.796 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.897 ; loss: 0.450
+2019-01-10 01:00:19,882:INFO: Epoch 25/45
+2019-01-10 01:01:13,618:INFO: - Train metrics: dsc: 0.899 ; iou: 0.848 ; accuracy: 0.999 ; precision: 0.902 ; recall: 0.942 ; loss: 0.447
+2019-01-10 01:01:17,924:INFO: - Eval metrics : dsc: 0.877 ; iou: 0.809 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.888 ; loss: 0.446
+2019-01-10 01:01:19,759:INFO: - Found new best DSC
+2019-01-10 01:01:19,759:INFO: Epoch 26/45
+2019-01-10 01:02:13,525:INFO: - Train metrics: dsc: 0.902 ; iou: 0.852 ; accuracy: 0.999 ; precision: 0.907 ; recall: 0.943 ; loss: 0.444
+2019-01-10 01:02:17,716:INFO: - Eval metrics : dsc: 0.871 ; iou: 0.800 ; accuracy: 0.999 ; precision: 0.873 ; recall: 0.910 ; loss: 0.443
+2019-01-10 01:02:18,533:INFO: Epoch 27/45
+2019-01-10 01:03:12,317:INFO: - Train metrics: dsc: 0.903 ; iou: 0.854 ; accuracy: 0.999 ; precision: 0.907 ; recall: 0.942 ; loss: 0.441
+2019-01-10 01:03:16,531:INFO: - Eval metrics : dsc: 0.875 ; iou: 0.807 ; accuracy: 0.999 ; precision: 0.902 ; recall: 0.892 ; loss: 0.439
+2019-01-10 01:03:17,350:INFO: Epoch 28/45
+2019-01-10 01:04:11,084:INFO: - Train metrics: dsc: 0.906 ; iou: 0.859 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.944 ; loss: 0.437
+2019-01-10 01:04:15,307:INFO: - Eval metrics : dsc: 0.868 ; iou: 0.794 ; accuracy: 0.998 ; precision: 0.861 ; recall: 0.916 ; loss: 0.437
+2019-01-10 01:04:16,103:INFO: Epoch 29/45
+2019-01-10 01:05:09,866:INFO: - Train metrics: dsc: 0.908 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.913 ; recall: 0.945 ; loss: 0.434
+2019-01-10 01:05:14,054:INFO: - Eval metrics : dsc: 0.882 ; iou: 0.815 ; accuracy: 0.999 ; precision: 0.916 ; recall: 0.886 ; loss: 0.433
+2019-01-10 01:05:15,697:INFO: - Found new best DSC
+2019-01-10 01:05:15,697:INFO: Epoch 30/45
+2019-01-10 01:06:09,479:INFO: - Train metrics: dsc: 0.908 ; iou: 0.862 ; accuracy: 0.999 ; precision: 0.914 ; recall: 0.945 ; loss: 0.431
+2019-01-10 01:06:13,731:INFO: - Eval metrics : dsc: 0.870 ; iou: 0.796 ; accuracy: 0.998 ; precision: 0.849 ; recall: 0.926 ; loss: 0.430
+2019-01-10 01:06:14,520:INFO: Epoch 31/45
+2019-01-10 01:07:08,355:INFO: - Train metrics: dsc: 0.911 ; iou: 0.865 ; accuracy: 0.999 ; precision: 0.917 ; recall: 0.946 ; loss: 0.427
+2019-01-10 01:07:12,608:INFO: - Eval metrics : dsc: 0.874 ; iou: 0.803 ; accuracy: 0.999 ; precision: 0.870 ; recall: 0.916 ; loss: 0.427
+2019-01-10 01:07:13,460:INFO: Epoch 32/45
+2019-01-10 01:08:07,230:INFO: - Train metrics: dsc: 0.913 ; iou: 0.869 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.948 ; loss: 0.424
+2019-01-10 01:08:11,429:INFO: - Eval metrics : dsc: 0.865 ; iou: 0.788 ; accuracy: 0.998 ; precision: 0.838 ; recall: 0.927 ; loss: 0.424
+2019-01-10 01:08:12,210:INFO: Epoch 33/45
+2019-01-10 01:09:05,908:INFO: - Train metrics: dsc: 0.912 ; iou: 0.868 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.947 ; loss: 0.421
+2019-01-10 01:09:10,127:INFO: - Eval metrics : dsc: 0.867 ; iou: 0.801 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.879 ; loss: 0.420
+2019-01-10 01:09:10,959:INFO: Epoch 34/45
+2019-01-10 01:10:04,788:INFO: - Train metrics: dsc: 0.912 ; iou: 0.869 ; accuracy: 0.999 ; precision: 0.921 ; recall: 0.947 ; loss: 0.418
+2019-01-10 01:10:08,946:INFO: - Eval metrics : dsc: 0.874 ; iou: 0.808 ; accuracy: 0.999 ; precision: 0.907 ; recall: 0.885 ; loss: 0.417
+2019-01-10 01:10:09,767:INFO: Epoch 35/45
+2019-01-10 01:11:03,460:INFO: - Train metrics: dsc: 0.914 ; iou: 0.871 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.947 ; loss: 0.414
+2019-01-10 01:11:07,633:INFO: - Eval metrics : dsc: 0.874 ; iou: 0.807 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.899 ; loss: 0.413
+2019-01-10 01:11:08,379:INFO: Epoch 36/45
+2019-01-10 01:12:02,057:INFO: - Train metrics: dsc: 0.914 ; iou: 0.871 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.947 ; loss: 0.411
+2019-01-10 01:12:06,301:INFO: - Eval metrics : dsc: 0.873 ; iou: 0.807 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.877 ; loss: 0.410
+2019-01-10 01:12:07,152:INFO: Epoch 37/45
+2019-01-10 01:13:00,926:INFO: - Train metrics: dsc: 0.915 ; iou: 0.873 ; accuracy: 0.999 ; precision: 0.923 ; recall: 0.948 ; loss: 0.408
+2019-01-10 01:13:05,133:INFO: - Eval metrics : dsc: 0.872 ; iou: 0.802 ; accuracy: 0.999 ; precision: 0.878 ; recall: 0.911 ; loss: 0.408
+2019-01-10 01:13:05,918:INFO: Epoch 38/45
+2019-01-10 01:13:59,583:INFO: - Train metrics: dsc: 0.918 ; iou: 0.876 ; accuracy: 0.999 ; precision: 0.924 ; recall: 0.951 ; loss: 0.405
+2019-01-10 01:14:03,803:INFO: - Eval metrics : dsc: 0.866 ; iou: 0.794 ; accuracy: 0.999 ; precision: 0.876 ; recall: 0.901 ; loss: 0.405
+2019-01-10 01:14:04,605:INFO: Epoch 39/45
+2019-01-10 01:14:58,392:INFO: - Train metrics: dsc: 0.918 ; iou: 0.878 ; accuracy: 0.999 ; precision: 0.929 ; recall: 0.947 ; loss: 0.402
+2019-01-10 01:15:02,586:INFO: - Eval metrics : dsc: 0.875 ; iou: 0.805 ; accuracy: 0.999 ; precision: 0.864 ; recall: 0.920 ; loss: 0.401
+2019-01-10 01:15:03,389:INFO: Epoch 40/45
+2019-01-10 01:15:57,186:INFO: - Train metrics: dsc: 0.917 ; iou: 0.874 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.947 ; loss: 0.399
+2019-01-10 01:16:01,435:INFO: - Eval metrics : dsc: 0.869 ; iou: 0.802 ; accuracy: 0.999 ; precision: 0.900 ; recall: 0.887 ; loss: 0.398
+2019-01-10 01:16:02,324:INFO: Epoch 41/45
+2019-01-10 01:16:56,154:INFO: - Train metrics: dsc: 0.919 ; iou: 0.879 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.948 ; loss: 0.395
+2019-01-10 01:17:00,427:INFO: - Eval metrics : dsc: 0.874 ; iou: 0.806 ; accuracy: 0.999 ; precision: 0.900 ; recall: 0.889 ; loss: 0.396
+2019-01-10 01:17:01,266:INFO: Epoch 42/45
+2019-01-10 01:17:55,030:INFO: - Train metrics: dsc: 0.920 ; iou: 0.881 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.947 ; loss: 0.392
+2019-01-10 01:17:59,262:INFO: - Eval metrics : dsc: 0.878 ; iou: 0.811 ; accuracy: 0.999 ; precision: 0.892 ; recall: 0.903 ; loss: 0.392
+2019-01-10 01:18:00,051:INFO: Epoch 43/45
+2019-01-10 01:18:53,816:INFO: - Train metrics: dsc: 0.920 ; iou: 0.882 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.950 ; loss: 0.389
+2019-01-10 01:18:58,025:INFO: - Eval metrics : dsc: 0.876 ; iou: 0.810 ; accuracy: 0.999 ; precision: 0.934 ; recall: 0.864 ; loss: 0.388
+2019-01-10 01:18:58,817:INFO: Epoch 44/45
+2019-01-10 01:19:52,615:INFO: - Train metrics: dsc: 0.925 ; iou: 0.887 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.954 ; loss: 0.386
+2019-01-10 01:19:56,788:INFO: - Eval metrics : dsc: 0.875 ; iou: 0.809 ; accuracy: 0.999 ; precision: 0.904 ; recall: 0.888 ; loss: 0.386
+2019-01-10 01:19:57,688:INFO: Epoch 45/45
+2019-01-10 01:20:51,483:INFO: - Train metrics: dsc: 0.927 ; iou: 0.890 ; accuracy: 0.999 ; precision: 0.935 ; recall: 0.953 ; loss: 0.383
+2019-01-10 01:20:55,699:INFO: - Eval metrics : dsc: 0.875 ; iou: 0.807 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.906 ; loss: 0.382
+2019-01-10 01:20:56,860:INFO: Loading the datasets...
+2019-01-10 01:21:02,544:INFO: - done.
+2019-01-10 01:21:02,545:INFO: For k-fold 4/5:
+2019-01-10 01:21:02,545:INFO: Starting training for 45 epoch(s)
+2019-01-10 01:21:02,545:INFO: Epoch 1/45
+2019-01-10 01:21:56,303:INFO: - Train metrics: dsc: 0.032 ; iou: 0.016 ; accuracy: 0.462 ; precision: 0.016 ; recall: 0.894 ; loss: 0.719
+2019-01-10 01:22:00,478:INFO: - Eval metrics : dsc: 0.053 ; iou: 0.028 ; accuracy: 0.752 ; precision: 0.028 ; recall: 0.853 ; loss: 0.655
+2019-01-10 01:22:02,134:INFO: - Found new best DSC
+2019-01-10 01:22:02,134:INFO: Epoch 2/45
+2019-01-10 01:22:55,930:INFO: - Train metrics: dsc: 0.167 ; iou: 0.097 ; accuracy: 0.910 ; precision: 0.098 ; recall: 0.857 ; loss: 0.607
+2019-01-10 01:23:00,134:INFO: - Eval metrics : dsc: 0.275 ; iou: 0.168 ; accuracy: 0.968 ; precision: 0.170 ; recall: 0.807 ; loss: 0.579
+2019-01-10 01:23:01,850:INFO: - Found new best DSC
+2019-01-10 01:23:01,851:INFO: Epoch 3/45
+2019-01-10 01:23:55,630:INFO: - Train metrics: dsc: 0.488 ; iou: 0.353 ; accuracy: 0.988 ; precision: 0.366 ; recall: 0.831 ; loss: 0.563
+2019-01-10 01:23:59,886:INFO: - Eval metrics : dsc: 0.527 ; iou: 0.386 ; accuracy: 0.990 ; precision: 0.394 ; recall: 0.860 ; loss: 0.555
+2019-01-10 01:24:01,728:INFO: - Found new best DSC
+2019-01-10 01:24:01,728:INFO: Epoch 4/45
+2019-01-10 01:24:55,620:INFO: - Train metrics: dsc: 0.635 ; iou: 0.508 ; accuracy: 0.995 ; precision: 0.529 ; recall: 0.852 ; loss: 0.545
+2019-01-10 01:24:59,893:INFO: - Eval metrics : dsc: 0.619 ; iou: 0.486 ; accuracy: 0.994 ; precision: 0.498 ; recall: 0.858 ; loss: 0.538
+2019-01-10 01:25:01,675:INFO: - Found new best DSC
+2019-01-10 01:25:01,675:INFO: Epoch 5/45
+2019-01-10 01:25:55,535:INFO: - Train metrics: dsc: 0.685 ; iou: 0.567 ; accuracy: 0.996 ; precision: 0.582 ; recall: 0.882 ; loss: 0.533
+2019-01-10 01:25:59,718:INFO: - Eval metrics : dsc: 0.683 ; iou: 0.565 ; accuracy: 0.996 ; precision: 0.581 ; recall: 0.863 ; loss: 0.528
+2019-01-10 01:26:01,421:INFO: - Found new best DSC
+2019-01-10 01:26:01,422:INFO: Epoch 6/45
+2019-01-10 01:26:55,339:INFO: - Train metrics: dsc: 0.716 ; iou: 0.606 ; accuracy: 0.997 ; precision: 0.621 ; recall: 0.895 ; loss: 0.524
+2019-01-10 01:26:59,527:INFO: - Eval metrics : dsc: 0.343 ; iou: 0.226 ; accuracy: 0.968 ; precision: 0.227 ; recall: 0.914 ; loss: 0.547
+2019-01-10 01:27:00,314:INFO: Epoch 7/45
+2019-01-10 01:27:54,196:INFO: - Train metrics: dsc: 0.744 ; iou: 0.644 ; accuracy: 0.997 ; precision: 0.663 ; recall: 0.898 ; loss: 0.518
+2019-01-10 01:27:58,407:INFO: - Eval metrics : dsc: 0.755 ; iou: 0.659 ; accuracy: 0.997 ; precision: 0.690 ; recall: 0.873 ; loss: 0.514
+2019-01-10 01:28:00,034:INFO: - Found new best DSC
+2019-01-10 01:28:00,034:INFO: Epoch 8/45
+2019-01-10 01:28:53,920:INFO: - Train metrics: dsc: 0.766 ; iou: 0.673 ; accuracy: 0.998 ; precision: 0.695 ; recall: 0.905 ; loss: 0.512
+2019-01-10 01:28:58,077:INFO: - Eval metrics : dsc: 0.697 ; iou: 0.593 ; accuracy: 0.996 ; precision: 0.633 ; recall: 0.841 ; loss: 0.510
+2019-01-10 01:28:58,843:INFO: Epoch 9/45
+2019-01-10 01:29:52,628:INFO: - Train metrics: dsc: 0.790 ; iou: 0.702 ; accuracy: 0.998 ; precision: 0.732 ; recall: 0.911 ; loss: 0.507
+2019-01-10 01:29:56,880:INFO: - Eval metrics : dsc: 0.791 ; iou: 0.717 ; accuracy: 0.998 ; precision: 0.773 ; recall: 0.851 ; loss: 0.505
+2019-01-10 01:29:58,579:INFO: - Found new best DSC
+2019-01-10 01:29:58,579:INFO: Epoch 10/45
+2019-01-10 01:30:52,405:INFO: - Train metrics: dsc: 0.813 ; iou: 0.731 ; accuracy: 0.998 ; precision: 0.764 ; recall: 0.918 ; loss: 0.502
+2019-01-10 01:30:56,642:INFO: - Eval metrics : dsc: 0.777 ; iou: 0.680 ; accuracy: 0.997 ; precision: 0.727 ; recall: 0.902 ; loss: 0.501
+2019-01-10 01:30:57,395:INFO: Epoch 11/45
+2019-01-10 01:31:51,278:INFO: - Train metrics: dsc: 0.836 ; iou: 0.758 ; accuracy: 0.998 ; precision: 0.807 ; recall: 0.924 ; loss: 0.497
+2019-01-10 01:31:55,544:INFO: - Eval metrics : dsc: 0.807 ; iou: 0.739 ; accuracy: 0.999 ; precision: 0.858 ; recall: 0.834 ; loss: 0.496
+2019-01-10 01:31:57,199:INFO: - Found new best DSC
+2019-01-10 01:31:57,199:INFO: Epoch 12/45
+2019-01-10 01:32:50,984:INFO: - Train metrics: dsc: 0.851 ; iou: 0.778 ; accuracy: 0.998 ; precision: 0.840 ; recall: 0.926 ; loss: 0.493
+2019-01-10 01:32:55,197:INFO: - Eval metrics : dsc: 0.801 ; iou: 0.711 ; accuracy: 0.998 ; precision: 0.762 ; recall: 0.907 ; loss: 0.493
+2019-01-10 01:32:55,987:INFO: Epoch 13/45
+2019-01-10 01:33:49,955:INFO: - Train metrics: dsc: 0.831 ; iou: 0.750 ; accuracy: 0.998 ; precision: 0.800 ; recall: 0.930 ; loss: 0.490
+2019-01-10 01:33:54,179:INFO: - Eval metrics : dsc: 0.793 ; iou: 0.705 ; accuracy: 0.998 ; precision: 0.779 ; recall: 0.895 ; loss: 0.490
+2019-01-10 01:33:54,972:INFO: Epoch 14/45
+2019-01-10 01:34:48,901:INFO: - Train metrics: dsc: 0.862 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.855 ; recall: 0.926 ; loss: 0.486
+2019-01-10 01:34:53,127:INFO: - Eval metrics : dsc: 0.820 ; iou: 0.749 ; accuracy: 0.998 ; precision: 0.853 ; recall: 0.875 ; loss: 0.485
+2019-01-10 01:34:54,855:INFO: - Found new best DSC
+2019-01-10 01:34:54,855:INFO: Epoch 15/45
+2019-01-10 01:35:48,768:INFO: - Train metrics: dsc: 0.873 ; iou: 0.805 ; accuracy: 0.999 ; precision: 0.861 ; recall: 0.939 ; loss: 0.482
+2019-01-10 01:35:53,028:INFO: - Eval metrics : dsc: 0.832 ; iou: 0.759 ; accuracy: 0.998 ; precision: 0.851 ; recall: 0.888 ; loss: 0.481
+2019-01-10 01:35:54,760:INFO: - Found new best DSC
+2019-01-10 01:35:54,760:INFO: Epoch 16/45
+2019-01-10 01:36:48,561:INFO: - Train metrics: dsc: 0.881 ; iou: 0.817 ; accuracy: 0.999 ; precision: 0.872 ; recall: 0.938 ; loss: 0.478
+2019-01-10 01:36:52,783:INFO: - Eval metrics : dsc: 0.830 ; iou: 0.759 ; accuracy: 0.998 ; precision: 0.855 ; recall: 0.883 ; loss: 0.477
+2019-01-10 01:36:53,549:INFO: Epoch 17/45
+2019-01-10 01:37:47,343:INFO: - Train metrics: dsc: 0.886 ; iou: 0.824 ; accuracy: 0.999 ; precision: 0.875 ; recall: 0.944 ; loss: 0.475
+2019-01-10 01:37:51,561:INFO: - Eval metrics : dsc: 0.835 ; iou: 0.770 ; accuracy: 0.999 ; precision: 0.893 ; recall: 0.858 ; loss: 0.474
+2019-01-10 01:37:53,273:INFO: - Found new best DSC
+2019-01-10 01:37:53,273:INFO: Epoch 18/45
+2019-01-10 01:38:47,253:INFO: - Train metrics: dsc: 0.892 ; iou: 0.833 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.944 ; loss: 0.471
+2019-01-10 01:38:51,450:INFO: - Eval metrics : dsc: 0.829 ; iou: 0.756 ; accuracy: 0.998 ; precision: 0.848 ; recall: 0.888 ; loss: 0.471
+2019-01-10 01:38:52,217:INFO: Epoch 19/45
+2019-01-10 01:39:46,020:INFO: - Train metrics: dsc: 0.893 ; iou: 0.835 ; accuracy: 0.999 ; precision: 0.884 ; recall: 0.947 ; loss: 0.468
+2019-01-10 01:39:50,215:INFO: - Eval metrics : dsc: 0.838 ; iou: 0.773 ; accuracy: 0.999 ; precision: 0.892 ; recall: 0.864 ; loss: 0.468
+2019-01-10 01:39:51,974:INFO: - Found new best DSC
+2019-01-10 01:39:51,974:INFO: Epoch 20/45
+2019-01-10 01:40:45,720:INFO: - Train metrics: dsc: 0.898 ; iou: 0.841 ; accuracy: 0.999 ; precision: 0.887 ; recall: 0.948 ; loss: 0.465
+2019-01-10 01:40:49,892:INFO: - Eval metrics : dsc: 0.837 ; iou: 0.772 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.827 ; loss: 0.464
+2019-01-10 01:40:50,667:INFO: Epoch 21/45
+2019-01-10 01:41:44,383:INFO: - Train metrics: dsc: 0.896 ; iou: 0.840 ; accuracy: 0.999 ; precision: 0.891 ; recall: 0.945 ; loss: 0.461
+2019-01-10 01:41:48,629:INFO: - Eval metrics : dsc: 0.843 ; iou: 0.778 ; accuracy: 0.999 ; precision: 0.882 ; recall: 0.876 ; loss: 0.461
+2019-01-10 01:41:50,337:INFO: - Found new best DSC
+2019-01-10 01:41:50,337:INFO: Epoch 22/45
+2019-01-10 01:42:44,095:INFO: - Train metrics: dsc: 0.904 ; iou: 0.852 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.948 ; loss: 0.458
+2019-01-10 01:42:48,295:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.765 ; accuracy: 0.999 ; precision: 0.942 ; recall: 0.809 ; loss: 0.458
+2019-01-10 01:42:49,105:INFO: Epoch 23/45
+2019-01-10 01:43:42,971:INFO: - Train metrics: dsc: 0.906 ; iou: 0.854 ; accuracy: 0.999 ; precision: 0.900 ; recall: 0.951 ; loss: 0.454
+2019-01-10 01:43:47,184:INFO: - Eval metrics : dsc: 0.827 ; iou: 0.750 ; accuracy: 0.998 ; precision: 0.825 ; recall: 0.906 ; loss: 0.454
+2019-01-10 01:43:47,956:INFO: Epoch 24/45
+2019-01-10 01:44:41,766:INFO: - Train metrics: dsc: 0.910 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.903 ; recall: 0.953 ; loss: 0.451
+2019-01-10 01:44:45,931:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.773 ; accuracy: 0.999 ; precision: 0.915 ; recall: 0.844 ; loss: 0.451
+2019-01-10 01:44:46,672:INFO: Epoch 25/45
+2019-01-10 01:45:40,444:INFO: - Train metrics: dsc: 0.911 ; iou: 0.861 ; accuracy: 0.999 ; precision: 0.906 ; recall: 0.953 ; loss: 0.447
+2019-01-10 01:45:44,655:INFO: - Eval metrics : dsc: 0.850 ; iou: 0.788 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.863 ; loss: 0.446
+2019-01-10 01:45:46,417:INFO: - Found new best DSC
+2019-01-10 01:45:46,417:INFO: Epoch 26/45
+2019-01-10 01:46:40,126:INFO: - Train metrics: dsc: 0.912 ; iou: 0.864 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.952 ; loss: 0.444
+2019-01-10 01:46:44,283:INFO: - Eval metrics : dsc: 0.843 ; iou: 0.782 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.845 ; loss: 0.443
+2019-01-10 01:46:45,047:INFO: Epoch 27/45
+2019-01-10 01:47:38,804:INFO: - Train metrics: dsc: 0.908 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.906 ; recall: 0.951 ; loss: 0.441
+2019-01-10 01:47:43,080:INFO: - Eval metrics : dsc: 0.850 ; iou: 0.788 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.859 ; loss: 0.439
+2019-01-10 01:47:44,665:INFO: - Found new best DSC
+2019-01-10 01:47:44,666:INFO: Epoch 28/45
+2019-01-10 01:48:38,396:INFO: - Train metrics: dsc: 0.914 ; iou: 0.867 ; accuracy: 0.999 ; precision: 0.914 ; recall: 0.949 ; loss: 0.437
+2019-01-10 01:48:42,664:INFO: - Eval metrics : dsc: 0.847 ; iou: 0.779 ; accuracy: 0.999 ; precision: 0.877 ; recall: 0.891 ; loss: 0.436
+2019-01-10 01:48:43,483:INFO: Epoch 29/45
+2019-01-10 01:49:37,172:INFO: - Train metrics: dsc: 0.912 ; iou: 0.865 ; accuracy: 0.999 ; precision: 0.913 ; recall: 0.950 ; loss: 0.434
+2019-01-10 01:49:41,393:INFO: - Eval metrics : dsc: 0.843 ; iou: 0.779 ; accuracy: 0.999 ; precision: 0.944 ; recall: 0.826 ; loss: 0.433
+2019-01-10 01:49:42,149:INFO: Epoch 30/45
+2019-01-10 01:50:35,842:INFO: - Train metrics: dsc: 0.915 ; iou: 0.869 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.950 ; loss: 0.431
+2019-01-10 01:50:40,044:INFO: - Eval metrics : dsc: 0.840 ; iou: 0.767 ; accuracy: 0.998 ; precision: 0.841 ; recall: 0.907 ; loss: 0.430
+2019-01-10 01:50:40,799:INFO: Epoch 31/45
+2019-01-10 01:51:34,536:INFO: - Train metrics: dsc: 0.918 ; iou: 0.874 ; accuracy: 0.999 ; precision: 0.916 ; recall: 0.956 ; loss: 0.427
+2019-01-10 01:51:38,765:INFO: - Eval metrics : dsc: 0.853 ; iou: 0.787 ; accuracy: 0.999 ; precision: 0.892 ; recall: 0.880 ; loss: 0.427
+2019-01-10 01:51:40,345:INFO: - Found new best DSC
+2019-01-10 01:51:40,345:INFO: Epoch 32/45
+2019-01-10 01:52:34,053:INFO: - Train metrics: dsc: 0.920 ; iou: 0.876 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.954 ; loss: 0.424
+2019-01-10 01:52:38,199:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.879 ; recall: 0.891 ; loss: 0.424
+2019-01-10 01:52:39,022:INFO: Epoch 33/45
+2019-01-10 01:53:32,801:INFO: - Train metrics: dsc: 0.921 ; iou: 0.878 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.956 ; loss: 0.421
+2019-01-10 01:53:37,012:INFO: - Eval metrics : dsc: 0.848 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.850 ; loss: 0.420
+2019-01-10 01:53:37,761:INFO: Epoch 34/45
+2019-01-10 01:54:31,499:INFO: - Train metrics: dsc: 0.919 ; iou: 0.876 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.954 ; loss: 0.418
+2019-01-10 01:54:35,758:INFO: - Eval metrics : dsc: 0.860 ; iou: 0.797 ; accuracy: 0.999 ; precision: 0.893 ; recall: 0.883 ; loss: 0.417
+2019-01-10 01:54:37,345:INFO: - Found new best DSC
+2019-01-10 01:54:37,346:INFO: Epoch 35/45
+2019-01-10 01:55:31,174:INFO: - Train metrics: dsc: 0.922 ; iou: 0.881 ; accuracy: 0.999 ; precision: 0.923 ; recall: 0.956 ; loss: 0.414
+2019-01-10 01:55:35,390:INFO: - Eval metrics : dsc: 0.855 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.899 ; recall: 0.875 ; loss: 0.413
+2019-01-10 01:55:36,288:INFO: Epoch 36/45
+2019-01-10 01:56:30,054:INFO: - Train metrics: dsc: 0.923 ; iou: 0.882 ; accuracy: 0.999 ; precision: 0.925 ; recall: 0.956 ; loss: 0.411
+2019-01-10 01:56:34,239:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.791 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.847 ; loss: 0.410
+2019-01-10 01:56:35,049:INFO: Epoch 37/45
+2019-01-10 01:57:28,747:INFO: - Train metrics: dsc: 0.924 ; iou: 0.883 ; accuracy: 0.999 ; precision: 0.926 ; recall: 0.954 ; loss: 0.408
+2019-01-10 01:57:32,967:INFO: - Eval metrics : dsc: 0.844 ; iou: 0.772 ; accuracy: 0.998 ; precision: 0.852 ; recall: 0.906 ; loss: 0.408
+2019-01-10 01:57:33,739:INFO: Epoch 38/45
+2019-01-10 01:58:27,429:INFO: - Train metrics: dsc: 0.921 ; iou: 0.879 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.956 ; loss: 0.405
+2019-01-10 01:58:31,678:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.788 ; accuracy: 0.999 ; precision: 0.899 ; recall: 0.873 ; loss: 0.404
+2019-01-10 01:58:32,547:INFO: Epoch 39/45
+2019-01-10 01:59:26,416:INFO: - Train metrics: dsc: 0.925 ; iou: 0.885 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.953 ; loss: 0.402
+2019-01-10 01:59:30,644:INFO: - Eval metrics : dsc: 0.848 ; iou: 0.785 ; accuracy: 0.999 ; precision: 0.887 ; recall: 0.880 ; loss: 0.401
+2019-01-10 01:59:31,425:INFO: Epoch 40/45
+2019-01-10 02:00:25,195:INFO: - Train metrics: dsc: 0.920 ; iou: 0.878 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.954 ; loss: 0.399
+2019-01-10 02:00:29,447:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.762 ; accuracy: 0.998 ; precision: 0.852 ; recall: 0.885 ; loss: 0.399
+2019-01-10 02:00:30,221:INFO: Epoch 41/45
+2019-01-10 02:01:24,068:INFO: - Train metrics: dsc: 0.913 ; iou: 0.867 ; accuracy: 0.999 ; precision: 0.920 ; recall: 0.943 ; loss: 0.396
+2019-01-10 02:01:28,318:INFO: - Eval metrics : dsc: 0.861 ; iou: 0.794 ; accuracy: 0.999 ; precision: 0.880 ; recall: 0.899 ; loss: 0.396
+2019-01-10 02:01:29,983:INFO: - Found new best DSC
+2019-01-10 02:01:29,983:INFO: Epoch 42/45
+2019-01-10 02:02:23,776:INFO: - Train metrics: dsc: 0.922 ; iou: 0.882 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.951 ; loss: 0.392
+2019-01-10 02:02:27,954:INFO: - Eval metrics : dsc: 0.850 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.845 ; loss: 0.392
+2019-01-10 02:02:28,733:INFO: Epoch 43/45
+2019-01-10 02:03:22,547:INFO: - Train metrics: dsc: 0.927 ; iou: 0.888 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.955 ; loss: 0.389
+2019-01-10 02:03:26,757:INFO: - Eval metrics : dsc: 0.858 ; iou: 0.793 ; accuracy: 0.999 ; precision: 0.883 ; recall: 0.896 ; loss: 0.389
+2019-01-10 02:03:27,506:INFO: Epoch 44/45
+2019-01-10 02:04:21,211:INFO: - Train metrics: dsc: 0.930 ; iou: 0.892 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.958 ; loss: 0.386
+2019-01-10 02:04:25,381:INFO: - Eval metrics : dsc: 0.862 ; iou: 0.799 ; accuracy: 0.999 ; precision: 0.915 ; recall: 0.869 ; loss: 0.386
+2019-01-10 02:04:26,956:INFO: - Found new best DSC
+2019-01-10 02:04:26,956:INFO: Epoch 45/45
+2019-01-10 02:05:20,737:INFO: - Train metrics: dsc: 0.931 ; iou: 0.895 ; accuracy: 0.999 ; precision: 0.935 ; recall: 0.958 ; loss: 0.383
+2019-01-10 02:05:24,942:INFO: - Eval metrics : dsc: 0.839 ; iou: 0.766 ; accuracy: 0.998 ; precision: 0.836 ; recall: 0.906 ; loss: 0.383
+2019-01-10 02:05:26,058:INFO: Loading the datasets...
+2019-01-10 02:05:30,485:INFO: - done.
+2019-01-10 02:05:30,486:INFO: For k-fold 5/5:
+2019-01-10 02:05:30,486:INFO: Starting training for 45 epoch(s)
+2019-01-10 02:05:30,486:INFO: Epoch 1/45
+2019-01-10 02:06:24,204:INFO: - Train metrics: dsc: 0.031 ; iou: 0.016 ; accuracy: 0.461 ; precision: 0.016 ; recall: 0.892 ; loss: 0.721
+2019-01-10 02:06:28,439:INFO: - Eval metrics : dsc: 0.057 ; iou: 0.029 ; accuracy: 0.760 ; precision: 0.030 ; recall: 0.894 ; loss: 0.655
+2019-01-10 02:06:30,086:INFO: - Found new best DSC
+2019-01-10 02:06:30,086:INFO: Epoch 2/45
+2019-01-10 02:07:23,811:INFO: - Train metrics: dsc: 0.207 ; iou: 0.126 ; accuracy: 0.920 ; precision: 0.127 ; recall: 0.868 ; loss: 0.605
+2019-01-10 02:07:28,049:INFO: - Eval metrics : dsc: 0.370 ; iou: 0.242 ; accuracy: 0.979 ; precision: 0.247 ; recall: 0.849 ; loss: 0.575
+2019-01-10 02:07:29,732:INFO: - Found new best DSC
+2019-01-10 02:07:29,732:INFO: Epoch 3/45
+2019-01-10 02:08:23,537:INFO: - Train metrics: dsc: 0.551 ; iou: 0.416 ; accuracy: 0.991 ; precision: 0.431 ; recall: 0.842 ; loss: 0.559
+2019-01-10 02:08:27,671:INFO: - Eval metrics : dsc: 0.543 ; iou: 0.404 ; accuracy: 0.990 ; precision: 0.411 ; recall: 0.885 ; loss: 0.553
+2019-01-10 02:08:29,252:INFO: - Found new best DSC
+2019-01-10 02:08:29,252:INFO: Epoch 4/45
+2019-01-10 02:09:23,017:INFO: - Train metrics: dsc: 0.665 ; iou: 0.543 ; accuracy: 0.995 ; precision: 0.565 ; recall: 0.856 ; loss: 0.542
+2019-01-10 02:09:27,249:INFO: - Eval metrics : dsc: 0.682 ; iou: 0.570 ; accuracy: 0.996 ; precision: 0.596 ; recall: 0.845 ; loss: 0.534
+2019-01-10 02:09:29,047:INFO: - Found new best DSC
+2019-01-10 02:09:29,047:INFO: Epoch 5/45
+2019-01-10 02:10:22,814:INFO: - Train metrics: dsc: 0.713 ; iou: 0.603 ; accuracy: 0.997 ; precision: 0.622 ; recall: 0.884 ; loss: 0.531
+2019-01-10 02:10:26,999:INFO: - Eval metrics : dsc: 0.720 ; iou: 0.629 ; accuracy: 0.997 ; precision: 0.695 ; recall: 0.799 ; loss: 0.527
+2019-01-10 02:10:28,821:INFO: - Found new best DSC
+2019-01-10 02:10:28,821:INFO: Epoch 6/45
+2019-01-10 02:11:22,612:INFO: - Train metrics: dsc: 0.749 ; iou: 0.651 ; accuracy: 0.997 ; precision: 0.673 ; recall: 0.889 ; loss: 0.523
+2019-01-10 02:11:26,862:INFO: - Eval metrics : dsc: 0.699 ; iou: 0.584 ; accuracy: 0.996 ; precision: 0.600 ; recall: 0.905 ; loss: 0.522
+2019-01-10 02:11:27,608:INFO: Epoch 7/45
+2019-01-10 02:12:21,296:INFO: - Train metrics: dsc: 0.772 ; iou: 0.683 ; accuracy: 0.998 ; precision: 0.711 ; recall: 0.892 ; loss: 0.516
+2019-01-10 02:12:25,444:INFO: - Eval metrics : dsc: 0.784 ; iou: 0.703 ; accuracy: 0.998 ; precision: 0.762 ; recall: 0.852 ; loss: 0.513
+2019-01-10 02:12:27,030:INFO: - Found new best DSC
+2019-01-10 02:12:27,030:INFO: Epoch 8/45
+2019-01-10 02:13:20,796:INFO: - Train metrics: dsc: 0.789 ; iou: 0.708 ; accuracy: 0.998 ; precision: 0.745 ; recall: 0.895 ; loss: 0.510
+2019-01-10 02:13:25,017:INFO: - Eval metrics : dsc: 0.788 ; iou: 0.715 ; accuracy: 0.998 ; precision: 0.783 ; recall: 0.845 ; loss: 0.508
+2019-01-10 02:13:26,749:INFO: - Found new best DSC
+2019-01-10 02:13:26,749:INFO: Epoch 9/45
+2019-01-10 02:14:20,488:INFO: - Train metrics: dsc: 0.775 ; iou: 0.689 ; accuracy: 0.997 ; precision: 0.736 ; recall: 0.891 ; loss: 0.507
+2019-01-10 02:14:24,778:INFO: - Eval metrics : dsc: 0.781 ; iou: 0.702 ; accuracy: 0.998 ; precision: 0.765 ; recall: 0.863 ; loss: 0.505
+2019-01-10 02:14:25,632:INFO: Epoch 10/45
+2019-01-10 02:15:19,388:INFO: - Train metrics: dsc: 0.826 ; iou: 0.751 ; accuracy: 0.998 ; precision: 0.810 ; recall: 0.904 ; loss: 0.501
+2019-01-10 02:15:23,592:INFO: - Eval metrics : dsc: 0.813 ; iou: 0.735 ; accuracy: 0.998 ; precision: 0.827 ; recall: 0.875 ; loss: 0.500
+2019-01-10 02:15:25,256:INFO: - Found new best DSC
+2019-01-10 02:15:25,256:INFO: Epoch 11/45
+2019-01-10 02:16:18,973:INFO: - Train metrics: dsc: 0.839 ; iou: 0.764 ; accuracy: 0.998 ; precision: 0.833 ; recall: 0.913 ; loss: 0.497
+2019-01-10 02:16:23,203:INFO: - Eval metrics : dsc: 0.805 ; iou: 0.724 ; accuracy: 0.998 ; precision: 0.817 ; recall: 0.891 ; loss: 0.496
+2019-01-10 02:16:23,948:INFO: Epoch 12/45
+2019-01-10 02:17:17,658:INFO: - Train metrics: dsc: 0.848 ; iou: 0.778 ; accuracy: 0.999 ; precision: 0.853 ; recall: 0.915 ; loss: 0.493
+2019-01-10 02:17:21,882:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.753 ; accuracy: 0.998 ; precision: 0.833 ; recall: 0.904 ; loss: 0.491
+2019-01-10 02:17:23,402:INFO: - Found new best DSC
+2019-01-10 02:17:23,402:INFO: Epoch 13/45
+2019-01-10 02:18:17,132:INFO: - Train metrics: dsc: 0.852 ; iou: 0.783 ; accuracy: 0.999 ; precision: 0.858 ; recall: 0.916 ; loss: 0.489
+2019-01-10 02:18:21,351:INFO: - Eval metrics : dsc: 0.835 ; iou: 0.760 ; accuracy: 0.998 ; precision: 0.846 ; recall: 0.895 ; loss: 0.488
+2019-01-10 02:18:22,991:INFO: - Found new best DSC
+2019-01-10 02:18:22,991:INFO: Epoch 14/45
+2019-01-10 02:19:16,765:INFO: - Train metrics: dsc: 0.849 ; iou: 0.778 ; accuracy: 0.999 ; precision: 0.852 ; recall: 0.916 ; loss: 0.486
+2019-01-10 02:19:20,964:INFO: - Eval metrics : dsc: 0.834 ; iou: 0.760 ; accuracy: 0.998 ; precision: 0.843 ; recall: 0.892 ; loss: 0.485
+2019-01-10 02:19:21,676:INFO: Epoch 15/45
+2019-01-10 02:20:15,426:INFO: - Train metrics: dsc: 0.865 ; iou: 0.796 ; accuracy: 0.999 ; precision: 0.859 ; recall: 0.926 ; loss: 0.482
+2019-01-10 02:20:19,633:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.767 ; accuracy: 0.999 ; precision: 0.890 ; recall: 0.865 ; loss: 0.481
+2019-01-10 02:20:21,310:INFO: - Found new best DSC
+2019-01-10 02:20:21,311:INFO: Epoch 16/45
+2019-01-10 02:21:15,039:INFO: - Train metrics: dsc: 0.877 ; iou: 0.815 ; accuracy: 0.999 ; precision: 0.881 ; recall: 0.928 ; loss: 0.478
+2019-01-10 02:21:19,197:INFO: - Eval metrics : dsc: 0.836 ; iou: 0.761 ; accuracy: 0.998 ; precision: 0.839 ; recall: 0.902 ; loss: 0.477
+2019-01-10 02:21:20,004:INFO: Epoch 17/45
+2019-01-10 02:22:13,801:INFO: - Train metrics: dsc: 0.883 ; iou: 0.823 ; accuracy: 0.999 ; precision: 0.884 ; recall: 0.933 ; loss: 0.475
+2019-01-10 02:22:18,011:INFO: - Eval metrics : dsc: 0.838 ; iou: 0.766 ; accuracy: 0.998 ; precision: 0.845 ; recall: 0.901 ; loss: 0.474
+2019-01-10 02:22:19,699:INFO: - Found new best DSC
+2019-01-10 02:22:19,699:INFO: Epoch 18/45
+2019-01-10 02:23:13,521:INFO: - Train metrics: dsc: 0.889 ; iou: 0.831 ; accuracy: 0.999 ; precision: 0.890 ; recall: 0.938 ; loss: 0.471
+2019-01-10 02:23:17,722:INFO: - Eval metrics : dsc: 0.839 ; iou: 0.762 ; accuracy: 0.998 ; precision: 0.833 ; recall: 0.910 ; loss: 0.471
+2019-01-10 02:23:19,332:INFO: - Found new best DSC
+2019-01-10 02:23:19,332:INFO: Epoch 19/45
+2019-01-10 02:24:13,144:INFO: - Train metrics: dsc: 0.895 ; iou: 0.837 ; accuracy: 0.999 ; precision: 0.891 ; recall: 0.941 ; loss: 0.468
+2019-01-10 02:24:17,359:INFO: - Eval metrics : dsc: 0.843 ; iou: 0.774 ; accuracy: 0.999 ; precision: 0.876 ; recall: 0.883 ; loss: 0.467
+2019-01-10 02:24:19,098:INFO: - Found new best DSC
+2019-01-10 02:24:19,098:INFO: Epoch 20/45
+2019-01-10 02:25:12,787:INFO: - Train metrics: dsc: 0.893 ; iou: 0.838 ; accuracy: 0.999 ; precision: 0.895 ; recall: 0.939 ; loss: 0.464
+2019-01-10 02:25:17,010:INFO: - Eval metrics : dsc: 0.848 ; iou: 0.780 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.884 ; loss: 0.464
+2019-01-10 02:25:18,725:INFO: - Found new best DSC
+2019-01-10 02:25:18,725:INFO: Epoch 21/45
+2019-01-10 02:26:12,505:INFO: - Train metrics: dsc: 0.900 ; iou: 0.846 ; accuracy: 0.999 ; precision: 0.897 ; recall: 0.944 ; loss: 0.461
+2019-01-10 02:26:16,769:INFO: - Eval metrics : dsc: 0.851 ; iou: 0.784 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.887 ; loss: 0.460
+2019-01-10 02:26:18,439:INFO: - Found new best DSC
+2019-01-10 02:26:18,439:INFO: Epoch 22/45
+2019-01-10 02:27:12,303:INFO: - Train metrics: dsc: 0.901 ; iou: 0.848 ; accuracy: 0.999 ; precision: 0.901 ; recall: 0.944 ; loss: 0.457
+2019-01-10 02:27:16,543:INFO: - Eval metrics : dsc: 0.846 ; iou: 0.776 ; accuracy: 0.999 ; precision: 0.862 ; recall: 0.899 ; loss: 0.457
+2019-01-10 02:27:17,335:INFO: Epoch 23/45
+2019-01-10 02:28:11,092:INFO: - Train metrics: dsc: 0.905 ; iou: 0.854 ; accuracy: 0.999 ; precision: 0.903 ; recall: 0.948 ; loss: 0.454
+2019-01-10 02:28:15,313:INFO: - Eval metrics : dsc: 0.819 ; iou: 0.736 ; accuracy: 0.998 ; precision: 0.794 ; recall: 0.919 ; loss: 0.454
+2019-01-10 02:28:16,126:INFO: Epoch 24/45
+2019-01-10 02:29:09,954:INFO: - Train metrics: dsc: 0.907 ; iou: 0.857 ; accuracy: 0.999 ; precision: 0.905 ; recall: 0.950 ; loss: 0.450
+2019-01-10 02:29:14,145:INFO: - Eval metrics : dsc: 0.833 ; iou: 0.751 ; accuracy: 0.998 ; precision: 0.808 ; recall: 0.919 ; loss: 0.451
+2019-01-10 02:29:14,927:INFO: Epoch 25/45
+2019-01-10 02:30:08,648:INFO: - Train metrics: dsc: 0.912 ; iou: 0.861 ; accuracy: 0.999 ; precision: 0.908 ; recall: 0.951 ; loss: 0.447
+2019-01-10 02:30:12,870:INFO: - Eval metrics : dsc: 0.845 ; iou: 0.776 ; accuracy: 0.999 ; precision: 0.866 ; recall: 0.894 ; loss: 0.447
+2019-01-10 02:30:13,665:INFO: Epoch 26/45
+2019-01-10 02:31:07,417:INFO: - Train metrics: dsc: 0.908 ; iou: 0.860 ; accuracy: 0.999 ; precision: 0.909 ; recall: 0.949 ; loss: 0.444
+2019-01-10 02:31:11,653:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.789 ; accuracy: 0.999 ; precision: 0.892 ; recall: 0.882 ; loss: 0.442
+2019-01-10 02:31:13,408:INFO: - Found new best DSC
+2019-01-10 02:31:13,409:INFO: Epoch 27/45
+2019-01-10 02:32:07,114:INFO: - Train metrics: dsc: 0.911 ; iou: 0.863 ; accuracy: 0.999 ; precision: 0.911 ; recall: 0.950 ; loss: 0.440
+2019-01-10 02:32:11,321:INFO: - Eval metrics : dsc: 0.835 ; iou: 0.762 ; accuracy: 0.998 ; precision: 0.832 ; recall: 0.910 ; loss: 0.439
+2019-01-10 02:32:12,198:INFO: Epoch 28/45
+2019-01-10 02:33:06,011:INFO: - Train metrics: dsc: 0.916 ; iou: 0.870 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.950 ; loss: 0.437
+2019-01-10 02:33:10,246:INFO: - Eval metrics : dsc: 0.831 ; iou: 0.750 ; accuracy: 0.998 ; precision: 0.805 ; recall: 0.921 ; loss: 0.437
+2019-01-10 02:33:11,176:INFO: Epoch 29/45
+2019-01-10 02:34:04,981:INFO: - Train metrics: dsc: 0.916 ; iou: 0.869 ; accuracy: 0.999 ; precision: 0.913 ; recall: 0.955 ; loss: 0.434
+2019-01-10 02:34:09,191:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.790 ; accuracy: 0.999 ; precision: 0.918 ; recall: 0.859 ; loss: 0.433
+2019-01-10 02:34:10,772:INFO: - Found new best DSC
+2019-01-10 02:34:10,772:INFO: Epoch 30/45
+2019-01-10 02:35:04,474:INFO: - Train metrics: dsc: 0.917 ; iou: 0.872 ; accuracy: 0.999 ; precision: 0.917 ; recall: 0.953 ; loss: 0.430
+2019-01-10 02:35:08,648:INFO: - Eval metrics : dsc: 0.841 ; iou: 0.765 ; accuracy: 0.998 ; precision: 0.832 ; recall: 0.916 ; loss: 0.431
+2019-01-10 02:35:09,508:INFO: Epoch 31/45
+2019-01-10 02:36:03,252:INFO: - Train metrics: dsc: 0.921 ; iou: 0.876 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.955 ; loss: 0.427
+2019-01-10 02:36:07,441:INFO: - Eval metrics : dsc: 0.857 ; iou: 0.791 ; accuracy: 0.999 ; precision: 0.879 ; recall: 0.893 ; loss: 0.427
+2019-01-10 02:36:09,254:INFO: - Found new best DSC
+2019-01-10 02:36:09,255:INFO: Epoch 32/45
+2019-01-10 02:37:03,048:INFO: - Train metrics: dsc: 0.920 ; iou: 0.876 ; accuracy: 0.999 ; precision: 0.919 ; recall: 0.954 ; loss: 0.424
+2019-01-10 02:37:07,260:INFO: - Eval metrics : dsc: 0.856 ; iou: 0.790 ; accuracy: 0.999 ; precision: 0.877 ; recall: 0.891 ; loss: 0.423
+2019-01-10 02:37:08,065:INFO: Epoch 33/45
+2019-01-10 02:38:01,943:INFO: - Train metrics: dsc: 0.924 ; iou: 0.881 ; accuracy: 0.999 ; precision: 0.922 ; recall: 0.957 ; loss: 0.421
+2019-01-10 02:38:06,160:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.786 ; accuracy: 0.999 ; precision: 0.902 ; recall: 0.871 ; loss: 0.420
+2019-01-10 02:38:06,941:INFO: Epoch 34/45
+2019-01-10 02:39:00,731:INFO: - Train metrics: dsc: 0.924 ; iou: 0.882 ; accuracy: 0.999 ; precision: 0.923 ; recall: 0.957 ; loss: 0.418
+2019-01-10 02:39:04,932:INFO: - Eval metrics : dsc: 0.859 ; iou: 0.794 ; accuracy: 0.999 ; precision: 0.900 ; recall: 0.880 ; loss: 0.417
+2019-01-10 02:39:06,646:INFO: - Found new best DSC
+2019-01-10 02:39:06,647:INFO: Epoch 35/45
+2019-01-10 02:40:00,427:INFO: - Train metrics: dsc: 0.925 ; iou: 0.884 ; accuracy: 0.999 ; precision: 0.923 ; recall: 0.959 ; loss: 0.414
+2019-01-10 02:40:04,713:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.785 ; accuracy: 0.999 ; precision: 0.872 ; recall: 0.895 ; loss: 0.414
+2019-01-10 02:40:05,504:INFO: Epoch 36/45
+2019-01-10 02:40:59,323:INFO: - Train metrics: dsc: 0.924 ; iou: 0.883 ; accuracy: 0.999 ; precision: 0.924 ; recall: 0.957 ; loss: 0.411
+2019-01-10 02:41:03,584:INFO: - Eval metrics : dsc: 0.853 ; iou: 0.788 ; accuracy: 0.999 ; precision: 0.931 ; recall: 0.843 ; loss: 0.410
+2019-01-10 02:41:04,380:INFO: Epoch 37/45
+2019-01-10 02:41:58,298:INFO: - Train metrics: dsc: 0.926 ; iou: 0.885 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.957 ; loss: 0.408
+2019-01-10 02:42:02,579:INFO: - Eval metrics : dsc: 0.850 ; iou: 0.782 ; accuracy: 0.999 ; precision: 0.863 ; recall: 0.902 ; loss: 0.408
+2019-01-10 02:42:03,392:INFO: Epoch 38/45
+2019-01-10 02:42:57,271:INFO: - Train metrics: dsc: 0.928 ; iou: 0.887 ; accuracy: 0.999 ; precision: 0.928 ; recall: 0.958 ; loss: 0.405
+2019-01-10 02:43:01,523:INFO: - Eval metrics : dsc: 0.858 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.870 ; recall: 0.898 ; loss: 0.404
+2019-01-10 02:43:02,287:INFO: Epoch 39/45
+2019-01-10 02:43:56,172:INFO: - Train metrics: dsc: 0.931 ; iou: 0.891 ; accuracy: 0.999 ; precision: 0.930 ; recall: 0.959 ; loss: 0.402
+2019-01-10 02:44:00,346:INFO: - Eval metrics : dsc: 0.854 ; iou: 0.789 ; accuracy: 0.999 ; precision: 0.885 ; recall: 0.886 ; loss: 0.401
+2019-01-10 02:44:01,048:INFO: Epoch 40/45
+2019-01-10 02:44:54,833:INFO: - Train metrics: dsc: 0.928 ; iou: 0.887 ; accuracy: 0.999 ; precision: 0.927 ; recall: 0.958 ; loss: 0.399
+2019-01-10 02:44:59,008:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.785 ; accuracy: 0.999 ; precision: 0.876 ; recall: 0.889 ; loss: 0.399
+2019-01-10 02:44:59,830:INFO: Epoch 41/45
+2019-01-10 02:45:53,701:INFO: - Train metrics: dsc: 0.925 ; iou: 0.880 ; accuracy: 0.999 ; precision: 0.926 ; recall: 0.951 ; loss: 0.396
+2019-01-10 02:45:57,891:INFO: - Eval metrics : dsc: 0.852 ; iou: 0.785 ; accuracy: 0.999 ; precision: 0.871 ; recall: 0.898 ; loss: 0.395
+2019-01-10 02:45:58,697:INFO: Epoch 42/45
+2019-01-10 02:46:52,624:INFO: - Train metrics: dsc: 0.930 ; iou: 0.890 ; accuracy: 0.999 ; precision: 0.932 ; recall: 0.957 ; loss: 0.392
+2019-01-10 02:46:56,830:INFO: - Eval metrics : dsc: 0.857 ; iou: 0.796 ; accuracy: 0.999 ; precision: 0.908 ; recall: 0.870 ; loss: 0.393
+2019-01-10 02:46:57,604:INFO: Epoch 43/45
+2019-01-10 02:47:51,508:INFO: - Train metrics: dsc: 0.932 ; iou: 0.894 ; accuracy: 0.999 ; precision: 0.929 ; recall: 0.961 ; loss: 0.389
+2019-01-10 02:47:55,693:INFO: - Eval metrics : dsc: 0.856 ; iou: 0.793 ; accuracy: 0.999 ; precision: 0.882 ; recall: 0.893 ; loss: 0.389
+2019-01-10 02:47:56,482:INFO: Epoch 44/45
+2019-01-10 02:48:50,356:INFO: - Train metrics: dsc: 0.933 ; iou: 0.895 ; accuracy: 0.999 ; precision: 0.934 ; recall: 0.959 ; loss: 0.386
+2019-01-10 02:48:54,630:INFO: - Eval metrics : dsc: 0.857 ; iou: 0.792 ; accuracy: 0.999 ; precision: 0.899 ; recall: 0.874 ; loss: 0.386
+2019-01-10 02:48:55,417:INFO: Epoch 45/45
+2019-01-10 02:49:49,262:INFO: - Train metrics: dsc: 0.933 ; iou: 0.895 ; accuracy: 0.999 ; precision: 0.934 ; recall: 0.959 ; loss: 0.383
+2019-01-10 02:49:53,549:INFO: - Eval metrics : dsc: 0.851 ; iou: 0.787 ; accuracy: 0.999 ; precision: 0.877 ; recall: 0.892 ; loss: 0.382
