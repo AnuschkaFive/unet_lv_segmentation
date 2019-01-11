@@ -1,0 +1,14 @@
+{
+    "endo_or_epi": "ENDO",
+    "model": "ModelA",
+    "learning_rate": 0.0004,
+    "momentum": 0.99,
+    "optimizer": "Adam",
+    "loss": "soft_dice_loss",
+    "activation": "ReLU",
+    "batch_size": 30,
+    "num_epochs": 45,
+    "dropout_rate": 0.0,
+    "treshold": 0.3,
+    "num_workers": 4
+}
