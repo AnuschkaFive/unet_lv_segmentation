@@ -1,7 +1,7 @@
 {
     "endo_or_epi": "ENDO",
     "model": "ModelA",
-    "learning_rate": 0.0004,
+    "learning_rate": [1e-4, 5e-5],
     "momentum": 0.99,
     "optimizer": "Adam",
     "loss": "soft_dice_loss",
