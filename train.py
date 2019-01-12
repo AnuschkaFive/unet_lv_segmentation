@@ -195,7 +195,7 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
             
             optimizer = getattr(optim, hyper_params.optimizer, None)
             assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
-            optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate)
+            optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate, weight_decay=hyper_params.weight_decay)
         
             # fetch loss function and metrics
             loss_fn = getattr(loss, hyper_params.loss, None)
@@ -289,7 +289,7 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         
         optimizer = getattr(optim, hyper_params.optimizer, None)
         assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
-        optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate)
+        optimizer = optimizer(model.parameters(), lr=hyper_params.learning_rate, weight_decay=hyper_params.weight_decay)
     
         # fetch loss function and metrics
         loss_fn = getattr(loss, hyper_params.loss, None)
