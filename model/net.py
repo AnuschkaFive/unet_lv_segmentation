@@ -22,7 +22,7 @@ class ConvBnRelu(nn.Module):
     def forward(self, x):
         x = self.conv(x)
         if self.use_bn:
-            print("BatchNorm!")
+            #print("BatchNorm!")
             x = self.bn(x)
         x = self.relu(x)
         return x
