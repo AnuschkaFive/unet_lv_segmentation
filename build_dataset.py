@@ -34,6 +34,7 @@ import argparse
 import random
 import torchvision.transforms as transforms
 import numpy as np
+import SimpleITK as sitk
 
 from pathlib import Path
 from PIL import Image
@@ -190,6 +191,24 @@ def resize_and_save(filename, output_dir, img_size=IMG_SIZE):
     image = image.resize((img_size, img_size), Image.BILINEAR)
     image.save(Path(output_dir) / Path(filename).parts[-1])
 
+def n4_bias_correction(scan_filename):
+    #sitk::ProcessObject::SetGlobalDefaultCoordinateTolerance (double)
+    #sitk.ProcessObject_SetGlobalDefaultCoordinateTolerance(100.)
+    #print("N4 to: {}".format(scan_filename))
+    origScan = sitk.ReadImage(scan_filename)
+    scan = sitk.Cast(origScan, sitk.sitkFloat64)
+    maskImage = sitk.OtsuThreshold(scan, 0, 1, 200)
+    #anotherImage->SetOrigin(referenceImage->GetOrigin() )
+    #maskImage.SetOrigin(scan.GetOrigin())
+    #maskImage.SetSpacing(scan.GetSpacing())
+    print("File: {}, Origin: {}, Spacing: {}".format(scan_filename, scan.GetOrigin(), scan.GetSpacing()))
+    print("Mask: --, Origin: {}, Spacing: {}".format(maskImage.GetOrigin(), maskImage.GetSpacing()))
+    #corrector = sitk.N4BiasFieldCorrectionImageFilter()
+    #result = corrector.Execute(scan, maskImage)
+    #result = sitk.N4BiasFieldCorrection(scan, maskImage)
+    #result = sitk.Cast(result, origScan.GetPixelID())
+    #sitk.WriteImage(result, scan_filename)
+    
 
 def transform_and_save(scan_filename, output_dir):
     """
@@ -200,6 +219,7 @@ def transform_and_save(scan_filename, output_dir):
         scan_filename: (string) The filename of the ORIG scan image.
         output_dir: (string) Where to save the transformed pictures.
     """
+    # OR: apply random scale to rotations! (less examples overall)
     scan = Image.open(scan_filename) 
     endo = Image.open(scan_filename.replace("_ORIG", "_ENDO"))
     epi = Image.open(scan_filename.replace("_ORIG", "_EPI"))
@@ -214,7 +234,35 @@ def transform_and_save(scan_filename, output_dir):
         scan_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ORIG_AUG{}".format(i)))
         endo_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(i)))
         epi_rotated.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(i)))
-
+    
+    #Horizontal Flip
+    scan_flippedH =scan.transpose(Image.FLIP_TOP_BOTTOM)
+    endo_flippedH = endo.transpose(Image.FLIP_TOP_BOTTOM)
+    epi_flippedH = epi.transpose(Image.FLIP_TOP_BOTTOM)
+    scan_flippedH.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ORIG_AUG{}".format(3)))
+    endo_flippedH.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(3)))
+    epi_flippedH.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(3)))
+    
+    #Vertical Flip
+    scan_flippedV =scan.transpose(Image.FLIP_LEFT_RIGHT)
+    endo_flippedV = endo.transpose(Image.FLIP_LEFT_RIGHT)
+    epi_flippedV = epi.transpose(Image.FLIP_LEFT_RIGHT)
+    scan_flippedV.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ORIG_AUG{}".format(4)))
+    endo_flippedV.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(4)))
+    epi_flippedV.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(4)))
+    
+    #Scaling
+    crop_percentage = random.uniform(0.15, 0.25)
+    crop_pixel = int(crop_percentage * IMG_SIZE)
+    scan_cropped = scan.crop((crop_pixel, crop_pixel, IMG_SIZE - crop_pixel, IMG_SIZE - crop_pixel))
+    endo_cropped = endo.crop((crop_pixel, crop_pixel, IMG_SIZE - crop_pixel, IMG_SIZE - crop_pixel))
+    epi_cropped = epi.crop((crop_pixel, crop_pixel, IMG_SIZE - crop_pixel, IMG_SIZE - crop_pixel))
+    scan_scaled = scan_cropped.resize([IMG_SIZE,IMG_SIZE],Image.ANTIALIAS)
+    endo_scaled = endo_cropped.resize([IMG_SIZE,IMG_SIZE],Image.ANTIALIAS)
+    epi_scaled = epi_cropped.resize([IMG_SIZE,IMG_SIZE],Image.ANTIALIAS)
+    scan_scaled.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ORIG_AUG{}".format(5)))
+    endo_scaled.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(5)))
+    epi_scaled.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(5)))
 
 def main(data_dir, output_dir):   
     """
@@ -248,6 +296,16 @@ def main(data_dir, output_dir):
         print("Resizing {} data, saving resized data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
             resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)
+#            
+#        print("Applying N4 bias fiel correction to {} data, saving data to {}".format(split, output_dir_split))
+#               
+#        i = 0
+#        for filename in tqdm(filenames[split]):
+#            i += 1
+#            if "_ORIG" in filename:
+#                #print("N4 for {}".format(filename))
+#                # and not "HAJU-BL_CineMR_ti00_sl05_ORIG" in filename
+#                n4_bias_correction(str(Path(output_dir_split) / Path(filename).parts[-1]))               
         
         print("Augmenting {} data, saving augmented data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
