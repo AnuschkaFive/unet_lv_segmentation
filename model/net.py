@@ -13,6 +13,7 @@ class ConvBnRelu(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, padding, stride, hyper_params):
         super(ConvBnRelu, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, padding=padding, stride=stride)
+        self.use_bn = hyper_params.batch_norm
         self.bn = nn.BatchNorm2d(out_channels)
         activation = getattr(nn, hyper_params.activation, None)
         assert activation is not None, "Activation Fn {} couldn't be found!".format(hyper_params.activation)
@@ -20,7 +21,9 @@ class ConvBnRelu(nn.Module):
 
     def forward(self, x):
         x = self.conv(x)
-        x = self.bn(x)
+        if self.use_bn:
+            print("BatchNorm!")
+            x = self.bn(x)
         x = self.relu(x)
         return x
 

@@ -271,6 +271,7 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
                 best_val_metrics_list = list_val_metrics['average'][x]
         best_json_path = str(Path(model_dir) / "metrics_k_fold_val_average_best.json")
         utils.save_dict_to_json(best_val_metrics_list, best_json_path)
+        writer.export_scalars_to_json(str(Path(model_dir) / "all_scalars.json"))
         
     else:
         # Set the random seed for reproducible experiments
@@ -313,7 +314,6 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         test_path = str(Path(model_dir) / "metrics_test.json")
         utils.save_dict_to_json(all_test_metrics, test_path)
         
-    writer.export_scalars_to_json(str(Path(model_dir) / "all_scalars.json"))
     writer.close()
         
 if __name__ == '__main__':
