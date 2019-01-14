@@ -163,6 +163,9 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)
     hyper_params = utils.HyperParams(json_path)
+    
+    # Append directory name of data
+    data_dir = data_dir + hyper_params.augmentation
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
