@@ -1,7 +1,7 @@
 {
     "endo_or_epi": "ENDO",
     "model": "ModelA",
-    "augmentation:" "_N4_rot_flip_scale",
+    "augmentation": "_N4_rot_flip_scale",
     "learning_rate": [5e-5, 1e-5],
     "momentum": 0.99,
     "optimizer": "Adam",
