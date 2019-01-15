@@ -1,7 +1,7 @@
 {
     "endo_or_epi": "ENDO",
     "model": "ModelA",
-    "augmentation:" "_rot",
+    "augmentation": "_rot",
     "learning_rate": 0.0001,
     "momentum": 0.99,
     "optimizer": "Adam",
@@ -9,6 +9,7 @@
     "activation": "ReLU",
     "batch_size": 3,
     "num_epochs": [90],
+    "batch_norm": 1,
     "dropout_rate": 0.0,
     "weight_decay": 0.0,
     "treshold": 0.5,
