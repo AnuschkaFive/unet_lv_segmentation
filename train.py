@@ -109,11 +109,11 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
         model_dir: (string) directory containing config, weights and log
         restore_file: (string) optional- name of file to restore from (without its extension .pth.tar)
     """
-    # reload weights from restore_file if specified
+    # reload weights from restore_file if specified - used for transfer learning, so optimizer isn't transferred
     if restore_file is not None:
-        restore_path = str(Path(args.model_dir) / (restore_file + '.pth.tar'))
+        restore_path = str(Path(model_dir) / (restore_file + '.pth.tar'))
         logging.info("Restoring parameters from {}".format(restore_path))
-        utils.load_checkpoint(restore_path, model, optimizer)
+        utils.load_checkpoint(restore_path, model, optimizer=None)
 
     best_val_dsc = 0.0
     
@@ -213,7 +213,7 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
             logging.info("- done.")
             logging.info("For k-fold {}/{}:".format(idx, k_folds))
             logging.info("Starting training for {} epoch(s)".format(hyper_params.num_epochs)) 
-            (all_train_metrics, all_val_metrics) = train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir)
+            (all_train_metrics, all_val_metrics) = train_and_evaluate(model, train_dl, val_dl, optimizer, loss_fn, metrics_dict, hyper_params, model_dir, restore_file=restore_file)
             # Write to Tesorboard.
             for epoch_name in all_train_metrics:            
                 writer.add_scalars('loss', {'k_fold_{}/train'.format(idx): all_train_metrics[epoch_name]['loss'], 'k_fold_{}/val'.format(idx): all_val_metrics[epoch_name]['loss']}, epoch_name[-2:])
