@@ -182,14 +182,44 @@ def split_filenames_into_train_test(data_dir, split_ratio):
     return filenames
 
 
-def resize_and_save(filename, output_dir, img_size=IMG_SIZE):
+def resize_and_save(filename, output_dir, img_size=IMG_SIZE, crop=None):
     """
     Resize the image contained in `filename` and save it to the `output_dir`
     """
     image = Image.open(filename)
+    if crop is not None:
+        image = image.crop(crop)
     # Use bilinear interpolation instead of the default "nearest neighbor" method
     image = image.resize((img_size, img_size), Image.BILINEAR)
     image.save(Path(output_dir) / Path(filename).parts[-1])
+
+
+def find_ROI_crop_area(file_dir, margin=0):
+    # Find largest field of EPI.
+    max_EPI = np.zeros((320, 320), np.int64)
+    for split in ['train', 'test']:
+        file_dir_split = Path(file_dir) / '{}_heart_scans'.format(split)
+        filenames = [str(path) for path in Path(file_dir_split).glob('**/*_EPI*.png')]
+        for filename in filenames:
+            curr_EPI = Image.open(filename)
+            curr_EPI = np.array(curr_EPI)
+            max_EPI = np.maximum(curr_EPI, max_EPI)
+            
+    # Find bounding box.
+    max_EPI = (max_EPI > 0)
+    rows = np.any(max_EPI, axis=1)
+    cols = np.any(max_EPI, axis=0)
+    rmin, rmax = np.argmax(rows), max_EPI.shape[0] - 1 - np.argmax(np.flipud(rows))
+    cmin, cmax = np.argmax(cols), max_EPI.shape[1] - 1 - np.argmax(np.flipud(cols))
+    
+    # Make bounding box squared.
+    rmin = min(rmin, cmin)
+    cmin = min(rmin, cmin)
+    rmax = max(rmax, cmax)
+    cmax = max(rmax, cmax)       
+        
+    return rmin - margin, rmax + margin, cmin - margin, cmax + margin   
+
 
 def n4_bias_correction(scan_filename):
     #sitk::ProcessObject::SetGlobalDefaultCoordinateTolerance (double)
@@ -298,9 +328,9 @@ def main(data_dir, output_dir):
 
         print("Resizing {} data, saving resized data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
-            resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)
+            resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)          
             
-        print("Applying N4 bias fiel correction to {} data, saving data to {}".format(split, output_dir_split))
+#        print("Applying N4 bias fiel correction to {} data, saving data to {}".format(split, output_dir_split))
                
 #        i = 0
 #        for filename in tqdm(filenames[split]):
@@ -313,7 +343,18 @@ def main(data_dir, output_dir):
         print("Augmenting {} data, saving augmented data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
             if "_ORIG" in filename and not "_AUG" in filename:
-                transform_and_save(str(Path(output_dir_split) / Path(filename).parts[-1]), output_dir_split, rot=False, h_flip=False, v_flip=False, scale=False)
+                transform_and_save(str(Path(output_dir_split) / Path(filename).parts[-1]), output_dir_split, rot=True, h_flip=False, v_flip=False, scale=False)
+    
+    print("Get Bounding Box coordinates")
+    (rmin, rmax, cmin, cmax) = find_ROI_crop_area(output_dir, margin=5)
+    print("RMin: {}, RMax: {}, CMin: {}, CMax: {}".format(rmin, rmax, cmin, cmax))
+
+    for split in ['train', 'test']:
+        output_dir_split = Path(output_dir) / '{}_heart_scans'.format(split)
+        output_filenames = [str(path) for path in Path(output_dir_split).glob('**/*.png')]
+        print("Crop to Bounding Box and resize {} again, saving cropped and resized data to {}".format(split, output_dir_split))
+        for filename in tqdm(output_filenames):
+            resize_and_save(filename, output_dir_split, img_size=IMG_SIZE, crop=(cmin, rmin, cmax, rmax))
 
     print("Done building dataset.")
 
