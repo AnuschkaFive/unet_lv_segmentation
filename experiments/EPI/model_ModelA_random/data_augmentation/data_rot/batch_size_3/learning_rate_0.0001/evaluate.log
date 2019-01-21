@@ -1,0 +1,4 @@
+2019-01-21 14:01:19,818:INFO: Creating the dataset...
+2019-01-21 14:01:25,004:INFO: - done.
+2019-01-21 14:01:26,026:INFO: Starting evaluation
+2019-01-21 14:01:28,227:INFO: - Eval metrics : dsc: 0.953 ; iou: 0.913 ; accuracy: 0.999 ; precision: 0.960 ; recall: 0.951 ; loss: 0.047
