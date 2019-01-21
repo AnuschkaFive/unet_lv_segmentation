@@ -112,7 +112,7 @@ def main(data_dir, model_dir, restore_file):
     logging.info("Creating the dataset...")
 
     # fetch dataloaders
-    dataloaders = data_loader.fetch_dataloader(['test'], data_dir, hyper_params)
+    dataloaders = data_loader.fetch_dataloader(['test'], data_dir + hyper_params.augmentation, hyper_params)
     test_dl = dataloaders['test']
 
     logging.info("- done.")
