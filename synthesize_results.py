@@ -26,9 +26,9 @@ def aggregate_metrics(parent_dir, metrics):
     if metrics_file.is_file():
         with open(metrics_file, 'r') as f:
             metrics[parent_dir] = json.load(f)
-            metrics[parent_dir].pop('recall', None)
-            metrics[parent_dir].pop('precision', None)
-            metrics[parent_dir].pop('accuracy', None)
+            #metrics[parent_dir].pop('recall', None)
+            #metrics[parent_dir].pop('precision', None)
+            #metrics[parent_dir].pop('accuracy', None)
             best_epoch = ""
             with open(Path(parent_dir) / "metrics_k_fold_val.json") as j:
                 val_metrics = json.load(j)
@@ -40,14 +40,28 @@ def aggregate_metrics(parent_dir, metrics):
                 metrics[parent_dir]["val"] = best_epoch
                 with open(Path(parent_dir) / "metrics_k_fold_train.json") as j:
                     train_metrics = json.load(j)
-                    metrics[parent_dir]["dsc train"] = train_metrics["average"][best_epoch]["dsc"] - metrics[parent_dir]["dsc"]
-                    metrics[parent_dir]["loss train"] = train_metrics["average"][best_epoch]["loss"] - metrics[parent_dir]["loss"]
-                    metrics[parent_dir]["iou train"] = train_metrics["average"][best_epoch]["iou"] - metrics[parent_dir]["iou"]
+                    #metrics[parent_dir]["dsc train"] = train_metrics["average"][best_epoch]["dsc"] - metrics[parent_dir]["dsc"]
+                    #metrics[parent_dir]["loss train"] = train_metrics["average"][best_epoch]["loss"] - metrics[parent_dir]["loss"]
+                    #metrics[parent_dir]["iou train"] = train_metrics["average"][best_epoch]["iou"] - metrics[parent_dir]["iou"]
+                    metrics[parent_dir]["dsc train"] = round(train_metrics["average"][best_epoch]["dsc"] - metrics[parent_dir]["dsc"], 4)*100  
+                    metrics[parent_dir]["loss train"] = round(train_metrics["average"][best_epoch]["loss"]- metrics[parent_dir]["loss"], 4)  
+                    metrics[parent_dir]["iou train"] = round(train_metrics["average"][best_epoch]["iou"]- metrics[parent_dir]["iou"], 4)*100  
+                    metrics[parent_dir]["accuracy train"] = round(train_metrics["average"][best_epoch]["accuracy"]- metrics[parent_dir]["accuracy"], 4)*100  
+                    metrics[parent_dir]["precision train"] = round(train_metrics["average"][best_epoch]["precision"]- metrics[parent_dir]["precision"], 4)*100  
+                    metrics[parent_dir]["recall train"] = round(train_metrics["average"][best_epoch]["recall"]- metrics[parent_dir]["recall"], 4)*100  
             else:
                 metrics[parent_dir]["dsc train"] = 0.0
                 metrics[parent_dir]["loss train"] = 0.0
                 metrics[parent_dir]["iou train"] = 0.0
                 metrics[parent_dir]["val"] = ""
+
+            metrics[parent_dir]["dsc"] = round(metrics[parent_dir]["dsc"], 4)*100            
+            metrics[parent_dir]["loss"] =round(metrics[parent_dir]["loss"], 4)
+            metrics[parent_dir]["iou"] =round(metrics[parent_dir]["iou"], 4)*100  
+            metrics[parent_dir]["accuracy"] =round(metrics[parent_dir]["accuracy"], 4)*100  
+            metrics[parent_dir]["precision"] =round(metrics[parent_dir]["precision"], 4)*100  
+            metrics[parent_dir]["recall"] = round(metrics[parent_dir]["recall"], 4)*100  
+
             test_file = Path(parent_dir) / "metrics_test.json"
             metrics[parent_dir]["dsc test"] = 0.0
             metrics[parent_dir]["loss test"] = 0.0
