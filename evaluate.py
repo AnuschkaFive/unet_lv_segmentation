@@ -167,7 +167,7 @@ def main(data_dir, model_dir, restore_file):
 
     # Evaluate
     test_metrics = evaluate(model, loss_fn, test_dl, metrics_dict, model_dir, hyper_params)
-    save_path = str(Path(model_dir) / "metrics_test_{}.json".format(args.restore_file))
+    save_path = str(Path(model_dir) / "metrics_test_{}.json".format(restore_file))
     utils.save_dict_to_json(test_metrics, save_path)
     
 if __name__ == '__main__':    
