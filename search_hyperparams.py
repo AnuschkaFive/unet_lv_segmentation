@@ -1,15 +1,17 @@
-#https://cs230-stanford.github.io/logging-hyperparams.html
+"""
+Peform hyperparemeters search.
 
-"""Peform hyperparemeters search"""
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html, 
+https://cs230-stanford.github.io/logging-hyperparams.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
 
 import argparse
 from pathlib import Path
-from subprocess import check_call
 import sys
 import train
 
 import utils
-
 
 PYTHON = sys.executable
 parser = argparse.ArgumentParser()
@@ -35,11 +37,6 @@ def launch_training_job(parent_dir, data_dir, job_name, hyper_params):
     json_path = Path(model_dir) / 'hyper_params.json'
     hyper_params.save(json_path)
 
-    # Launch training with this config
-#    cmd = "{python} train.py --model_dir={model_dir} --data_dir {data_dir}".format(python=PYTHON, model_dir=model_dir,
-#                                                                                   data_dir=data_dir)
-#    print(cmd)
-#    check_call(cmd, shell=True)
     train.main(model_dir=model_dir, data_dir=data_dir)
 
 def main(parent_dir, data_dir):
@@ -49,24 +46,18 @@ def main(parent_dir, data_dir):
 
     hyper_param_key_to_vary = ''
     
-    # Perform hypersearch over one parameter
+    # Perform hypersearch over one parameter.
     for hyper_param_key in hyper_params.dict:
         if isinstance(hyper_params.dict[hyper_param_key], list):
             hyper_param_key_to_vary = hyper_param_key
             
-    #learning_rates = [1e-4, 1e-3, 1e-2]
     assert hyper_param_key_to_vary is not '', "No hyperparameter with a list (variable values) found!"
-
-#    hyper_param_values = hyper_params.dict[hyper_param_key_to_vary]
-#    hyper_params.dict[hyper_param_key_to_vary] = 0.
 
     #for learning_rate in learning_rates:
     for hyper_param_value in hyper_params.dict[hyper_param_key_to_vary]:
         # Modify the relevant parameter in params
-        #hyper_params.learning_rate = learning_rate
         hyper_params.dict[hyper_param_key_to_vary] = hyper_param_value
         # Launch job (name has to be unique)
-        #job_name = "learning_rate_{}".format(learning_rate)
         job_name = "{}_{}".format(hyper_param_key_to_vary, hyper_param_value)
         launch_training_job(parent_dir, data_dir, job_name, hyper_params)
 

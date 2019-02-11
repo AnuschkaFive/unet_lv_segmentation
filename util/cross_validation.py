@@ -41,7 +41,6 @@ def k_folds(n_splits = 3, subjects = 145, frames = 20):
         subjects: number of patients
         frames: length of the sequence of each patient
     '''
-    # TODO: make random permutation of indices!
     indices = np.arange(subjects * frames).astype(int)
     for test_idx in get_indices(n_splits, subjects, frames):
         train_idx = np.setdiff1d(indices, test_idx)

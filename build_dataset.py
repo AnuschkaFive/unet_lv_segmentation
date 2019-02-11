@@ -1,35 +1,9 @@
-"""Split the SIGNS dataset into train/val/test and resize images to 64x64.
-The SIGNS dataset comes into the following format:
-    train_signs/
-        0_IMG_5864.jpg
-        ...
-    test_signs/
-        0_IMG_5942.jpg
-        ...
-Original images have size (3024, 3024).
-Resizing to (64, 64) reduces the dataset size from 1.16 GB to 4.7 MB, and loading smaller images
-makes training faster.
-We already have a test set created, so we only need to split "train_signs" into train and val sets.
-Because we don't have a lot of images and we want that the statistics on the val set be as
-representative as possible, we'll take 20% of "train_signs" as val set.
-
-TODO: 
-    - DONE make sure to have ENDO and EPI for all (if possible: generate empty images automatically!)
-    - DONE shuffle (use random seed!)
-    - DONE split into train (+ val) + test (use random seed!)
-    - augmentation (all images, but same for ORIGIN + ENDO + EPI): (use random seed!)
-        * flip horizontally, "_AUG1"
-        * flip vertically,  "_AUG2"
-        * flip horizontally + vertically, "_AUG3"
-        * for all 4: (standard + 3 flips) rotate random degree between 80-100 * (-1) or (1), "AUG_4"-"_AUG7"
-        -> this would mean 8x data size
-    - ROI
-    - DONE resize to be same size overall
-    - normalization: calculate mean and std for train set; apply same to test set (or do this somewhere else? right before entering batch into network?)
-        -> needs to be SAVED! in model, probably, so that it can be applied to data fed into network later, for using it!
 """
-# inserted os.sep, to accomodate for windows not having the current directory saved, and windows using backslash, unix using forward slash
-# TODO: repalce with pathlib (https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f)
+Preprocess the dataset, applying various options, and saving it to a new location.
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
 import argparse
 import random
 import torchvision.transforms as transforms
@@ -90,7 +64,6 @@ def stratify_filenames(filenames):
     return categories_np.tolist()
 
 
-# TODO: alternatively, this can be done before ROI is determined... then it wouldn't contaminate the original data set!
 def create_missing_endo_or_epi(data_dir):
     """
     Checks whether ORIG scan files have either only ENDO ground truth file
@@ -170,7 +143,6 @@ def split_filenames_into_train_test(data_dir, split_ratio):
         test_filenames.append(epi_file)
         test_filenames.append(scan_file)    
     
-    # TODO: should also test if those files all exist! Though they should, if method 'create_missing_endo_or_epi' was called
     assert len(filenames) * 3 == (len(train_filenames) + len(test_filenames)), 'Some EPI or ORIGINAL files are missing, {}/{}'.format((len(train_filenames) + len(test_filenames)), len(filenames) * 3)
     
     # Make a dictionary with all relevant filenames.
@@ -182,19 +154,27 @@ def split_filenames_into_train_test(data_dir, split_ratio):
     return filenames
 
 
-def resize_and_save(filename, output_dir, img_size=IMG_SIZE, crop=None):
+def resize_and_save(filename, output_dir, img_size=IMG_SIZE):
     """
-    Resize the image contained in `filename` and save it to the `output_dir`
+    Resize the image contained in `filename` and save it to the `output_dir`.
+    Args:
+        filename: (string) Filename of an image.
+        output_dir: (string) Location to save the resized file.
+        img_size: (int) New size of the image.
     """
     image = Image.open(filename)
-    if crop is not None:
-        image = image.crop(crop)
+
     # Use bilinear interpolation instead of the default "nearest neighbor" method
     image = image.resize((img_size, img_size), Image.BILINEAR)
     image.save(Path(output_dir) / Path(filename).parts[-1])
 
 
 def find_ROI_crop_area(file_dir, margin=0):
+    """
+    Finds the largest possible bounding box and crops all images accordingly.
+    Args:
+        file_dir: (string) Location of the images to be cropped.
+    """
     # Find largest field of EPI.
     max_EPI = np.zeros((320, 320), np.int64)
     for split in ['train', 'test']:
@@ -222,23 +202,18 @@ def find_ROI_crop_area(file_dir, margin=0):
 
 
 def n4_bias_correction(scan_filename):
-    #sitk::ProcessObject::SetGlobalDefaultCoordinateTolerance (double)
-    #sitk.ProcessObject_SetGlobalDefaultCoordinateTolerance(100.)
-    #print("N4 to: {}".format(scan_filename))
+    """
+    Applies N4 Bias Field Correction to a scan image.
+    Args:
+        scan_filename: (string) The filename of the ORIG scan image.
+    """
     origScan = sitk.ReadImage(scan_filename)
     scan = sitk.Cast(origScan, sitk.sitkFloat64)
     maskImage = sitk.OtsuThreshold(scan, 0, 1, 200)
-    #anotherImage->SetOrigin(referenceImage->GetOrigin() )
-    #maskImage.SetOrigin(scan.GetOrigin())
-    #maskImage.SetSpacing(scan.GetSpacing())
-    #print("File: {}, Origin: {}, Spacing: {}".format(scan_filename, scan.GetOrigin(), scan.GetSpacing()))
-    #print("Mask: --, Origin: {}, Spacing: {}".format(maskImage.GetOrigin(), maskImage.GetSpacing()))
     corrector = sitk.N4BiasFieldCorrectionImageFilter()
     result = corrector.Execute(scan, maskImage)
-    #result = sitk.N4BiasFieldCorrection(scan, maskImage)
     result = sitk.Cast(result, origScan.GetPixelID())
-    sitk.WriteImage(result, scan_filename)
-    
+    sitk.WriteImage(result, scan_filename)    
 
 def transform_and_save(scan_filename, output_dir, rot=True, h_flip=True, v_flip=True, scale=True):
     """
@@ -249,7 +224,6 @@ def transform_and_save(scan_filename, output_dir, rot=True, h_flip=True, v_flip=
         scan_filename: (string) The filename of the ORIG scan image.
         output_dir: (string) Where to save the transformed pictures.
     """
-    # OR: apply random scale to rotations! (less examples overall)
     scan = Image.open(scan_filename) 
     endo = Image.open(scan_filename.replace("_ORIG", "_ENDO"))
     epi = Image.open(scan_filename.replace("_ORIG", "_EPI"))
@@ -297,22 +271,48 @@ def transform_and_save(scan_filename, output_dir, rot=True, h_flip=True, v_flip=
         endo_scaled.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_ENDO_AUG{}".format(5)))
         epi_scaled.save(Path(output_dir) / Path(scan_filename).parts[-1].replace("_ORIG", "_EPI_AUG{}".format(5)))
 
-def main(data_dir, output_dir):   
+def main(data_dir, output_dir, n4=False, roi=False, rot=True, h_flip=False, v_flip=False, scale=False):   
     """
     Builds the dataset by creating the necessary directories and calling the
     necessary functions.
     Args:
         data_dir: (string) The path to the directory with the original dataset.
-        output_dir: (string) Where to save the pre-processed dataset.
+        output_dir: (string) Where to save the preprocessed dataset.
+        n4: (bool) Whether to apply N4 Bias Field Correction to the ORIG scan images.
+        roi: (bool) Whether to crop all images to thei ROI.
+        rot: (bool) Whether to augment the data by rotating it.
+        h_flip: (bool) Whether to augment the data by horizontally flipping it.
+        v_flip: (bool) Whether to augment the data by vertically flipping it.
+        scale: (bool) Whether to augment the data by scaling it.
     """
     assert Path(data_dir).is_dir(), "Couldn't find the dataset at {}".format(data_dir)
     
     create_missing_endo_or_epi(data_dir)
     
     filenames = split_filenames_into_train_test(data_dir, 0.8333)
+    
+    # Rename location of preprocessed dataset to make compatible with JSON hyperparameter configuration later on.
+    if n4:
+        #add "_N4"
+        output_dir = output_dir + "_N4"
+    if roi:
+        #add "_ROI"
+        output_dir = output_dir + "_ROI"
+    if not (rot or h_flip or v_flip or scale):
+        #add "_none"
+        output_dir = output_dir + "_none"
+    else:
+        if rot:
+            #add "_rot"
+            output_dir = output_dir + "_rot"
+        if h_flip or v_flip:
+            #add "_flip"
+            output_dir = output_dir + "_flip"
+        if scale:
+            #add "_scale"
+            output_dir = output_dir + "_scale"
 
     # Define the data directories    
-    # TODO: if directory already found, delete everything in it! OR skip?
     if not Path(output_dir).exists():
         Path(output_dir).mkdir()
     else:
@@ -329,32 +329,29 @@ def main(data_dir, output_dir):
         print("Resizing {} data, saving resized data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
             resize_and_save(filename, output_dir_split, img_size=IMG_SIZE)          
-            
-#        print("Applying N4 bias fiel correction to {} data, saving data to {}".format(split, output_dir_split))
-               
-#        i = 0
-#        for filename in tqdm(filenames[split]):
-#            i += 1
-#            if "_ORIG" in filename:
-#                #print("N4 for {}".format(filename))
-#                # and not "HAJU-BL_CineMR_ti00_sl05_ORIG" in filename
-#                n4_bias_correction(str(Path(output_dir_split) / Path(filename).parts[-1]))               
+         
+        if n4:
+            print("Applying N4 bias fiel correction to {} data, saving data to {}".format(split, output_dir_split))
+            for filename in tqdm(filenames[split]):
+                if "_ORIG" in filename:
+                    n4_bias_correction(str(Path(output_dir_split) / Path(filename).parts[-1]))               
         
         print("Augmenting {} data, saving augmented data to {}".format(split, output_dir_split))
         for filename in tqdm(filenames[split]):
             if "_ORIG" in filename and not "_AUG" in filename:
-                transform_and_save(str(Path(output_dir_split) / Path(filename).parts[-1]), output_dir_split, rot=True, h_flip=False, v_flip=False, scale=False)
+                transform_and_save(str(Path(output_dir_split) / Path(filename).parts[-1]), output_dir_split, rot=rot, h_flip=h_flip, v_flip=v_flip, scale=scale)
     
-    print("Get Bounding Box coordinates")
-    (rmin, rmax, cmin, cmax) = find_ROI_crop_area(output_dir, margin=5)
-    print("RMin: {}, RMax: {}, CMin: {}, CMax: {}".format(rmin, rmax, cmin, cmax))
-
-    for split in ['train', 'test']:
-        output_dir_split = Path(output_dir) / '{}_heart_scans'.format(split)
-        output_filenames = [str(path) for path in Path(output_dir_split).glob('**/*.png')]
-        print("Crop to Bounding Box and resize {} again, saving cropped and resized data to {}".format(split, output_dir_split))
-        for filename in tqdm(output_filenames):
-            resize_and_save(filename, output_dir_split, img_size=IMG_SIZE, crop=(cmin, rmin, cmax, rmax))
+    if roi:
+        print("Get Bounding Box coordinates")
+        (rmin, rmax, cmin, cmax) = find_ROI_crop_area(output_dir, margin=5)
+        print("RMin: {}, RMax: {}, CMin: {}, CMax: {}".format(rmin, rmax, cmin, cmax))
+    
+        for split in ['train', 'test']:
+            output_dir_split = Path(output_dir) / '{}_heart_scans'.format(split)
+            output_filenames = [str(path) for path in Path(output_dir_split).glob('**/*.png')]
+            print("Crop to Bounding Box and resize {} again, saving cropped and resized data to {}".format(split, output_dir_split))
+            for filename in tqdm(output_filenames):
+                resize_and_save(filename, output_dir_split, img_size=IMG_SIZE, crop=(cmin, rmin, cmax, rmax))
 
     print("Done building dataset.")
 

@@ -1,13 +1,16 @@
-import random
-import os
+"""
+Dataloader for getting batches of normalized dataset samples.
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
+
 import torch
 
 from pathlib import Path
 from PIL import Image
 from torch.utils.data import Dataset, DataLoader, Subset
 import torchvision.transforms as transforms
-import numpy as np
-import util.cross_validation as cv
 import build_dataset
 
 class Heart2DSegmentationDataset(Dataset):
@@ -16,15 +19,14 @@ class Heart2DSegmentationDataset(Dataset):
     """
     def __init__(self, data_dir, endo_or_epi, transform=None):
         """
-        Store the filenames of the jpgs to use. Specifies transforms to apply on images.
+        Store the filenames of the PNGs to use. Specifies normalization to apply on images.
         Args:
             data_dir: (string) Directory containing the dataset
-            endo_or_epi: (string)
-            transform: (torchvision.transforms) transformation to apply on image
+            endo_or_epi: (string) Whether the dataset is using ENDO or EPI ground truth images.
+            transform: (torchvision.transforms) Normalization to apply on image.
         """
         self.endo_or_epi = endo_or_epi
         self.ground_truth_filenames = build_dataset.stratify_filenames([str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')])
-        #self.ground_truth_filenames = [str(path) for path in Path(data_dir).glob('**/*' + endo_or_epi + '*.png')]
         self.transform = transform
         self.convert_to_tensor = transforms.ToTensor()
 
@@ -38,7 +40,7 @@ class Heart2DSegmentationDataset(Dataset):
         Args:
             idx: (int) index in [0, 1, ..., size_of_dataset-1]
         Returns:
-            scan: (Tensor) transformed ORIG scan image
+            scan: (Tensor) Normalized ORIG scan image.
             ground_truth: (Tensor) corresponding transformed ENDO or EPI ground truth image
             ground_truth_name: (string) file name of the ENDO or EPI ground truth image
         """
@@ -50,9 +52,7 @@ class Heart2DSegmentationDataset(Dataset):
 
         if(self.transform):
             scan = self.transform(scan)
-            #ground_truth = self.transform(ground_truth)
 
-        #return scan.type(torch.FloatTensor), ground_truth.type(torch.FloatTensor), self.ground_truth_filenames[idx]
         return scan, ground_truth, self.ground_truth_filenames[idx]
 
 def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None):
@@ -60,51 +60,38 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
     Fetches the DataLoader object for each type in types from data_dir.
     Args:
         types: (list) has one or more of 'train', 'val', 'test' depending on which data is required
-        is_cv: (int) The number of folds for cross validation. -1, if no cross validation.
         data_dir: (string) directory containing the dataset
         hyper_params: (Params) hyperparameters
+        train_idx: (int) When not none, k-fold CV is used. Specifies subset to be used as CV training set.
+        val_idx: (int) When not none, k-fold CV is used. Specifies subset to be used as CV validation set.
     Returns:
         data: (dict) contains the DataLoader object for each type in types
     """
     dataloaders = {}
     
+    # TODO: write this to hyper_params, make hyper_params an out variable? then save?
+    # TODO: also, add 3rd variation of types: for testing, only read it from hyper_params (DO I NEED TO READ HYPER_PARAMS FOR JUST TESTING?)
     if train_idx is not None:
         mean, std = mean_std_calc(DataLoader(Subset(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi), train_idx)))
     else:
         mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
-    #print("Mean: {}, Std: {}".format(mean.item(), std.item()))
+    
+    print("Mean: {}, Std: {}".format(mean.item(), std.item()))
     # borrowed from http://pytorch.org/tutorials/advanced/neural_style_tutorial.html
     # and http://pytorch.org/tutorials/beginner/data_loading_tutorial.html
-    # define a training image loader that specifies transforms on images. See documentation for more details.
     train_transformer = transforms.Compose([
-        #transforms.RandomHorizontalFlip(),  # randomly flip image horizontally
-        #transforms.RandomVerticalFlip(), #randomly flip image vertically
-        #transforms.RandomRotation((80, 100), Image.BILINEAR),
-        #transforms.ToTensor(),  # transform it into a torch tensor
         transforms.Normalize(mean=[mean.item()], std=[std.item()])
         ])
     
-    # loader for evaluation, no horizontal flip
     eval_transformer = transforms.Compose([
-        #transforms.RandomHorizontalFlip(),  # randomly flip image horizontally
-        #transforms.RandomVerticalFlip(), #randomly flip image vertically
-        #transforms.RandomRotation((80, 100), Image.BILINEAR),
-        #transforms.ToTensor(),  # transform it into a torch tensor
         transforms.Normalize(mean=[mean.item()], std=[std.item()])
         ])
 
     for split in ['train', 'val', 'test']:
         if split in types:
-            # TODO: ich glaube, hier soll das was anderes sein, nämlich nur eine string concatenation...? Kein Unterordner?
             path = str(Path(data_dir) / "{}_heart_scans".format(split if split != 'val' else 'train'))
 
-            # use the train_transformer if training data, else use eval_transformer without random flip
-            # TODO: hier, falls k-fold-cross-validation, dann in folds aufteilen?
             if split == 'train':
-                # if is_cv != -1:
-                # - make array of dict with is_cv as size
-                # - use SubsetRandomSampler, with seed and shuffle, to create dataloaders of train and val, for each array space
-                # - else: just make train (of all)
                 if train_idx is not None:
                     dl = DataLoader(Subset(Heart2DSegmentationDataset(path, hyper_params.endo_or_epi, train_transformer), train_idx), 
                                     batch_size=hyper_params.batch_size, 
@@ -138,12 +125,10 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
 
 def mean_std_calc(dataloader):
     """
-    Function to calculate the mean and standard
-    deviation of a given dataset.
-    Parameter:
-       dataloader(torch.dataloader): Dataloader of the dataset
-       to calculate the mean and standard deviation.
+    Function to calculate the mean and standard deviation of a given dataset.
     Inspired from 'ptrblck' at https://discuss.pytorch.org/t/about-normalization-using-pre-trained-vgg16-networks/23560/6
+    Args:
+       dataloader: (torch.dataloader) Dataloader of the dataset to calculate the mean and standard deviation.
     """
     mean = 0
     std = 0
@@ -156,16 +141,7 @@ def mean_std_calc(dataloader):
         samples += batch_samples
 
     return (mean / samples),(std / samples)
-
-
-# TODO: Indices should probably be shuffled...?
-#ds = Heart2DSegmentationDataset('data/64x64_heart_scans/train_heart_scans', 'ENDO', train_transformer)
-#for train_idx, test_idx in cv.k_folds(n_splits = 5, subjects = ds.__len__(), frames=1):
-#    dataset_train = torch.utils.data.Subset(ds, train_idx)
-#    dataset_test = torch.utils.data.Subset(ds, train_idx)
-#    train_loader = torch.utils.data.DataLoader(dataset = ds, batch_size = 10)    
-#    test_loader = torch.utils.data.DataLoader(dataset = ds, batch_size = 10)
-    
+  
 
 ### Testing Section ###
 #size = 20
