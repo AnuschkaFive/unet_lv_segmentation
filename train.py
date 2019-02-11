@@ -1,4 +1,9 @@
-"""Train the model"""
+"""
+Train the model, with or without k-fold Cross Validation.
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
 
 import argparse
 import logging
@@ -24,19 +29,18 @@ parser.add_argument('--data_dir', default='data/320x320_heart_scans', help="Dire
 parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing hyper_params.json")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
-                    training")  # 'best' or 'train'
+                    training. Used for transfer learning.")
 
 def train(model, optimizer, loss_fn, dataloader, metrics_dict, hyper_params):
     """
-    Train the model on `num_steps` batches
+    Train the model.
     Args:
         model: (torch.nn.Module) the neural network
         optimizer: (torch.optim) optimizer for parameters of model
         loss_fn: a function that takes batch_output and batch_labels and computes the loss for the batch
         dataloader: (DataLoader) a torch.utils.data.DataLoader object that fetches training data
         metrics_dict: (dict) a dictionary of functions that compute a metric using the output and labels of each batch
-        params: (Params) hyperparameters
-        num_steps: (int) number of batches to train on, each of size params.batch_size
+        hyper_params: (Params) hyperparameters
     """
 
     # set model to training mode
@@ -107,7 +111,7 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
         metrics_dict: (dict) a dictionary of functions that compute a metric using the outputs and ground truths of each batch
         hyper_params: (Params) hyperparameters
         model_dir: (string) directory containing config, weights and log
-        restore_file: (string) optional- name of file to restore from (without its extension .pth.tar)
+        restore_file: (string) optional- name of file to restore from (without its extension .pth.tar). Used for transfer learning.
     """
     # reload weights from restore_file if specified - used for transfer learning, so optimizer isn't transferred
     if restore_file is not None:
@@ -146,19 +150,20 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
         if is_best:
             logging.info("- Found new best DSC")
             best_val_dsc = val_dsc
-
-#            # Save best val metrics in a json file in the model directory
-#            best_json_path = str(Path(model_dir) / "metrics_val_best_weights.json")
-#            utils.save_dict_to_json(val_metrics, best_json_path)
-
-#        # Save latest val metrics in a json file in the model directory
-#        last_json_path = str(Path(model_dir) / "metrics_val_last_weights.json")
-#        utils.save_dict_to_json(val_metrics, last_json_path)
     
     return (all_train_metrics, all_val_metrics)
         
 
 def main(data_dir, model_dir, restore_file=None, k_folds=5):
+    """
+    Train a new model, either with k-fold Cross Validation (phase 1, model evaluation) or 
+    without (phase 2, model building).
+    Args:
+        data_dir: (string) Directory containing the dataset.
+        model_dir: (string) Directory containing hyper_params.json.
+        restore_file: (string) Name of the file in model_dir containing weights to reload before training. Used for transfer learning."
+        k_folds: (int) Specifies the number of folds for k-fold CV. -1, if no k-fold CV is used. Model will then be finally trained (phase 2, model building).
+    """
     # Load the parameters from json file    
     json_path = Path(model_dir) / 'hyper_params.json'
     assert json_path.is_file(), "No json configuration file found at {}".format(json_path)
@@ -169,12 +174,12 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
 
     # Set the logger
     utils.set_logger(Path(model_dir) / 'train.log')
-    #writer = SummaryWriter(str(Path(model_dir) / 'tensor_log'))
     writer = SummaryWriter(str(Path('tensor_log') / model_dir))
 
     # use GPU if available
     hyper_params.cuda = torch.device('cuda:0') if torch.cuda.is_available() else -1
    
+    # For training with k-fold Cross Validation (model evaluation, phase 1):
     if k_folds != 0:
         idx = 0
         list_train_metrics = {}
@@ -192,9 +197,6 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
             model = getattr(net, hyper_params.model, None)
             assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
             model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
-            
-            #dummy_input = Variable(torch.rand(3, 1, 320, 320))
-            #writer.add_graph(model, dummy_input)    
             
             optimizer = getattr(optim, hyper_params.optimizer, None)
             assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)
@@ -274,7 +276,8 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
                 best_val_metrics_list = list_val_metrics['average'][x]
         best_json_path = str(Path(model_dir) / "metrics_k_fold_val_average_best.json")
         utils.save_dict_to_json(best_val_metrics_list, best_json_path)
-        
+    
+    # For final training of models, without k-fold Cross Validation (model building, phase 2):    
     else:
         # Set the random seed for reproducible experiments
         torch.manual_seed(230)
@@ -286,9 +289,6 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         model = getattr(net, hyper_params.model, None)
         assert model is not None, "Model {} couldn't be found!".format(hyper_params.model)
         model = model(hyper_params).to(device=hyper_params.cuda) if hyper_params.cuda is not -1 else model(hyper_params)
-        
-        #dummy_input = Variable(torch.rand(3, 1, 320, 320))
-        #writer.add_graph(model, dummy_input)    
         
         optimizer = getattr(optim, hyper_params.optimizer, None)
         assert optimizer is not None, "Optimizer {} couldn't be found!".format(hyper_params.model)

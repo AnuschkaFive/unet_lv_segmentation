@@ -1,4 +1,9 @@
-"""Evaluates the model"""
+"""
+Evaluates the model
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
 
 import argparse
 import logging
@@ -13,7 +18,6 @@ import model.net as net
 import model.data_loader as data_loader
 import model.loss as loss
 import model.metric as metric
-from torchvision import transforms
 from PIL import Image
 
 parser = argparse.ArgumentParser()
@@ -24,7 +28,7 @@ parser.add_argument('--restore_file', default='best', help="name of the file in 
 
 
 def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
-    """Evaluate the model on `num_steps` batches.
+    """Evaluate the model.
     Args:
         model: (torch.nn.Module) the neural network
         loss_fn: (Function) a function that takes batch_output and batch_labels and computes the loss for the batch
@@ -40,6 +44,9 @@ def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
     # summary for current eval loop
     summ = []
     
+    # dictionary of results for every separate image
+    all_single_metrics = {}
+    
     with torch.no_grad():
         # compute metrics over the dataset
         for idx, (scan_batch, ground_truth_batch, ground_truth_filename) in enumerate(dataloader):
@@ -53,6 +60,16 @@ def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
             # compute model output
             output_batch = model(scan_batch)
             loss = loss_fn(output_batch, ground_truth_batch)
+            
+            if model_dir is not "":
+                # compute loss for every single file of this batch
+                for i in range(0, output_batch.shape[0]):
+                    all_single_metrics[str(Path(ground_truth_filename[i]).parts[-1])] = {}
+                    all_single_metrics[str(Path(ground_truth_filename[i]).parts[-1])]['loss'] = loss_fn(
+                                            torch.index_select(output_batch, 0, torch.tensor([i], device='cuda:'+str(hyper_params.cuda)[-1] if hyper_params.cuda is not -1 else 'cpu')), 
+                                            torch.index_select(ground_truth_batch, 0, torch.tensor([i], device='cuda:'+str(hyper_params.cuda)[-1] if hyper_params.cuda is not -1 else 'cpu'))
+                                            ).item()
+                    #print("Old shape: {}, new shape: {}".format(output_batch.shape, torch.index_select(output_batch, 0, torch.tensor([i], device='cuda:'+str(hyper_params.cuda)[-1] if hyper_params.cuda is not -1 else 'cpu')).shape))
             
             # make output_batch one-hot encoded
             output_batch = torch.sigmoid(output_batch)
@@ -77,11 +94,28 @@ def evaluate(model, loss_fn, dataloader, metrics, model_dir, hyper_params):
                              for metric in metrics}
             summary_batch['loss'] = loss.item()
             summ.append(summary_batch)
+            
+            if model_dir is not "":
+                # compute all metrics for every single file of this batch
+                for i in range(0, output_batch.shape[0]):
+                    #print("Original shape vs. Reduced shapes: {} / {}".format(output_batch.shape, output_batch[i:i+1][:].shape))
+                    saved_loss = all_single_metrics[str(Path(ground_truth_filename[i]).parts[-1])]['loss']
+                    all_single_metrics[str(Path(ground_truth_filename[i]).parts[-1])] = {metric: metrics[metric](output_batch[i:i+1][:], ground_truth_batch[i:i+1][:])
+                             for metric in metrics}
+                    all_single_metrics[str(Path(ground_truth_filename[i]).parts[-1])]['loss'] = saved_loss
 
     # compute mean of all metrics in summary
     metrics_mean = {metric:np.mean([x[metric] for x in summ]) for metric in summ[0]} 
     metrics_string = " ; ".join("{}: {:05.3f}".format(k, v) for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
+    
+    if model_dir is not "":
+        sorted_all_single_metrics = {}
+        for key in sorted(all_single_metrics, key=lambda x: (all_single_metrics[x]['dsc']), reverse=True):
+            sorted_all_single_metrics[key] = all_single_metrics[key]
+        # write all_single_metrics to a json
+        all_single_metrics_path = str(Path(model_dir) / "metrics_test_single_file_names.json")
+        utils.save_dict_to_json(sorted_all_single_metrics, all_single_metrics_path)
     return metrics_mean
 
 
@@ -103,7 +137,6 @@ def main(data_dir, model_dir, restore_file):
     if hyper_params.cuda is not -1: 
         with torch.cuda.device(str(hyper_params.cuda)[-1]):
             torch.cuda.manual_seed(230)
-    #if hyper_params.cuda: torch.cuda.manual_seed(230)
         
     # Get the logger
     utils.set_logger(Path(model_dir) / 'evaluate.log')

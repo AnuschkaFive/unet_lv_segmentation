@@ -1,6 +1,7 @@
 """
-Defines the neural network architecture.
-Based on code by Marco Pavlowski (and https://tuatini.me/practical-image-segmentation-with-unet/).
+Defines the neural network architectures.
+
+Based on code by Marco Pavlowski and https://tuatini.me/practical-image-segmentation-with-unet/.
 """
 
 import torch
@@ -22,7 +23,6 @@ class ConvBnRelu(nn.Module):
     def forward(self, x):
         x = self.conv(x)
         if self.use_bn:
-            #print("BatchNorm!")
             x = self.bn(x)
         x = self.relu(x)
         return x
@@ -62,16 +62,13 @@ class StackDecoder(nn.Module):
         Returns:
             The concatenated tensor.
         """       
-        #TODO: make work for uneven numbers!
         cH = (bypass.size()[2] - upsampled.size()[2]) // 2
         cW = (bypass.size()[3] - upsampled.size()[3]) // 2
-        #print('Bypass Size: {} {}, Upsampled Size: {} {}'.format(bypass.size()[2], bypass.size()[3], upsampled.size()[2], upsampled.size()[3]))
         bypass = F.pad(bypass, (-cW, -cW, -cH, -cH))
 
         return torch.cat((upsampled, bypass), 1)
 
     def forward(self, x, down_tensor):
-        #x = self.upSample(x)
         x = F.interpolate(x, self.upsample_size)
         if not self.use_crop_concat:
             x = x.add(down_tensor)
@@ -85,7 +82,6 @@ class StackDecoder(nn.Module):
 class UNetOriginal(nn.Module):
     def __init__(self, hyper_params):
         super(UNetOriginal, self).__init__()
-        # TODO: works for input image sizes 360x360 (thanks Marco!)
         kSize = (3,3)
         pad = 1  # padding 1 so ksize 3 doesn't shorten the output
         stride = 1
@@ -102,10 +98,6 @@ class UNetOriginal(nn.Module):
             ConvBnRelu(1024, 1024, kernel_size=(3, 3), stride=1, padding=0, hyper_params=hyper_params)
         )
 
-#        self.up1 = StackDecoder(in_channels=1024, out_channels=512, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(56, 56))
-#        self.up2 = StackDecoder(in_channels=512, out_channels=256, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(104, 104))
-#        self.up3 = StackDecoder(in_channels=256, out_channels=128, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(200, 200))
-#        self.up4 = StackDecoder(in_channels=128, out_channels=64, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(392, 392))
         self.up1 = StackDecoder(in_channels=1024, out_channels=512, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(40, 40), hyper_params=hyper_params)
         self.up2 = StackDecoder(in_channels=512, out_channels=256, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(80, 80), hyper_params=hyper_params)
         self.up3 = StackDecoder(in_channels=256, out_channels=128, kernel_size=kSize, padding=pad, stride=stride, upsample_size=(160, 160), hyper_params=hyper_params)
@@ -128,13 +120,14 @@ class UNetOriginal(nn.Module):
         x = self.up4(x, x_trace1)
 
         out = self.output_seg_map(x)
-        #out = torch.squeeze(out, dim=1)
         return out
 
 class UNetOriginalPretrained(nn.Module):
+    """
+    UNetOriginal initialized with pretrained weights and biases from a VGG-11 net (pretrained on ImageNet).
+    """
     def __init__(self, hyper_params):
         super(UNetOriginalPretrained, self).__init__()
-        # TODO: works for input image sizes 360x360 (thanks Marco!)
         kSize = (3,3)
         pad = 1  # padding 1 so ksize 3 doesn't shorten the output
         stride = 1
@@ -183,14 +176,12 @@ class UNetOriginalPretrained(nn.Module):
         x = self.up4(x, x_trace1)
 
         out = self.output_seg_map(x)
-        #out = torch.squeeze(out, dim=1)
         return out
     
     
 class ModelA(nn.Module):
     def __init__(self, hyper_params):
         super(ModelA, self).__init__()
-        # TODO: works for input image sizes 360x360 (thanks Marco!)
         kSize = (3,3)
         pad = 1  # padding 1 so ksize 3 doesn't shorten the output
         stride = 1
@@ -229,91 +220,5 @@ class ModelA(nn.Module):
         x = self.up4(x, x_trace1)
 
         out = self.output_seg_map(x)
-        #out = torch.squeeze(out, dim=1)
         return out
-
-
-# custom weights initialization called on netG and netD
-def weights_init(m):
-    classname = m.__class__.__name__
-    #nameclass = m.__class__
-    print(classname)
-    if classname.find('Conv2d') != -1:
-        m.weight.data.fill_(0.0)
-#    elif classname.find('BatchNorm') != -1:
-#        m.weight.data.normal_(1.0, 0.02)
-#        m.bias.data.fill_(0)
-
-#class Net(nn.Module):
-#    """
-#    This is the standard way to define your own network in PyTorch. You typically choose the components
-#    (e.g. LSTMs, linear layers etc.) of your network in the __init__ function. You then apply these layers
-#    on the input step-by-step in the forward function. You can use torch.nn.functional to apply functions
-#    such as F.relu, F.sigmoid, F.softmax, F.max_pool2d. Be careful to ensure your dimensions are correct after each
-#    step. You are encouraged to have a look at the network in pytorch/nlp/model/net.py to get a better sense of how
-#    you can go about defining your own network.
-#    The documentation for all the various components available o you is here: http://pytorch.org/docs/master/nn.html
-#    """
-#
-#    def __init__(self, params):
-#        """
-#        We define an convolutional network that predicts the sign from an image. The components
-#        required are:
-#        - an embedding layer: this layer maps each index in range(params.vocab_size) to a params.embedding_dim vector
-#        - lstm: applying the LSTM on the sequential input returns an output for each token in the sentence
-#        - fc: a fully connected layer that converts the LSTM output for each token to a distribution over NER tags
-#        Args:
-#            params: (Params) contains num_channels
-#        """
-#        super(Net, self).__init__()
-#        self.num_channels = params.num_channels
-#        
-#        # each of the convolution layers below have the arguments (input_channels, output_channels, filter_size,
-#        # stride, padding). We also include batch normalisation layers that help stabilise training.
-#        # For more details on how to use these layers, check out the documentation.
-#        self.conv1 = nn.Conv2d(3, self.num_channels, 3, stride=1, padding=1)
-#        self.bn1 = nn.BatchNorm2d(self.num_channels)
-#        self.conv2 = nn.Conv2d(self.num_channels, self.num_channels*2, 3, stride=1, padding=1)
-#        self.bn2 = nn.BatchNorm2d(self.num_channels*2)
-#        self.conv3 = nn.Conv2d(self.num_channels*2, self.num_channels*4, 3, stride=1, padding=1)
-#        self.bn3 = nn.BatchNorm2d(self.num_channels*4)
-#
-#        # 2 fully connected layers to transform the output of the convolution layers to the final output
-#        self.fc1 = nn.Linear(8*8*self.num_channels*4, self.num_channels*4)
-#        self.fcbn1 = nn.BatchNorm1d(self.num_channels*4)
-#        self.fc2 = nn.Linear(self.num_channels*4, 6)       
-#        self.dropout_rate = params.dropout_rate
-#
-#    def forward(self, s):
-#        """
-#        This function defines how we use the components of our network to operate on an input batch.
-#        Args:
-#            s: (Variable) contains a batch of images, of dimension batch_size x 3 x 64 x 64 .
-#        Returns:
-#            out: (Variable) dimension batch_size x 6 with the log probabilities for the labels of each image.
-#        Note: the dimensions after each step are provided
-#        """
-#        #                                                  -> batch_size x 3 x 64 x 64
-#        # we apply the convolution layers, followed by batch normalisation, maxpool and relu x 3
-#        s = self.bn1(self.conv1(s))                         # batch_size x num_channels x 64 x 64
-#        s = F.relu(F.max_pool2d(s, 2))                      # batch_size x num_channels x 32 x 32
-#        s = self.bn2(self.conv2(s))                         # batch_size x num_channels*2 x 32 x 32
-#        s = F.relu(F.max_pool2d(s, 2))                      # batch_size x num_channels*2 x 16 x 16
-#        s = self.bn3(self.conv3(s))                         # batch_size x num_channels*4 x 16 x 16
-#        s = F.relu(F.max_pool2d(s, 2))                      # batch_size x num_channels*4 x 8 x 8
-#
-#        # flatten the output for each image
-#        s = s.view(-1, 8*8*self.num_channels*4)             # batch_size x 8*8*num_channels*4
-#
-#        # apply 2 fully connected layers with dropout
-#        s = F.dropout(F.relu(self.fcbn1(self.fc1(s))), 
-#            p=self.dropout_rate, training=self.training)    # batch_size x self.num_channels*4
-#        s = self.fc2(s)                                     # batch_size x 6
-#
-#        # apply log softmax on each image's output (this is recommended over applying softmax
-#        # since it is numerically more stable)
-#        return F.log_softmax(s, dim=1)
-
-
-
 

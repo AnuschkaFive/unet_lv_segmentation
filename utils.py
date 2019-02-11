@@ -1,6 +1,12 @@
+"""
+Utilities for saving and loading hyperparameters, metrics and models.
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
+
 import json
 import logging
-#import os
 from pathlib import Path
 import shutil
 

@@ -1,4 +1,9 @@
-"""Aggregates results from the metrics_eval_best_weights.json in a parent folder"""
+"""
+Aggregates results from various JSON in a parent folder.
+
+Originally based on https://cs230-stanford.github.io/pytorch-getting-started.html and 
+https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision.
+"""
 
 import argparse
 import json
@@ -14,9 +19,14 @@ parser.add_argument('--parent_dir', default='experiments',
 
 
 def aggregate_metrics(parent_dir, metrics):
-    """Aggregate the metrics of all experiments in folder `parent_dir`.
+    """
+    Aggregate the metrics of all experiments in folder `parent_dir`.
     Assumes that `parent_dir` contains multiple experiments, with their results stored in
-    `parent_dir/subdir/metrics_dev.json`
+        'metrics_k_fold_val.json' - experiments (phase 1) validation results, 
+        'metrics_k_fold_train.json' - experiments (phase 1) training results,, 
+        'metrics_k_fold_val_average_best.json' - experiments (phase 1) best validation DSC and corresponding metrics, 
+        'metrics_test.json' - final training (phase 2) validation results, 
+        'metrics_train.json' - final training (phase 2) training results
     Args:
         parent_dir: (string) path to directory containing experiments results
         metrics: (dict) subdir -> {'accuracy': ..., ...}
