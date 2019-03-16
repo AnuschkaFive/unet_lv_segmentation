@@ -69,12 +69,19 @@ def fetch_dataloader(types, data_dir, hyper_params, train_idx=None, val_idx=None
     """
     dataloaders = {}
     
-    # TODO: write this to hyper_params, make hyper_params an out variable? then save?
+    # TODO: write this to hyper_params, make hyper_params an out variable? then save? yes, AND: when ONLY test is requested, load from hyperparams!
     # TODO: also, add 3rd variation of types: for testing, only read it from hyper_params (DO I NEED TO READ HYPER_PARAMS FOR JUST TESTING?)
     if train_idx is not None:
         mean, std = mean_std_calc(DataLoader(Subset(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi), train_idx)))
+        hyper_params.mean = mean.item()
+        hyper_params.std = std.item()
     else:
-        mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
+        if 'train' in types:
+            mean, std = mean_std_calc(DataLoader(Heart2DSegmentationDataset(str(Path(data_dir) / "train_heart_scans"), hyper_params.endo_or_epi)))
+            hyper_params.mean = mean.item()
+            hyper_params.std = std.item()
+        else:
+            mean, std = torch.tensor(hyper_params.mean), torch.tensor(hyper_params.std)
     
     print("Mean: {}, Std: {}".format(mean.item(), std.item()))
     # borrowed from http://pytorch.org/tutorials/advanced/neural_style_tutorial.html

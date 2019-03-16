@@ -76,10 +76,14 @@ def aggregate_metrics(parent_dir, metrics):
             metrics[parent_dir]["dsc test"] = 0.0
             metrics[parent_dir]["loss test"] = 0.0
             metrics[parent_dir]["iou test"] = 0.0
+            metrics[parent_dir]["precision test"] = 0.0
+            metrics[parent_dir]["recall test"] = 0.0
             metrics[parent_dir]["test"] = ""
             metrics[parent_dir]["dsc test train"] = 0.0
             metrics[parent_dir]["loss test train"] = 0.0
             metrics[parent_dir]["iou test train"] = 0.0
+            metrics[parent_dir]["precision test train"] = 0.0
+            metrics[parent_dir]["recall test train"] = 0.0
             if test_file.is_file():
                 best_test_epoch = ""
                 with open(test_file, 'r') as t:
@@ -93,12 +97,17 @@ def aggregate_metrics(parent_dir, metrics):
                         metrics[parent_dir]["dsc test"] = test_metrics[best_test_epoch]["dsc"]
                         metrics[parent_dir]["loss test"] = test_metrics[best_test_epoch]["loss"]
                         metrics[parent_dir]["iou test"] = test_metrics[best_test_epoch]["iou"]
+                        metrics[parent_dir]["precision test"] = test_metrics[best_test_epoch]["precision"]
+                        metrics[parent_dir]["recall test"] = test_metrics[best_test_epoch]["recall"]
                         metrics[parent_dir]["test"] = best_test_epoch
                         with open(Path(parent_dir) / "metrics_train.json") as k:
                             test_train_metrics = json.load(k)
-                            metrics[parent_dir]["dsc test train"] = test_train_metrics[best_test_epoch]["dsc"] - test_metrics[best_test_epoch]["dsc"]
-                            metrics[parent_dir]["loss test train"] = test_train_metrics[best_test_epoch]["loss"] - test_metrics[best_test_epoch]["loss"]
-                            metrics[parent_dir]["iou test train"] = test_train_metrics[best_test_epoch]["iou"] - test_metrics[best_test_epoch]["iou"]
+                            metrics[parent_dir]["dsc test train"] = round(test_train_metrics[best_test_epoch]["dsc"] - test_metrics[best_test_epoch]["dsc"],4)*100
+                            metrics[parent_dir]["loss test train"] = round(test_train_metrics[best_test_epoch]["loss"] - test_metrics[best_test_epoch]["loss"],4)
+                            metrics[parent_dir]["iou test train"] = round(test_train_metrics[best_test_epoch]["iou"] - test_metrics[best_test_epoch]["iou"],4)*100
+                            metrics[parent_dir]["precision test train"] = round(test_train_metrics[best_test_epoch]["precision"] - test_metrics[best_test_epoch]["precision"],4)*100
+                            metrics[parent_dir]["recall test train"] = round(test_train_metrics[best_test_epoch]["recall"] - test_metrics[best_test_epoch]["recall"],4)*100
+                            
 
     # Check every subdirectory of parent_dir
     for subdir in Path(parent_dir).iterdir():

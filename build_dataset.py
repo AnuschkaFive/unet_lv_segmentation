@@ -316,7 +316,7 @@ def main(data_dir, output_dir, n4=False, roi=False, rot=True, h_flip=False, v_fl
     if not Path(output_dir).exists():
         Path(output_dir).mkdir()
     else:
-        print("Warning: output dir {} already exists".format(args.output_dir))
+        print("Warning: output dir {} already exists".format(output_dir))
 
     # Preprocess train and test
     for split in ['train', 'test']:

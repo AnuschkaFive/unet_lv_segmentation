@@ -210,6 +210,13 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
             
             logging.info("Loading the datasets...")
             dataloaders = data_loader.fetch_dataloader(['train', 'val'], data_dir, hyper_params, train_idx, val_idx)
+            
+            # Save hyperparameters, now containing used mean and bias.
+            cuda = hyper_params.cuda
+            hyper_params.cuda = ""
+            hyper_params.save(Path(model_dir) / 'hyper_params.json')
+            hyper_params.cuda = cuda
+            
             train_dl = dataloaders['train']
             val_dl = dataloaders['val']            
             logging.info("- done.")
@@ -303,6 +310,13 @@ def main(data_dir, model_dir, restore_file=None, k_folds=5):
         # fetch dataloaders
         logging.info("Loading the datasets...")
         dataloaders = data_loader.fetch_dataloader(['train', 'test'], data_dir, hyper_params)
+        
+        # Save hyperparameters, now containing used mean and bias.
+        cuda = hyper_params.cuda
+        hyper_params.cuda = ""
+        hyper_params.save(Path(model_dir) / 'hyper_params.json')
+        hyper_params.cuda = cuda
+            
         train_dl = dataloaders['train']
         test_dl = dataloaders['test']        
         logging.info("- done.")
